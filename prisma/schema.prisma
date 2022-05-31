@@ -59,6 +59,7 @@ model usuario {
   nome_social                                String?      @db.VarChar(50)
   ativo                                      Boolean
   telefone                                   String?      @db.VarChar(11)
+  restricao_alimenticia                      String?      @db.VarChar(40)
   comentario_comentario_id_aprovadoTousuario comentario[] @relation("comentario_id_aprovadoTousuario")
   comentario_comentario_id_usuarioTousuario  comentario[] @relation("comentario_id_usuarioTousuario")
   endereco                                   endereco[]
