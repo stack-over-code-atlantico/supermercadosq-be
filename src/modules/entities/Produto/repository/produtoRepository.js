@@ -1,4 +1,4 @@
-const prisma = require("../../../database/prismaClient");
+const prisma = require("../../../../database/prismaClient");
 
 const findUniqueProduct = async (id_produto) => {
 	const result = await prisma.produto.findUnique({
@@ -14,36 +14,75 @@ const productRead = async () => {
 	return result;
 };
 
-const productCreate = async (data) => {
-	const product = await prisma.produto.create({
+const productCreate = async (
+    nome,
+    ingredientes,
+    imagem,
+    data_postagem,
+    editado,
+    status,
+    feedbacks_produtos,
+    id_usuario,
+    id_aprovado,
+) => {
+	const result = await prisma.produto.create({
 		data: {
-            nome: data.nome,              
-            ingredientes: data.ingredientes,  
-            imagem: data.imagem,            
-            data_postagem: new Date(),     
-            editado: false,           
-            status: data.status,          
-            feedbacks_produtos: data.feedbacks_produtos,
-            id_usuario: data.id_produto,        
-            id_aprovado: data.id_aprovado       
+            nome,              
+            ingredientes,  
+            imagem,            
+            data_postagem,     
+            editado,           
+            status,          
+            feedbacks_produtos,
+            id_usuario,        
+            id_aprovado       
 		},
 	});
-	return product;
+	return result;
 };
 
-productCreate(
-    nome = "Leite em Pó Integral 800g",
-    ingredientes = "Leite em pó integral reinspecionado. Alérgicos: Contém Leite, Contém Lactose, Não contém glúten",
-    imagem = null,
-    data_postagem = now(),
-    editado = false,
-    status = null,
-    feedbacks_produtos = null,
-    id_usuario = 3,
-    id_aprovado = null
-);
+const productDelete = async (id_produto) => {
+    const result = await prisma.produto.delete({
+        where: {
+            id_produto,
+        },
+    });
+    return result;
+};
+
+const productUpdate = async (
+    nome,
+    ingredientes,
+    imagem,
+    editado,
+    status,
+    feedbacks_produtos,
+    id_aprovado,
+) => {
+    const product = await prisma.produto.findFirst({
+        where: {id_produto},
+    });
+	const result = await prisma.produto.create({
+        where: {id_produto},
+		data: {
+            nome: nome ? nome : product.nome,              
+            ingredientes: ingredientes ? ingredientes : product.ingredientes,  
+            imagem: imagem ? imagem : product.imagem,
+            editado: true,           
+            status: status ? status : product.status,          
+            feedbacks_produtos: feedbacks_produtos ? feedbacks_produtos : product.feedbacks_produtos,    
+            id_aprovado: id_aprovado ? id_aprovado : product.id_aprovado,       
+		},
+	});
+	return result;
+};
+
+productRead();
 
 module.exports = {
-	create,
 	findUniqueProduct,
+	productRead,
+    productCreate,
+    productDelete,
+    productUpdate,
 };
