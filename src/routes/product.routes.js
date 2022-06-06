@@ -2,12 +2,12 @@ const express = require('express');
 const route = express();
 const productRepository = require('../modules/entities/Produto/repository/produtoRepository');
 
-route.get('/product-read', async (req, res) => {
+route.get('/', async (req, res) => {
     const product = await productRepository.productRead();
     return res.json(product);
 });
 
-route.post('/product-create', async (req, res) => {
+route.post('/', async (req, res) => {
   const {
     nome,
     ingredientes,
