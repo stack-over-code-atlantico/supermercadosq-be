@@ -42,6 +42,7 @@
     "@login": "./src/modules/entities/Login",
     "@endereco": "./src/modules/entities/Endereco",
     "@produto": "./src/modules/entities/Produto",
-    "@comentario": "./src/modules/entities/Comentario"
+    "@comentario": "./src/modules/entities/Comentario",
+    "@Middleware": "./src/middlewares"
   }
 }
