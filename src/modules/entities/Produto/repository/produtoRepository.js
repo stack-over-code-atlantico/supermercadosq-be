@@ -18,7 +18,7 @@ const findUniqueProduct = async (id_produto) => {
 
 const productRead = async () => {
 	const result = await prisma.produto.findMany();
-    console.log(result)
+    console.log(result);
 	return result;
 };
 
@@ -74,16 +74,16 @@ const productUpdate = async (
 
 const productDelete = async (id_produto) => {
     try{
-    const result = await prisma.produto.delete({
-        where: {
-            id_produto,
-        },
-    });
-    console.log('Product removed successfully. Below is the product information.');
-    console.log(result);
-    return result;
-    }catch (e){
-    console.log('Product does not exist');
+        const result = await prisma.produto.delete({
+            where: {
+                id_produto,
+            },
+        });
+        console.log('Product removed successfully. Below is the product information.');
+        console.log(result);
+        return result;
+    } catch (e){
+        console.log('Product does not exist');
     }
 };
 
