@@ -19,6 +19,11 @@ class UsuarioController {
       nivel,
       telefone,
       restricao_alimenticia,
+      logradouro,
+      numero,
+      bairro,
+      cidade,
+      estado,
     } = req.body;
     const users = await userService.createUser(
       nome,
@@ -29,6 +34,11 @@ class UsuarioController {
       nivel,
       telefone,
       restricao_alimenticia,
+      logradouro,
+      numero,
+      bairro,
+      cidade,
+      estado,
     );
     return res.status(201).json(users);
   }
@@ -59,8 +69,28 @@ class UsuarioController {
   
   async delete (req, res) {
     const { cpf_cnpj } = req.params;
-    const users = await userService.deleteUser(cpf_cnpj);
-    return res.status(204).send(users);
+    const {
+      nome,
+      nome_social,
+      email,
+      senha,
+      ativo,
+      nivel,
+      telefone,
+      restricao_alimenticia,
+    } = req.body;
+    const users = await userService.deleteUser(
+      cpf_cnpj,
+      nome,
+      nome_social,
+      email,
+      senha,
+      ativo,
+      nivel,
+      telefone,
+      restricao_alimenticia,
+    );
+    return res.status(204).json(users);
   }
 }
 
