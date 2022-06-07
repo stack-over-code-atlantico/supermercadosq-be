@@ -2,12 +2,13 @@ const usuarioRepositorio = require('@usuario/repository/usuarioRepository');
 const { sign } = require('jsonwebtoken');
 
 class UsuarioService {
-  async listAllUsers () {
+
+  async listAllUsers() {
     const users = await usuarioRepositorio.usersRead();
     return users;
   }
 
-  async createUser (
+  async createUser(
     nome,
     nome_social,
     cpf_cnpj,
@@ -18,9 +19,9 @@ class UsuarioService {
     restricao_alimenticia
   ) {
     const alreadyHaveUser = await usuarioRepositorio.findUniqueUser(cpf_cnpj);
-    
+
     if (alreadyHaveUser) throw new Error(`Already have user.`);
-    
+
     const users = await usuarioRepositorio.usersCreate(
       nome,
       nome_social,
@@ -34,7 +35,7 @@ class UsuarioService {
     return users;
   }
 
-  async updateUser (
+  async updateUser(
     cpf_cnpj,
     nome,
     nome_social,
@@ -56,10 +57,20 @@ class UsuarioService {
     );
     return users;
   }
-  
-  async deleteUser (cpf_cnpj) {
+
+  async deleteUser(cpf_cnpj) {
     const users = await usuarioRepositorio.usersDelete(cpf_cnpj);
     return users;
+  }
+
+  async verifyAdmin(cpf_cnpj){
+    console.log('verifyAdmin')
+    var user = await usuarioRepositorio.findUniqueUser(cpf_cnpj)
+    // Validar Nivel
+    if(!user){
+        throw new Error("User not found!");
+    }
+    return user.admin;
   }
 }
 

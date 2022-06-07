@@ -2,14 +2,14 @@ const prisma = require('../../../../database/prismaClient');
 const { hash } = require('bcrypt');
 
 const findUniqueUser = async (cpf_cnpj) => {
-  const result = await prisma.usuario.findUnique({
+  const result = await prisma.usuario.findFirst({
     where: { cpf_cnpj },
   });
   return result;
 };
 
 const findUserPerEmail = async (email) => {
-  const result = await prisma.usuario.findUnique({
+  const result = await prisma.usuario.findFirst({
     where: { email },
   });
   return result;
@@ -24,7 +24,7 @@ const findUniqueRestriction = async (restricao_alimenticia) => {
 
 const usersRead = async () => {
   const result = await prisma.usuario.findMany();
-  // console.log(result);
+
   return result; 
 };
 
@@ -86,7 +86,7 @@ const usersUpdate = async (
       restricao_alimenticia,
     },
   });
-  console.log(result);
+  
   return result;
 };
 

@@ -3,11 +3,10 @@ const LoginService = require('@login/services/LoginService');
 const loginService = new LoginService();
 
 class LoginController {
-  async singIn (req, res) {
+  async signin(req, res) {
     const { email, senha } = req.body;
-    const login = await loginService.singIn(email, senha);
-    console.log(login);
-    return res.send();
+    const login = await loginService.signin(email,senha);
+    return res.json(login);
   }
 }
 
