@@ -13,10 +13,10 @@ const commentCreate = async (data) => {
 	const comentario = await prisma.comentario.create({
 		data: {
 			mensagem: data.mensagem,
-			status: data.status,
+			status: null,
 			data_comentario: new Date(),
 			editado: false,
-			feedbacks_comentarios: data.feedbacks_comentarios,
+			feedbacks_comentarios: 0,
 			id_produto: data.id_produto,
 			id_usuario: data.id_usuario,
 			id_aprovado: data.id_aprovado,
