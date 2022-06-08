@@ -1,3 +1,46 @@
+
+## Fluxo da Aplicação
+```mermaid
+    flowchart TD
+    A[Chegada da requisição] -->|Envia para| B(Controller)
+    B(Controller) --> C(Função correspondente no cotroller)
+    C --> D{Há Erros?}
+    D --> |Sim| E[Retorna Error]
+    D --> |Não| F[Service]
+    F --> G[Função no service]
+    G --> H{Validações}
+    H --> |Sim| I[Retorna Error]
+    H --> |Não| J[repository]
+    J --> K(Faz consulta no banco)
+
+    style A fill:#99d9ff,stroke:#000,stroke-width:4px,color:#000
+    style B fill:#acecb6,stroke:#000,stroke-width:4px,color:#000
+    style D fill:#f9f49f,stroke:#000,stroke-width:4px,color:#000
+    style F fill:#acecb6,stroke:#000,stroke-width:4px,color:#000
+    style H fill:#f9f49f,stroke:#000,stroke-width:4px,color:#000
+    style J fill:#acecb6,stroke:#000,stroke-width:4px,color:#000
+```
+
+## Fluxo para **Deletar usuário**
+
+```mermaid
+    sequenceDiagram
+    par Rota "/" to Middleware
+        Rota "/"->>Middleware: Envia para função nos middlewares
+    and Middleware to Funcao_Auth
+        Middleware->>Funcao_Auth: Tem token?
+        Funcao_Auth-->>Rota "/": Não há token ou token inválido
+    and Middleware to Funcao_isAdmin
+        Middleware->>Funcao_isAdmin: É administrador?
+        Funcao_isAdmin-->>Rota "/": Não é administrador
+    and Middleware to Controller_delete_user
+        Middleware->>Controller_delete_user: Deletado!
+        Controller_delete_user->>Rota "/": Status 200
+    end
+```
+
+##
+
 <h1> Regra de negócios </h1>
 
 <table>
@@ -151,3 +194,53 @@
     </td>
   </tr>
 </table>
+
+## Ações a Fazer
+
+- **O sistema deverá iniciar com um Administrador primordial (Adão).**
+- **Haverá uma validação para que o Administrador (Adão) não possa ser deletado do sistema através do seu ID.**
+
+### Usuário
+- [ok] : Cadastrar usuário
+- [ok] : Listagem de usuário
+- [--] : Atualização de usuário
+- [ok] : O Usuário não poderá cadastrar o cpf ou cnpj caso já estejam cadastrados.
+- [--] : O Usuário não poderá cadastrar um email caso já esteja cadastrado.
+- [ok] : O Usuário poderá alterar email, senha, endereço, telefone, porém não o seu nível de acesso e cpf ou cnpj não.
+- [--] : O Usuário poderá adicionar suas próprias postagens, comentários
+- [--] : O Usuário poderá denunciar comentários e postagens.
+- [--] : O Usuário poderá editar suas postagens e comentários.
+
+### Administrador
+- **Todos tem um middleware isAdmin**
+- [--] : O Administrador do sistema pode transformar um usuário em ADMIN. **Criar rota, terá uma validação de administrador, ou seja Middleware isAdmin**
+- [--] : O Administrador poderá adicionar apagar e editar. 
+- [--] : O Administrador poderá bloquear usuários.        
+- [--] : O Administrador poderá arquivar comentários  
+- [--] : O Administrador poderá bloquear postagens denunciados.
+- [--] : Deixar usuário inativo (Delete)
+- [--] : O Administrador poderá alterar o nível de qualquer usuário.
+- [--] : Aprovar produto **Quando o prdiduto estive aprovado, terá o id_aprovado, que será o id do administrador que aprovou**
+### Fornecedor
+- [--] : Poderá denunciar comentários e postagens.
+- [--] : Poderá editar suas postagens e comentários.
+
+### Cliente
+- [--] : O Cliente que tiver sua conta desativada, terá o atributo "ativo" como false, assim como seus comentários e produtos postados.
+
+### Produtos
+- [--] : Criar produto
+- [--] : Listar produto apenas aqueles com status **diferentes de false**
+- [--] : Atualizar produto
+- [--] : Deletar/Denunciar produto **Setar Status para false**    **Terá validação, ou seja, Middleware isAdmin**
+- [--] : Função rota para incrementar "feedbacks_produto" inicia com 0.
+
+### Comentário
+- [--] : Criar comentário
+- [--] : Deletar comentário **Setar status para false**
+- [--] : Atualizar comentário
+- [--] : Listar comentário
+- [--] : Denunciar comentário **Setar para false**
+- [--] : Função rota para atualizar id_aprovado com o id do **ADMIN** quando aprovado **Apenas Admins podem aprovar** 
+- [--] : Função rota para incrementar "feedbacks_produto" inicia com 0.
+

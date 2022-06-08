@@ -9,9 +9,11 @@ class LoginService {
     if(!user){
       throw new Error("Invalid login!");
     }
+    console.log(user)
 
      try {
             const comparePassword = await compare(senha, user.senha);
+            console.log(comparePassword)
             if(comparePassword){
                 token = sign(
                     {cpf_cnpj: user.cpf_cnpj, nivel: user.nivel}, 
