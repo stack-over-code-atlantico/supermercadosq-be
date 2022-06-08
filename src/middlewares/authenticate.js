@@ -1,4 +1,4 @@
-const { verify } = require('jsonwebtoken');
+const { verify } = require('jsonwebtoken')
 
 module.exports = function (req, res, next) {
   console.log('Auth')

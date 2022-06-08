@@ -26,6 +26,7 @@ const usersRead = async () => {
   const result = await prisma.usuario.findMany({
     include: { endereco: true }
   });
+
   return result; 
 };
 
