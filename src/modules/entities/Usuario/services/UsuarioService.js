@@ -2,12 +2,13 @@ const usuarioRepositorio = require('@usuario/repository/usuarioRepository');
 const { sign } = require('jsonwebtoken');
 
 class UsuarioService {
-  async listAllUsers () {
+
+  async listAllUsers() {
     const users = await usuarioRepositorio.usersRead();
     return users;
   }
 
-  async createUser (
+  async createUser(
     nome,
     nome_social,
     cpf_cnpj,
@@ -15,12 +16,20 @@ class UsuarioService {
     senha,
     nivel,
     telefone,
-    restricao_alimenticia
+    restricao_alimenticia,
+    logradouro,
+    numero,
+    bairro,
+    cidade,
+    estado,
   ) {
     const alreadyHaveUser = await usuarioRepositorio.findUniqueUser(cpf_cnpj);
-    
+    console.log(alreadyHaveUser);
+
+    if (alreadyHaveUser && alreadyHaveUser.email === email) throw new Error(`Email already in use.`);
+
     if (alreadyHaveUser) throw new Error(`Already have user.`);
-    
+
     const users = await usuarioRepositorio.usersCreate(
       nome,
       nome_social,
@@ -30,19 +39,28 @@ class UsuarioService {
       nivel,
       telefone,
       restricao_alimenticia,
+      logradouro,
+      numero,
+      bairro,
+      cidade,
+      estado,
     );
     return users;
   }
 
-  async updateUser (
+  async updateUser(
     cpf_cnpj,
     nome,
     nome_social,
     email,
     senha,
-    nivel,
     telefone,
-    restricao_alimenticia
+    restricao_alimenticia,
+    logradouro,
+    numero,
+    bairro,
+    cidade,
+    estado,
   ) {
     const users = await usuarioRepositorio.usersUpdate(
       cpf_cnpj,
@@ -50,16 +68,40 @@ class UsuarioService {
       nome_social,
       email,
       senha,
-      nivel,
       telefone,
       restricao_alimenticia,
+      logradouro,
+      numero,
+      bairro,
+      cidade,
+      estado,
     );
     return users;
   }
-  
-  async deleteUser (cpf_cnpj) {
+
+  async deleteUser(cpf_cnpj) {
     const users = await usuarioRepositorio.usersDelete(cpf_cnpj);
     return users;
+  }
+
+  async nivelEdit(cpf_cnpj, nivel) {
+    if (
+      nivel === "CLIENTE" ||
+      nivel === "ADMINISTRADOR" ||
+      nivel === "FORNECEDOR"
+    ) {
+      const users = await usuarioRepositorio.nivelEdit(cpf_cnpj, nivel);
+      return users;
+    }
+    throw new Error(`Nivel doesn't exist.`);
+  }
+
+  async verifyAdmin(cpf_cnpj){
+    console.log('verifyAdmin')
+    var user = await usuarioRepositorio.findUniqueUser(cpf_cnpj);
+    if (!user) throw new Error("User not found!");
+    if (user.nivel === "ADMINISTRADOR") return true;
+    return false;
   }
 }
 

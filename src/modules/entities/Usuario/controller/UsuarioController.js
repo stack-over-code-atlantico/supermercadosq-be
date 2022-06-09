@@ -19,6 +19,11 @@ class UsuarioController {
       nivel,
       telefone,
       restricao_alimenticia,
+      logradouro,
+      numero,
+      bairro,
+      cidade,
+      estado,
     } = req.body;
     const users = await userService.createUser(
       nome,
@@ -29,6 +34,11 @@ class UsuarioController {
       nivel,
       telefone,
       restricao_alimenticia,
+      logradouro,
+      numero,
+      bairro,
+      cidade,
+      estado,
     );
     return res.status(201).json(users);
   }
@@ -40,9 +50,13 @@ class UsuarioController {
       nome_social,
       email,
       senha,
-      nivel,
       telefone,
       restricao_alimenticia,
+      logradouro,
+      numero,
+      bairro,
+      cidade,
+      estado,
     } = req.body;
     const users = await userService.updateUser(
       cpf_cnpj,
@@ -50,9 +64,13 @@ class UsuarioController {
       nome_social,
       email,
       senha,
-      nivel,
       telefone,
       restricao_alimenticia,
+      logradouro,
+      numero,
+      bairro,
+      cidade,
+      estado,
     );
     return res.status(204).json(users);
   }
@@ -60,7 +78,14 @@ class UsuarioController {
   async delete (req, res) {
     const { cpf_cnpj } = req.params;
     const users = await userService.deleteUser(cpf_cnpj);
-    return res.status(204).send(users);
+    return res.status(204).json(users);
+  }
+
+  async niveledit (req, res) {
+    const { cpf_cnpj } = req.params;
+    const { nivel } = req.body;
+    const users = await userService.nivelEdit(cpf_cnpj, nivel);
+    return res.status(204).json(users);
   }
 }
 

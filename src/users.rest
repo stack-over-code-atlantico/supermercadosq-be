@@ -7,26 +7,25 @@ content-type: application/json
 {
   "nome": "teste",
   "nome_social": "teste2",
-  "cpf_cnpj": "3234567890",
-  "email": "teste@io.com",
-  "senha": "senha",
-  "nivel": "CLIENTE",
+  "cpf_cnpj": "3234567893",
+  "email": "teste@email.com",
+  "senha": "123456",
+  "nivel": "ADMINISTRADOR",
   "telefone": "9876543",
-  "restricao_alimenticia": "Leite"
+  "restricao_alimenticia": "Leite",
+  "logradouro": "Teste",
+  "numero": "123A",
+  "bairro": "teste",
+  "cidade": "Teste",
+  "estado": "CE"
 }
 ###
-PUT http://localhost:3000/users/1234567890
+PUT http://localhost:3000/users/3234567893
 content-type: application/json
 
 {
-  "nome": "",
-  "nome_social": null,
-  "email": "teste@io.com",
-  "senha": "123456",
-  "nivel": "CLIENTE",
-  "telefone": "",
-  "restricao_alimenticia": "Leite"
+  "senha": "1234567"
 }
 ###
-DELETE http://localhost:3000/users/1234567890
+PUT http://localhost:3000/users/3234567893/delete
 ###
