@@ -12,14 +12,12 @@ route.post('/', async (req, res) => {
     nome,
     ingredientes,
     imagem,
-    feedbacks_produtos,
     id_usuario
   } = req.body;
   const product = await productRepository.productCreate(
     nome,
     ingredientes,
     imagem,
-    feedbacks_produtos,
     id_usuario
   );
   res.status(201).json(product);
