@@ -203,9 +203,9 @@
 ### Usuário
 - [ok] : Cadastrar usuário
 - [ok] : Listagem de usuário
-- [--] : Atualização de usuário
+- [ok] : Atualização de usuário
 - [ok] : O Usuário não poderá cadastrar o cpf ou cnpj caso já estejam cadastrados.
-- [--] : O Usuário não poderá cadastrar um email caso já esteja cadastrado.
+- [ok] : O Usuário não poderá cadastrar um email caso já esteja cadastrado.
 - [ok] : O Usuário poderá alterar email, senha, endereço, telefone, porém não o seu nível de acesso e cpf ou cnpj não.
 - [--] : O Usuário poderá adicionar suas próprias postagens, comentários
 - [--] : O Usuário poderá denunciar comentários e postagens.
@@ -213,13 +213,12 @@
 
 ### Administrador
 - **Todos tem um middleware isAdmin**
-- [--] : O Administrador do sistema pode transformar um usuário em ADMIN. **Criar rota, terá uma validação de administrador, ou seja Middleware isAdmin**
-- [--] : O Administrador poderá adicionar apagar e editar. 
-- [--] : O Administrador poderá bloquear usuários.        
+- [ok] : O Administrador do sistema pode transformar um usuário em ADMIN. **Criar rota, terá uma validação de administrador, ou seja Middleware isAdmin**
+- [--] : O Administrador poderá adicionar apagar e editar.        
 - [--] : O Administrador poderá arquivar comentários  
 - [--] : O Administrador poderá bloquear postagens denunciados.
-- [--] : Deixar usuário inativo (Delete)
-- [--] : O Administrador poderá alterar o nível de qualquer usuário.
+- [ok] : Deixar usuário inativo (Delete)
+- [ok] : O Administrador poderá alterar o nível de qualquer usuário.
 - [--] : Aprovar produto **Quando o prdiduto estive aprovado, terá o id_aprovado, que será o id do administrador que aprovou**
 ### Fornecedor
 - [--] : Poderá denunciar comentários e postagens.

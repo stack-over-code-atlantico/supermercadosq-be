@@ -1,5 +1,6 @@
 const prisma = require('../../../../database/prismaClient');
 const { hash } = require('bcrypt');
+const { usuario, endereco } = require('../../../../database/prismaClient');
 
 const findUniqueUser = async (cpf_cnpj) => {
   const result = await prisma.usuario.findFirst({
@@ -71,29 +72,20 @@ const usersCreate = async (
   return result; 
 };
 
-const usersDelete = async (
-  cpf_cnpj,
-  nome,
-  nome_social = null,
-  email,
-  senha,
-  ativo,
-  nivel,
-  telefone = null,
-  restricao_alimenticia = null,
-  ) => {
+const usersDelete = async (cpf_cnpj) => {
   const result = await prisma.usuario.update({
     where: { cpf_cnpj },
     data: {
-      nome,
-      nome_social,
-      email,
-      senha,
-      ativo,
-      nivel,
-      telefone,
-      restricao_alimenticia,
+      ativo: false
     },
+  });
+  return result;
+};
+
+const nivelEdit = async (cpf_cnpj, nivel) => {
+  const result = await prisma.usuario.update({
+    where: { cpf_cnpj },
+    data: { nivel },
   });
   return result;
 };
@@ -101,26 +93,46 @@ const usersDelete = async (
 const usersUpdate = async (
   cpf_cnpj,
   nome,
-  nome_social = null,
+  nome_social,
   email,
   senha,
-  nivel,
-  telefone = null,
-  restricao_alimenticia = null,
-  ) => {
+  telefone,
+  restricao_alimenticia,
+  logradouro,
+  numero,
+  bairro,
+  cidade,
+  estado,
+) => {
+  // const password = await hash(senha, 8);
+  const user = await prisma.usuario.findFirst({ 
+    where: { cpf_cnpj },
+    include: {
+    endereco: true,
+  } });
   const result = await prisma.usuario.update({
     where: { cpf_cnpj },
     data: {
-      nome,
-      nome_social,
-      email,
-      senha,
-      nivel,
-      telefone,
-      restricao_alimenticia,
+      nome: nome ? nome : user.nome,
+      nome_social:  nome_social ? nome_social : user.nome_social ,
+      email:  email ? email : user.email ,
+      senha:  senha ? await hash(senha, 8) : user.senha ,
+      telefone:  telefone ? telefone : user.telefone ,
+      restricao_alimenticia:  restricao_alimenticia ? restricao_alimenticia  : user.restricao_alimenticia,
+      endereco: {
+        update: {
+          where: { id_endereco: user.endereco[0].id_endereco },
+          data: {
+            logradouro: logradouro ? logradouro : user.endereco[0].logradouro,
+            numero: numero ? numero : user.endereco[0].numero,
+            bairro: bairro ? bairro : user.endereco[0].bairro,
+            cidade: cidade ? cidade : user.endereco[0].cidade,
+            estado: estado ? estado : user.endereco[0].estado
+          }
+        }
+      }
     },
   });
-  
   return result;
 };
 
@@ -132,4 +144,5 @@ module.exports = {
   usersCreate,
   usersDelete,
   usersUpdate,
+  nivelEdit,
 };

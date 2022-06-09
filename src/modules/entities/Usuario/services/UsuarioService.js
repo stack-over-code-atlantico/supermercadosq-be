@@ -24,6 +24,9 @@ class UsuarioService {
     estado,
   ) {
     const alreadyHaveUser = await usuarioRepositorio.findUniqueUser(cpf_cnpj);
+    console.log(alreadyHaveUser);
+
+    if (alreadyHaveUser && alreadyHaveUser.email === email) throw new Error(`Email already in use.`);
 
     if (alreadyHaveUser) throw new Error(`Already have user.`);
 
@@ -51,9 +54,13 @@ class UsuarioService {
     nome_social,
     email,
     senha,
-    nivel,
     telefone,
-    restricao_alimenticia
+    restricao_alimenticia,
+    logradouro,
+    numero,
+    bairro,
+    cidade,
+    estado,
   ) {
     const users = await usuarioRepositorio.usersUpdate(
       cpf_cnpj,
@@ -61,36 +68,32 @@ class UsuarioService {
       nome_social,
       email,
       senha,
-      nivel,
       telefone,
       restricao_alimenticia,
+      logradouro,
+      numero,
+      bairro,
+      cidade,
+      estado,
     );
     return users;
   }
 
-  async deleteUser(
-    cpf_cnpj,
-    nome,
-    nome_social,
-    email,
-    senha,
-    ativo,
-    nivel,
-    telefone,
-    restricao_alimenticia
-  ) {
-    const users = await usuarioRepositorio.usersDelete(
-      cpf_cnpj,
-      nome,
-      nome_social,
-      email,
-      senha,
-      ativo,
-      nivel,
-      telefone,
-      restricao_alimenticia,
-    );
+  async deleteUser(cpf_cnpj) {
+    const users = await usuarioRepositorio.usersDelete(cpf_cnpj);
     return users;
+  }
+
+  async nivelEdit(cpf_cnpj, nivel) {
+    if (
+      nivel === "CLIENTE" ||
+      nivel === "ADMINISTRADOR" ||
+      nivel === "FORNECEDOR"
+    ) {
+      const users = await usuarioRepositorio.nivelEdit(cpf_cnpj, nivel);
+      return users;
+    }
+    throw new Error(`Nivel doesn't exist.`);
   }
 
   async verifyAdmin(cpf_cnpj){

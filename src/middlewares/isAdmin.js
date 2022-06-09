@@ -3,7 +3,7 @@ const { verify } = require('jsonwebtoken')
 
 const usuarioService = new UsuarioService();
 
-module.exports = function (req, res, next) {
+module.exports = async function (req, res, next) {
   console.log('IsAdmin');
   const authHeader = req.headers.authorization;
 
@@ -14,7 +14,7 @@ module.exports = function (req, res, next) {
   const [, token] = authHeader.split(" ");
 
   const { cpf_cnpj } = verify(token, process.env.JWT_SECRET);
-  const user = usuarioService.verifyAdmin(cpf_cnpj);
+  const user = await usuarioService.verifyAdmin(cpf_cnpj);
   console.log(user);
 
   if (!user) {
