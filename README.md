@@ -225,11 +225,11 @@
 - [--] : Poderá editar suas postagens e comentários.
 
 ### Cliente
-- [--] : O Cliente que tiver sua conta desativada, terá o atributo "ativo" como false, assim como seus comentários e produtos postados.
+- [ok] : O Cliente que tiver sua conta desativada, terá o atributo "ativo" como false, assim como seus comentários e produtos postados.
 
 ### Produtos
-- [--] : Criar produto
-- [--] : Listar produto apenas aqueles com status **diferentes de false**
+- [ok] : Criar produto
+- [ok] : Listar produto apenas aqueles com status **diferentes de false**
 - [--] : Atualizar produto
 - [--] : Deletar/Denunciar produto **Setar Status para false**    **Terá validação, ou seja, Middleware isAdmin**
 - [--] : Função rota para incrementar "feedbacks_produto" inicia com 0.

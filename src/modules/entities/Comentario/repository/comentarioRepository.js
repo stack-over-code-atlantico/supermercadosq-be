@@ -1,4 +1,4 @@
-const prisma = require("../../../database/prismaClient");
+const prisma = require("../../../../database/prismaClient");
 
 const findUniqueComment = async (id_comentario) => {
 	const result = await prisma.comentario.findUnique({

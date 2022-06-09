@@ -17,8 +17,23 @@ const findUniqueProduct = async (id_produto) => {
 };
 
 const productRead = async () => {
-	const result = await prisma.produto.findMany();
-    console.log(result);
+	const result = await prisma.produto.findMany({
+        where: {
+            OR: [
+                {
+                    status: {
+                        equals: null,
+                    },
+                },
+                {
+                    status: {
+                        equals: "true",
+                    },
+                },
+              ],
+            
+          },
+    });
 	return result;
 };
 
@@ -26,7 +41,6 @@ const productCreate = async (
     nome,
     ingredientes,
     imagem,
-    feedbacks_produtos,
     id_usuario
 ) => {
 	const result = await prisma.produto.create({
@@ -36,7 +50,7 @@ const productCreate = async (
             imagem: imagem,            
             data_postagem: new Date(),
             status: null,          
-            feedbacks_produtos: feedbacks_produtos,
+            feedbacks_produtos: 0,
             id_usuario: id_usuario,  
             editado: false,       
             id_aprovado: null       
