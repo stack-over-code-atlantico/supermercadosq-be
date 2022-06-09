@@ -1,3 +1,6 @@
+## Arquitetura de Pastas do Backend
+
+<img src="https://i.ibb.co/DwddM97/Screenshot-1.png" fullwidth/>
 
 ## Fluxo da Aplicação
 ```mermaid
