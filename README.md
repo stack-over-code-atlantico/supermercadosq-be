@@ -222,7 +222,7 @@
 - [--] : O Administrador poderá bloquear postagens denunciados.
 - [ok] : Deixar usuário inativo (Delete)
 - [ok] : O Administrador poderá alterar o nível de qualquer usuário.
-- [--] : Aprovar produto **Quando o prdiduto estive aprovado, terá o id_aprovado, que será o id do administrador que aprovou**
+- [--] : Aprovar produto **Quando o produto estiver aprovado, terá o id_aprovado, que será o id do administrador que aprovou**
 ### Fornecedor
 - [--] : Poderá denunciar comentários e postagens.
 - [--] : Poderá editar suas postagens e comentários.
