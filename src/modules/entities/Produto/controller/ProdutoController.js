@@ -26,7 +26,7 @@ class ProdutoController {
         feedbacks_produtos,
         id_usuario,  
         editado,       
-        id_aprovado,
+        id_admin_relator,
     );
     return res.status(201).json(product);
   }
@@ -48,7 +48,7 @@ class ProdutoController {
         status,          
         feedbacks_produtos,
         editado,       
-        id_aprovado, 
+        id_admin_relator, 
     );
     return res.status(204).json(product);
   }
