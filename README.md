@@ -233,7 +233,7 @@
 ### Produtos
 - [ok] : Criar produto
 - [ok] : Listar produto apenas aqueles com status **diferentes de false**
-- [--] : Atualizar produto
+- [ok] : Atualizar produto
 - [--] : Deletar/Denunciar produto **Setar Status para false**    **Terá validação, ou seja, Middleware isAdmin**
 - [--] : Função rota para incrementar "feedbacks_produto" inicia com 0.
 
