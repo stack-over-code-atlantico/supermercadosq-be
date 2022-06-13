@@ -16,8 +16,8 @@ model comentario {
   feedbacks_comentarios                   Int?
   id_produto                              Int
   id_usuario                              Int
-  id_aprovado                             Int?
-  usuario_comentario_id_aprovadoTousuario usuario? @relation("comentario_id_aprovadoTousuario", fields: [id_aprovado], references: [id_usuario], onDelete: NoAction, onUpdate: NoAction)
+  id_admin_relator                        Int?
+  usuario_comentario_id_aprovadoTousuario usuario? @relation("comentario_id_aprovadoTousuario", fields: [id_admin_relator], references: [id_usuario], onDelete: NoAction, onUpdate: NoAction)
   produto                                 produto  @relation(fields: [id_produto], references: [id_produto], onDelete: NoAction, onUpdate: NoAction)
   usuario_comentario_id_usuarioTousuario  usuario  @relation("comentario_id_usuarioTousuario", fields: [id_usuario], references: [id_usuario], onDelete: NoAction, onUpdate: NoAction)
 }
@@ -43,8 +43,8 @@ model produto {
   status                               String?      @db.VarChar(9)
   feedbacks_produtos                   Int?
   id_usuario                           Int
-  id_aprovado                          Int?
-  usuario_produto_id_aprovadoTousuario usuario?     @relation("produto_id_aprovadoTousuario", fields: [id_aprovado], references: [id_usuario], onDelete: NoAction, onUpdate: NoAction)
+  id_admin_relator                     Int?
+  usuario_produto_id_aprovadoTousuario usuario?     @relation("produto_id_aprovadoTousuario", fields: [id_admin_relator], references: [id_usuario], onDelete: NoAction, onUpdate: NoAction)
   usuario_produto_id_usuarioTousuario  usuario      @relation("produto_id_usuarioTousuario", fields: [id_usuario], references: [id_usuario], onDelete: NoAction, onUpdate: NoAction)
   comentario                           comentario[]
 }
