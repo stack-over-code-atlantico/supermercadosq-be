@@ -53,7 +53,7 @@ const productCreate = async (
             feedbacks_produtos: 0,
             id_usuario: id_usuario,  
             editado: false,       
-            id_aprovado: null       
+            id_admin_relator: null       
 		},
 	});
 	return result;
@@ -80,7 +80,7 @@ const productUpdate = async (
             status: product.status,          
             feedbacks_produtos: feedbacks_produtos,
             editado: true,       
-            id_aprovado: product.id_aprovado        
+            id_admin_relator: product.id_admin_relator        
 		},
 	});
     return result;

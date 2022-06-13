@@ -27,7 +27,7 @@ class ProdutoService {
         feedbacks_produtos,
         id_usuario,  
         editado,       
-        id_aprovado,
+        id_admin_relator,
     );
     return product;
   }
@@ -49,7 +49,7 @@ class ProdutoService {
         status,          
         feedbacks_produtos,
         editado,       
-        id_aprovado, 
+        id_admin_relator, 
     );
     return product;
   }
