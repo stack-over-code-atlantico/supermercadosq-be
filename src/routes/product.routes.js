@@ -1,52 +1,28 @@
 const express = require('express');
 const route = express();
-const productRepository = require('../modules/entities/Produto/repository/produtoRepository');
+const ProdutoController = require('@produto/controller/ProdutoController')
+const authenticate = require('@Middleware/authenticate');
 
-route.get('/', async (req, res) => {
-    const product = await productRepository.productRead();
-    return res.json(product);
-});
+const productController = new ProdutoController()
+/**
+ * Lista todos os produtos
+ */
+ route.get('/', productController.list);
 
-route.post('/', async (req, res) => {
-  const {
-    nome,
-    ingredientes,
-    imagem,
-    id_usuario
-  } = req.body;
-  const product = await productRepository.productCreate(
-    nome,
-    ingredientes,
-    imagem,
-    id_usuario
-  );
-  res.status(201).json(product);
-});
+ /**
+  * Cria um produto
+  */
+ route.post('/', productController.create);
 
-route.put('/:id_product', async (req, res) => {
-  const { id_produto } = req.params;
-  const {
-    nome,
-    ingredientes,
-    imagem,
-    feedbacks_produtos,
-    id_usuario
-  } = req.body;
-  const product = await productRepository.productUpdate(
-    Number(id_produto),
-    nome,
-    ingredientes,
-    imagem,
-    feedbacks_produtos,
-    id_usuario
-  );
-  return res.status(204).json(product);
-});
+  /**
+  * Altera um produto
+  */
+ route.put('/:id_produto', productController.update);
 
-route.delete('/:id_produto', async (req, res) => {
-  const { id_produto } = req.params;
-  const product = await productRepository.productDelete(Number(id_produto));
-  return res.status(204).send(product);
-});
+  /**
+  * Deleta um produto
+  */
+ route.put('/:id_produto/delete', productController.delete)
 
+ 
 module.exports = route;
