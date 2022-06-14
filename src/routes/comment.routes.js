@@ -1,11 +1,12 @@
 const express = require('express');
 const route = express();
 const comentarioRepositorio = require('@comentario/repository/comentarioRepository');
+const ComentarioController = require('@comentario/controller/ComentarioController')
 
-route.get('/', async (req, res) => {
-    const comentario = await comentarioRepositorio.comentarioRead();
-    return res.json(comentario);
-});
+
+const comentarioController = new ComentarioController()
+
+route.get('/', comentarioController.list)
 
 route.post('/', async (req, res) => {
   const {

@@ -35,9 +35,14 @@ class ProdutoService {
     return produtos
   }
 
-  async deleteProduto(id_produto){
-    const produto = await produtoRepositorio.produtoDelete(id_produto)
-    return produto
+  async deleteProduto(id_produto,id_usuario, nivel ){
+    const outroPorduto = await produtoRepositorio.findUniqueProduto(id_produto)
+    if(outroPorduto.id_usuario === id_usuario || nivel === 'ADMINISTRADOR'){
+      console.log('deu ruim papai')
+      const produto = await produtoRepositorio.produtoDelete(id_produto)
+      return produto
+    }
+    return new Error('Erroooo')
   }
 }
 
