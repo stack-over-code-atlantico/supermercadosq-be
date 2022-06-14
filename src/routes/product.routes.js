@@ -15,5 +15,7 @@ const productController = new ProdutoController()
  
  route.put('/:id_produto', productController.update);
 
+ route.put('/:id_produto/delete', productController.delete)
+
  
 module.exports = route;

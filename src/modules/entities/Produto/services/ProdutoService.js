@@ -34,6 +34,11 @@ class ProdutoService {
     )
     return produtos
   }
+
+  async deleteProduto(id_produto){
+    const produto = await produtoRepositorio.produtoDelete(id_produto)
+    return produto
+  }
 }
 
 module.exports = ProdutoService;

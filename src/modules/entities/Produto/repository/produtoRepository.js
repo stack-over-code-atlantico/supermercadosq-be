@@ -45,9 +45,20 @@ const produtosUpdate = async (id_produto, nome, ingredientes, imagem) => {
   return result;
 };
 
+const produtoDelete = async(id_produto)=>{
+  const result = await prisma.produto.update({
+    where:{id_produto},
+    data:{
+      status: 'REPROVADO'
+    }
+  })
+  return result
+}
+
 module.exports = {
   findUniqueProduto,
   produtosRead,
   produtosCreate,
-  produtosUpdate
+  produtosUpdate,
+  produtoDelete
 };

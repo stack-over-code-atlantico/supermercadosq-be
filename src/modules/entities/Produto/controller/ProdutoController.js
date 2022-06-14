@@ -30,6 +30,12 @@ class ProdutoController {
     );
     return res.status(204).json(produto);
   }
+
+  async delete(req, res){
+    const {id_produto} = req.params
+    const produto = await produtoService.deleteProduto(Number(id_produto))
+    return res.status(204).json(produto)
+  }
 }
 
 module.exports = ProdutoController;
