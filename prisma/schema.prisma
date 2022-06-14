@@ -8,18 +8,18 @@ datasource db {
 }
 
 model comentario {
-  id_comentario                           Int      @id @default(autoincrement())
-  mensagem                                String
-  status                                  String?  @db.VarChar(9)
-  data_comentario                         DateTime @db.Date
-  editado                                 Boolean?
-  feedbacks_comentarios                   Int?
-  id_produto                              Int
-  id_usuario                              Int
-  id_admin_relator                        Int?
-  usuario_comentario_id_aprovadoTousuario usuario? @relation("comentario_id_aprovadoTousuario", fields: [id_admin_relator], references: [id_usuario], onDelete: NoAction, onUpdate: NoAction)
-  produto                                 produto  @relation(fields: [id_produto], references: [id_produto], onDelete: NoAction, onUpdate: NoAction)
-  usuario_comentario_id_usuarioTousuario  usuario  @relation("comentario_id_usuarioTousuario", fields: [id_usuario], references: [id_usuario], onDelete: NoAction, onUpdate: NoAction)
+  id_comentario                                Int      @id @default(autoincrement())
+  mensagem                                     String
+  status                                       String?  @db.VarChar(9)
+  data_comentario                              DateTime @db.Date
+  editado                                      Boolean?
+  feedbacks_comentarios                        Int?
+  id_produto                                   Int
+  id_usuario                                   Int
+  id_admin_relator                             Int?
+  usuario_comentario_id_admin_relatorTousuario usuario? @relation("comentario_id_admin_relatorTousuario", fields: [id_admin_relator], references: [id_usuario], onDelete: NoAction, onUpdate: NoAction)
+  produto                                      produto  @relation(fields: [id_produto], references: [id_produto], onDelete: NoAction, onUpdate: NoAction)
+  usuario_comentario_id_usuarioTousuario       usuario  @relation("comentario_id_usuarioTousuario", fields: [id_usuario], references: [id_usuario], onDelete: NoAction, onUpdate: NoAction)
 }
 
 model endereco {
@@ -34,35 +34,35 @@ model endereco {
 }
 
 model produto {
-  id_produto                           Int          @id @default(autoincrement())
-  nome                                 String       @db.VarChar(50)
-  ingredientes                         String
-  imagem                               Bytes?
-  data_postagem                        DateTime     @db.Date
-  editado                              Boolean?
-  status                               String?      @db.VarChar(9)
-  feedbacks_produtos                   Int?
-  id_usuario                           Int
-  id_admin_relator                     Int?
-  usuario_produto_id_aprovadoTousuario usuario?     @relation("produto_id_aprovadoTousuario", fields: [id_admin_relator], references: [id_usuario], onDelete: NoAction, onUpdate: NoAction)
-  usuario_produto_id_usuarioTousuario  usuario      @relation("produto_id_usuarioTousuario", fields: [id_usuario], references: [id_usuario], onDelete: NoAction, onUpdate: NoAction)
-  comentario                           comentario[]
+  id_produto                                Int          @id @default(autoincrement())
+  nome                                      String       @db.VarChar(50)
+  ingredientes                              String
+  imagem                                    Bytes?
+  data_postagem                             DateTime     @db.Date
+  editado                                   Boolean?
+  status                                    String?      @db.VarChar(9)
+  feedbacks_produtos                        Int?
+  id_usuario                                Int
+  id_admin_relator                          Int?
+  usuario_produto_id_admin_relatorTousuario usuario?     @relation("produto_id_admin_relatorTousuario", fields: [id_admin_relator], references: [id_usuario], onDelete: NoAction, onUpdate: NoAction)
+  usuario_produto_id_usuarioTousuario       usuario      @relation("produto_id_usuarioTousuario", fields: [id_usuario], references: [id_usuario], onDelete: NoAction, onUpdate: NoAction)
+  comentario                                comentario[]
 }
 
 model usuario {
-  id_usuario                                 Int          @id @default(autoincrement())
-  nome                                       String       @db.VarChar(50)
-  cpf_cnpj                                   String       @unique @db.VarChar(20)
-  email                                      String       @db.VarChar(50)
-  senha                                      String       @db.VarChar(255)
-  nivel                                      String?      @db.VarChar(15)
-  nome_social                                String?      @db.VarChar(50)
-  ativo                                      Boolean
-  telefone                                   String?      @db.VarChar(11)
-  restricao_alimenticia                      String?      @db.VarChar(40)
-  comentario_comentario_id_aprovadoTousuario comentario[] @relation("comentario_id_aprovadoTousuario")
-  comentario_comentario_id_usuarioTousuario  comentario[] @relation("comentario_id_usuarioTousuario")
-  endereco                                   endereco[]
-  produto_produto_id_aprovadoTousuario       produto[]    @relation("produto_id_aprovadoTousuario")
-  produto_produto_id_usuarioTousuario        produto[]    @relation("produto_id_usuarioTousuario")
+  id_usuario                                      Int          @id @default(autoincrement())
+  nome                                            String       @db.VarChar(50)
+  cpf_cnpj                                        String       @unique @db.VarChar(20)
+  email                                           String       @db.VarChar(50)
+  senha                                           String       @db.VarChar(255)
+  nivel                                           String?      @db.VarChar(15)
+  nome_social                                     String?      @db.VarChar(50)
+  ativo                                           Boolean
+  telefone                                        String?      @db.VarChar(11)
+  restricao_alimenticia                           String?      @db.VarChar(40)
+  comentario_comentario_id_admin_relatorTousuario comentario[] @relation("comentario_id_admin_relatorTousuario")
+  comentario_comentario_id_usuarioTousuario       comentario[] @relation("comentario_id_usuarioTousuario")
+  endereco                                        endereco[]
+  produto_produto_id_admin_relatorTousuario       produto[]    @relation("produto_id_admin_relatorTousuario")
+  produto_produto_id_usuarioTousuario             produto[]    @relation("produto_id_usuarioTousuario")
 }
