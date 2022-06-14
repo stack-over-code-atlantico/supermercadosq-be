@@ -18,5 +18,4 @@ module.exports = function (req, res, next) {
   } catch(e) {
     throw new Error("Invalid token!");
   }
-
 }

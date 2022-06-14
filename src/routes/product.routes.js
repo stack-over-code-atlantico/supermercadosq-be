@@ -2,6 +2,7 @@ const express = require('express');
 const route = express();
 const ProdutoController = require('@produto/controller/ProdutoController')
 const authenticate = require('@Middleware/authenticate');
+const isAdmin = require('../middlewares/isAdmin');
 
 const productController = new ProdutoController()
 /**
@@ -22,7 +23,7 @@ const productController = new ProdutoController()
   /**
   * Deleta um produto
   */
- route.put('/:id_produto/delete', productController.delete)
+ route.put('/:id_produto/delete', authenticate, productController.delete)
 
  
 module.exports = route;
