@@ -25,7 +25,7 @@ const commentCreate = async (data) => {
 	return comentario;
 };
 
-const commentRead = async () => {
+const comentariosRead = async () => {
 	const result = await prisma.comentario.findMany();
 	console.log(result);
 	return result;
@@ -74,7 +74,7 @@ const commentDelete = async (id_comentario) => {
 module.exports = {
 	findUniqueComment,
 	commentCreate,
-	commentRead,
+	comentariosRead,
 	commentUpdate,
 	commentDelete
 };
