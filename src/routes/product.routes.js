@@ -8,13 +8,20 @@ const productController = new ProdutoController()
  * Lista todos os produtos
  */
  route.get('/', productController.list);
+
  /**
   * Cria um produto
   */
  route.post('/', productController.create);
- 
+
+  /**
+  * Altera um produto
+  */
  route.put('/:id_produto', productController.update);
 
+  /**
+  * Deleta um produto
+  */
  route.put('/:id_produto/delete', productController.delete)
 
  
