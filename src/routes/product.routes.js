@@ -13,7 +13,7 @@ const productController = new ProdutoController()
  /**
   * Cria um produto
   */
- route.post('/', productController.create);
+ route.post('/',authenticate,productController.create);
 
   /**
   * Altera um produto
@@ -28,8 +28,12 @@ const productController = new ProdutoController()
  /**
   * Denuncia um produto
   */
-
  route.put('/:id_produto/denuncia', authenticate, productController.denuncia)
+
+ /**
+  * analisa Denuncia de um produto
+  */
+ route.put('/:id_produto/analisaDenuncia', isAdmin, productController.analisaDenuncia)
 
  
 module.exports = route;
