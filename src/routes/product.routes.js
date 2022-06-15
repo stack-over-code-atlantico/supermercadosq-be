@@ -13,7 +13,7 @@ const productController = new ProdutoController()
  /**
   * Cria um produto
   */
- route.post('/', productController.create);
+ route.post('/',authenticate,productController.create);
 
   /**
   * Altera um produto

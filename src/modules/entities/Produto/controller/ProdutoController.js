@@ -18,7 +18,9 @@ class ProdutoController {
   }
 
   async create(req, res) {
-    const { nome, ingredientes, imagem, id_usuario } = req.body;
+    const authHeader = req.headers.authorization;
+    const [id_usuario] = getToken(authHeader);
+    const { nome, ingredientes, imagem } = req.body;
     const produto = await produtoService.createProduto(
       nome,
       ingredientes,
