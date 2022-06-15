@@ -4,25 +4,12 @@ const comentarioRepositorio = require('@comentario/repository/comentarioReposito
 const ComentarioController = require('@comentario/controller/ComentarioController')
 
 
-const comentarioController = new ComentarioController()
+const comentarioController = new ComentarioController();
 
-route.get('/', comentarioController.list)
+route.get('/', comentarioController.list);
 
-route.post('/', async (req, res) => {
-  const {
-    mensagem,
-    id_produto,
-    id_usuario,
-    id_aprovado
-  } = req.body;
-  const comentario = await comentarioRepositorio.comentarioCreate(
-    mensagem,
-    id_produto,
-    id_usuario,
-    id_aprovado
-  );
-  res.status(201).json(comentario);
-});
+route.post('/', comentarioController.create);
+
 
 route.put('/:id_comentario', async (req, res) => {
   const { id_comentario } = req.params;

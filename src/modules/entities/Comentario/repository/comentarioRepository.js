@@ -9,20 +9,20 @@ const findUniqueComment = async (id_comentario) => {
 	return result;
 };
 
-const commentCreate = async (data) => {
-	const comment = await prisma.comentario.create({
+const commentCreate = async (mensagem, id_produto, id_usuario) => {
+	const result = await prisma.comentario.create({
 		data: {
-			mensagem: data.mensagem,
+			mensagem,
 			status: null,
 			data_comentario: new Date(),
 			editado: false,
 			feedbacks_comentarios: 0,
-			id_produto: data.id_produto,
-			id_usuario: data.id_usuario,
-			id_aprovado: data.id_aprovado,
+			id_produto,
+			id_usuario,
+			id_admin_relator: null
 		},
 	});
-	return comment;
+	return result;
 };
 
 const commentRead = async () => {

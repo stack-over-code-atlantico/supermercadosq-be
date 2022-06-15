@@ -1,6 +1,6 @@
 const ComentarioService = require('@comentario/services/ComentarioService')
 
-const comentarioService = new ComentarioService()
+const comentarioService = new ComentarioService();
 
 class ComentarioController {
 
@@ -10,10 +10,15 @@ class ComentarioController {
   }
 
   async create (req, res) {
-    const {
-      
-    }
+    const { mensagem, id_produto, id_usuario } = req.body;
+    const comment = await comentarioService.createComment(
+      mensagem,
+      id_produto,
+      id_usuario,
+    );
+    return res.status(201).json(comment);
   }
+
 
 }
 
