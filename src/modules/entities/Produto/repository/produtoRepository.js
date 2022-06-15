@@ -45,25 +45,35 @@ const produtosUpdate = async (id_produto, nome, ingredientes, imagem) => {
   return result;
 };
 
-const produtoDelete = async(id_produto)=>{
+const produtoDelete = async id_produto => {
   const result = await prisma.produto.update({
-    where:{id_produto},
-    data:{
+    where: { id_produto },
+    data: {
       status: 'REPROVADO'
     }
-  })
-  return result
-}
+  });
+  return result;
+};
 
-const denunciaProduto = async(id_produto)=> {
+const produtoDeleteAdmin = async (id_produto, id_usuario) => {
   const result = await prisma.produto.update({
-    where: {id_produto},
-    data:{
+    where: { id_produto },
+    data: {
+      status: "REPROVADO",
+      id_admin_relator: id_usuario
+    }
+  });
+};
+
+const denunciaProduto = async id_produto => {
+  const result = await prisma.produto.update({
+    where: { id_produto },
+    data: {
       status: 'ANALISE'
     }
-  })
-  return result
-}
+  });
+  return result;
+};
 
 module.exports = {
   findUniqueProduto,
@@ -71,5 +81,6 @@ module.exports = {
   produtosCreate,
   produtosUpdate,
   produtoDelete,
+  produtoDeleteAdmin,
   denunciaProduto
 };
