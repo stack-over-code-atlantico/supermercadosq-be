@@ -29,7 +29,13 @@ class ComentarioController {
     return res.status(204).json(comment);
   }
   
- 
+ async delete (req, res) {
+  const { id_comentario } = req.params;
+  const comment = await comentarioService.deleteComment(
+    Number(id_comentario)
+  );
+  return res.status(204).json(comment);
+ }
 
 
 }

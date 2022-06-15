@@ -56,18 +56,13 @@ const commentUpdateAdmin = async (id_comentario, id_usuario) => {
 
 
 const commentDelete = async (id_comentario) => {
-	try{
-		const comentario = await prisma.comentario.delete({
-			where: {
-				id_comentario,
-			},
-		});
-		console.log('Comment removed successfully. Below is the comment information.');
-		console.log(comentario);
-		return comentario;
-	} catch (e){
-		console.log('Comment does not exist.');
-	}
+	const result = await prisma.comentario.update({
+		where: { id_comentario },
+		data: { 
+			status: 'REPROVADO'
+		}
+	});
+	return result;
 };
 
 

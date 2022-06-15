@@ -23,6 +23,13 @@ class ComentarioService {
     );
     return comment;
   }
+
+  async deleteComment(id_comentario) {
+    const comment = await comentarioRepositorio.commentDelete(
+      id_comentario
+    );
+    return comment;
+  }
   
 }
 

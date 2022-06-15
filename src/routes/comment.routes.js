@@ -12,6 +12,7 @@ route.post('/', comentarioController.create);
 
 route.put('/:id_comentario', comentarioController.update);
 
+route.put('/:id_comentario/delete', comentarioController.delete);
 
 route.delete('/:id_comentario', async (req, res) => {
   const { id_comentario } = req.params;
