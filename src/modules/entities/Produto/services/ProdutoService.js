@@ -44,6 +44,11 @@ class ProdutoService {
     }
     return new Error('Erroooo')
   }
+
+  async denunciaProduto(id_produto) {
+    const produto = await produtoRepositorio.denunciaProduto(id_produto)
+    return produto
+  }
 }
 
 module.exports = ProdutoService;

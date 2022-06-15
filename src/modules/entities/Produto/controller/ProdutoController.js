@@ -52,6 +52,15 @@ class ProdutoController {
     }
     return res.status(204).json(produto);
   }
+
+  async denuncia(req, res) {
+    const {id_produto} = req.params
+    const produto = await produtoService.denunciaProduto(Number(id_produto))
+
+    return res.status(204).json(produto)
+  }
 }
+
+
 
 module.exports = ProdutoController;
