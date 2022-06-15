@@ -25,5 +25,11 @@ const productController = new ProdutoController()
   */
  route.put('/:id_produto/delete', authenticate, productController.delete)
 
+ /**
+  * Denuncia um produto
+  */
+
+ route.put('/:id_produto/denuncia', authenticate, productController.denuncia)
+
  
 module.exports = route;
