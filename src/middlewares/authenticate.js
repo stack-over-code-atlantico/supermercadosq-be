@@ -11,10 +11,12 @@ module.exports = function (req, res, next) {
   const [, token] = authHeader.split(" ");
 
   try {
-    const d = verify(token, process.env.JWT_SECRET);
-    console.log(d)
-
+    const desc = verify(token, process.env.JWT_SECRET);
+    const {id_usuario, nivel} = desc
+    req.id_usuario = id_usuario
+    req.nivel = nivel
     next();
+
   } catch(e) {
     throw new Error("Invalid token!");
   }

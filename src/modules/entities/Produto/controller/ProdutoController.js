@@ -1,16 +1,8 @@
 const ProdutoService = require('@produto/services/ProdutoService');
-const { verify } = require('jsonwebtoken');
+
 
 const produtoService = new ProdutoService();
 
-function getToken(authHeader) {
-  if (!authHeader) {
-    throw new Error('Token missing!');
-  }
-  const [, token] = authHeader.split(' ');
-  const { id_usuario, nivel } = verify(token, process.env.JWT_SECRET);
-  return [id_usuario, nivel];
-}
 class ProdutoController {
   async list(req, res) {
     const produtos = await produtoService.listAllProdutos();
@@ -18,8 +10,7 @@ class ProdutoController {
   }
 
   async create(req, res) {
-    const authHeader = req.headers.authorization;
-    const [id_usuario] = getToken(authHeader);
+    const {id_usuario} = req;
     const { nome, ingredientes, imagem } = req.body;
     const produto = await produtoService.createProduto(
       nome,
@@ -43,15 +34,14 @@ class ProdutoController {
   }
 
   async delete(req, res) {
-    const authHeader = req.headers.authorization;
-    const [id_usuario, nivel] = getToken(authHeader);
+    const {id_usuario, nivel} = req
     const { id_produto } = req.params;
     const produto = await produtoService.deleteProduto(
       Number(id_produto),
       id_usuario,
       nivel
     );
-    console.log(produto);
+    console.log(produto+'oi');
     if (produto instanceof Error) {
       return res.status(401).json(produto.message);
     }
@@ -61,13 +51,11 @@ class ProdutoController {
   async denuncia(req, res) {
     const { id_produto } = req.params;
     const produto = await produtoService.denunciaProduto(Number(id_produto));
-
     return res.status(204).json(produto);
   }
 
   async analisaDenuncia(req, res) {
-    const authHeader = req.headers.authorization;
-    const [id_usuario] = getToken(authHeader);
+    const {id_usuario} = req;
     const { id_produto } = req.params;
     const {status} = req.body;
     const produto = await produtoService.analisaDenuncia(
