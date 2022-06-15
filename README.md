@@ -238,7 +238,7 @@
 - [--] : Função rota para incrementar "feedbacks_produto" inicia com 0.
 
 ### Comentário
-- [--] : Criar comentário
+- [ok] : Criar comentário
 - [--] : Deletar comentário **Setar status para false**
 - [--] : Atualizar comentário
 - [ok] : Listar comentário
