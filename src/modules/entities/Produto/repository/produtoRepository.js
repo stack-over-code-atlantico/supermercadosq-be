@@ -63,6 +63,7 @@ const produtoDeleteAdmin = async (id_produto, id_usuario) => {
       id_admin_relator: id_usuario
     }
   });
+  return result;
 };
 
 const denunciaProduto = async id_produto => {
