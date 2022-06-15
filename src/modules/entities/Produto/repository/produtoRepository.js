@@ -75,6 +75,17 @@ const denunciaProduto = async id_produto => {
   return result;
 };
 
+const analisaDenuncia = async(id_produto, id_usuario, status)=>{
+  const result = await prisma.produto.update({
+    where: {id_produto},
+    data:{
+      status: status,
+      id_admin_relator: id_usuario
+    }
+  })
+  return result
+}
+
 module.exports = {
   findUniqueProduto,
   produtosRead,
@@ -82,5 +93,6 @@ module.exports = {
   produtosUpdate,
   produtoDelete,
   produtoDeleteAdmin,
-  denunciaProduto
+  denunciaProduto,
+  analisaDenuncia
 };

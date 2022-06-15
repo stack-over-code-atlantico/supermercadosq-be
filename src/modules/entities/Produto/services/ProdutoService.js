@@ -46,6 +46,11 @@ class ProdutoService {
     const produto = await produtoRepositorio.denunciaProduto(id_produto);
     return produto;
   }
+
+  async analisaDenuncia(id_produto, id_usuario, status) {
+    const produto = await produtoRepositorio.analisaDenuncia(id_produto, id_usuario, status);
+    return produto;
+  }
 }
 
 module.exports = ProdutoService;

@@ -62,6 +62,19 @@ class ProdutoController {
 
     return res.status(204).json(produto);
   }
+
+  async analisaDenuncia(req, res) {
+    const authHeader = req.headers.authorization;
+    const [id_usuario] = getToken(authHeader);
+    const { id_produto } = req.params;
+    const {status} = req.body;
+    const produto = await produtoService.analisaDenuncia(
+      Number(id_produto),
+      id_usuario,
+      status
+    );
+    return res.status(204).json(produto);
+  }
 }
 
 module.exports = ProdutoController;
