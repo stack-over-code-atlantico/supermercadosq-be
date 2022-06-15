@@ -211,37 +211,37 @@
 - [ok] : O Usuário não poderá cadastrar um email caso já esteja cadastrado.
 - [ok] : O Usuário poderá alterar email, senha, endereço, telefone, porém não o seu nível de acesso e cpf ou cnpj não.
 - [--] : O Usuário poderá adicionar suas próprias postagens, comentários
-- [--] : O Usuário poderá denunciar comentários e postagens.
-- [--] : O Usuário poderá editar suas postagens e comentários.
+- [--] : O Usuário poderá denunciar comentários e produtos.
+- [--] : O Usuário poderá editar seus comentários e produtos.
 
 ### Administrador
 - **Todos tem um middleware isAdmin**
 - [ok] : O Administrador do sistema pode transformar um usuário em ADMIN. **Criar rota, terá uma validação de administrador, ou seja Middleware isAdmin**
 - [--] : O Administrador poderá adicionar apagar e editar.        
-- [--] : O Administrador poderá arquivar comentários  
-- [--] : O Administrador poderá bloquear postagens denunciados.
+- [ok] : O Administrador poderá deletar comentários  
+- [--] : O Administrador poderá deletar postagens denunciados.
 - [ok] : Deixar usuário inativo (Delete)
 - [ok] : O Administrador poderá alterar o nível de qualquer usuário.
-- [--] : Aprovar produto **Quando o produto estiver aprovado, terá o id_aprovado, que será o id do administrador que aprovou**
+- [--] : Avaliar denuncia do produto **Quando o produto estiver aprovado, terá o id_admin_relator, que será o id do administrador que aprovou**
 ### Fornecedor
-- [--] : Poderá denunciar comentários e postagens.
-- [--] : Poderá editar suas postagens e comentários.
+- [--] : Poderá denunciar comentários e produtos.
+- [--] : Poderá editar seus produtos e comentários.
 
 ### Cliente
-- [ok] : O Cliente que tiver sua conta desativada, terá o atributo "ativo" como false, assim como seus comentários e produtos postados.
+- [ok] : O Cliente que tiver sua conta desativada, terá o atributo "ativo" como false, assim como seus comentários e produtos postados como "REPROVADO".
 
 ### Produtos
 - [ok] : Criar produto
-- [ok] : Listar produto apenas aqueles com status **diferentes de false**
-- [--] : Atualizar produto
-- [--] : Deletar/Denunciar produto **Setar Status para false**    **Terá validação, ou seja, Middleware isAdmin**
+- [ok] : Listar produto apenas aqueles com status **diferentes de reprovado**
+- [ok] : Atualizar produto
+- [ok] : Deletar/Denunciar produto **Setar Status para false**    **Terá validação, ou seja, Middleware isAdmin**
 - [--] : Função rota para incrementar "feedbacks_produto" inicia com 0.
 
 ### Comentário
 - [--] : Criar comentário
 - [--] : Deletar comentário **Setar status para false**
 - [--] : Atualizar comentário
-- [--] : Listar comentário
+- [ok] : Listar comentário
 - [--] : Denunciar comentário **Setar para false**
 - [--] : Função rota para atualizar id_aprovado com o id do **ADMIN** quando aprovado **Apenas Admins podem aprovar** 
 - [--] : Função rota para incrementar "feedbacks_produto" inicia com 0.
