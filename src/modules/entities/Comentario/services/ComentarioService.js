@@ -16,7 +16,17 @@ class ComentarioService {
     return comments;
   }
 
-
+  async updateComment(id_comentario, mensagem) {
+    const comment = await comentarioRepositorio.commentUpdate(
+      id_comentario,
+      mensagem
+    );
+    return comment;
+  }
+  
 }
+
+
+
 
 module.exports = ComentarioService;

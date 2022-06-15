@@ -19,6 +19,18 @@ class ComentarioController {
     return res.status(201).json(comment);
   }
 
+  async update (req, res) {
+    const { id_comentario } = req.params;
+    const { mensagem } = req.body;
+    const comment = await comentarioService.updateComment(
+      Number(id_comentario),
+      mensagem
+    );
+    return res.status(204).json(comment);
+  }
+  
+ 
+
 
 }
 
