@@ -10,7 +10,7 @@ const findUniqueComment = async (id_comentario) => {
 };
 
 const commentCreate = async (data) => {
-	const comentario = await prisma.comentario.create({
+	const comment = await prisma.comentario.create({
 		data: {
 			mensagem: data.mensagem,
 			status: null,
@@ -22,12 +22,11 @@ const commentCreate = async (data) => {
 			id_aprovado: data.id_aprovado,
 		},
 	});
-	return comentario;
+	return comment;
 };
 
-const comentariosRead = async () => {
+const commentRead = async () => {
 	const result = await prisma.comentario.findMany();
-	console.log(result);
 	return result;
 };
 
@@ -74,7 +73,7 @@ const commentDelete = async (id_comentario) => {
 module.exports = {
 	findUniqueComment,
 	commentCreate,
-	comentariosRead,
+	commentRead,
 	commentUpdate,
 	commentDelete
 };
