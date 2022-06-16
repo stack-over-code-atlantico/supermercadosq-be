@@ -24,19 +24,43 @@ class ComentarioController {
     const { mensagem } = req.body;
     const comment = await comentarioService.updateComment(
       Number(id_comentario),
-      mensagem
+      mensagem,
     );
     return res.status(204).json(comment);
   }
   
- async delete (req, res) {
-  const { id_comentario } = req.params;
-  const comment = await comentarioService.deleteComment(
-    Number(id_comentario)
-  );
-  return res.status(204).json(comment);
- }
+  async delete (req, res) {
+    const { id_usuario, nivel } = req;
+    const { id_comentario } = req.params;
+    const comment = await comentarioService.deleteComment(
+      Number(id_comentario),
+      id_usuario,
+      nivel
+    );
 
+   if(comment instanceof Error) {
+    return res.status(401).json(comment.message);
+   }
+   return res.status(204).json(comment);
+  }
+
+  async report (req, res) {
+    const { id_comentario } = req.params;
+    const comment = await comentarioService.reportComment(Number(id_comentario));
+    return res.status(204).json(comment);
+  }
+
+  async reviewReport (req, res) {
+    const { id_usuario } = req;
+    const { id_comentario } = req.params;
+    const { status } = req.body;
+    const comment = await comentarioService.reviewReportComment(
+      Number(id_comentario),
+      id_usuario,
+      status
+    );
+    return res.status(204).json(comment);
+  }
 
 }
 
