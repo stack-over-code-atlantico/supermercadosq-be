@@ -242,7 +242,7 @@
 - [ok] : Deletar comentário **Setar status para false**
 - [ok] : Atualizar comentário
 - [ok] : Listar comentário
-- [--] : Denunciar comentário **Setar para false**
+- [ok] : Denunciar comentário **Setar para false**
 - [--] : Função rota para atualizar id_aprovado com o id do **ADMIN** quando aprovado **Apenas Admins podem aprovar** 
 - [--] : Função rota para incrementar "feedbacks_produto" inicia com 0.
 
