@@ -3,11 +3,14 @@ const { compare } = require('bcrypt');
 const { sign } = require('jsonwebtoken');
 
 class LoginService {
-  async signin(email, senha) {
+  async signin(id_usuario, ativo, email, senha) {
     const user = await usuarioRepository.findUserPerEmail(email);
     var token = null;
     if (!user) {
       throw new Error('Invalid login!');
+    }
+    if (user.ativo === false) {
+      throw new Error('Account Disabled!');
     }
     console.log(user);
 
