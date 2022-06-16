@@ -7,10 +7,10 @@ class LoginService {
     const user = await usuarioRepository.findUserPerEmail(email);
     var token = null;
     if (!user) {
-      throw new Error('Invalid login!');
+      return new Error('Invalid login!');
     }
     if (user.ativo === false) {
-      throw new Error('Account Disabled!');
+      return new Error('Account Disabled!');
     }
     console.log(user);
 
