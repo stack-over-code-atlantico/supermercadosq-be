@@ -18,7 +18,7 @@ const productController = new ProdutoController()
   /**
   * Altera um produto
   */
- route.put('/:id_produto', productController.update);
+ route.put('/:id_produto', authenticate, productController.update);
 
   /**
   * Deleta um produto

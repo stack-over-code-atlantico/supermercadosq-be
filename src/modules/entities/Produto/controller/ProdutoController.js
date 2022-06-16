@@ -22,14 +22,20 @@ class ProdutoController {
   }
 
   async update(req, res) {
+    const {id_usuario, nivel} = req
     const { id_produto } = req.params;
     const { nome, ingredientes, imagem } = req.body;
     const produto = await produtoService.updateProduto(
       Number(id_produto),
+      id_usuario,
+      nivel,
       nome,
       ingredientes,
-      imagem
+      imagem,
     );
+    if (produto instanceof Error) {
+      return res.status(401).json(produto.message);
+    }
     return res.status(204).json(produto);
   }
 
