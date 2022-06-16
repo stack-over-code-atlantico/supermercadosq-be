@@ -243,6 +243,6 @@
 - [ok] : Atualizar comentário
 - [ok] : Listar comentário
 - [ok] : Denunciar comentário **Setar para false**
-- [--] : Função rota para atualizar id_aprovado com o id do **ADMIN** quando aprovado **Apenas Admins podem aprovar** 
+- [ok] : Função rota para atualizar id_admin_relator com o id do **ADMIN** quando aprovado **Apenas Admins podem aprovar** 
 - [--] : Função rota para incrementar "feedbacks_produto" inicia com 0.
 
