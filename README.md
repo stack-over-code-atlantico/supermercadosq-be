@@ -213,6 +213,7 @@
 - [--] : O Usuário poderá adicionar suas próprias postagens, comentários
 - [--] : O Usuário poderá denunciar comentários e produtos.
 - [--] : O Usuário poderá editar seus comentários e produtos.
+- [--] : O Usuário "deletado"(ativo false) tera todos os seus comentários, produtos e comentários dos produtos como "reprovado"
 
 ### Administrador
 - **Todos tem um middleware isAdmin**
