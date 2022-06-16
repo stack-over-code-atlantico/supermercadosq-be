@@ -55,6 +55,16 @@ const produtoDelete = async id_produto => {
   return result;
 };
 
+const produtoDeleteByUser = async id_usuario => {
+  const result = await prisma.produto.updateMany({
+    where: { id_usuario },
+    data: {
+      status: 'REPROVADO'
+    }
+  });
+  return result;
+};
+
 const produtoDeleteAdmin = async (id_produto, id_usuario) => {
   const result = await prisma.produto.update({
     where: { id_produto },
@@ -93,6 +103,7 @@ module.exports = {
   produtosCreate,
   produtosUpdate,
   produtoDelete,
+  produtoDeleteByUser,
   produtoDeleteAdmin,
   denunciaProduto,
   analisaDenuncia
