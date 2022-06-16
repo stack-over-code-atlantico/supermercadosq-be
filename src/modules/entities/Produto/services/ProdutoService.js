@@ -19,7 +19,6 @@ class ProdutoService {
   async updateProduto(
     id_produto,
     id_usuario,
-    nivel,
     nome,
     ingredientes,
     imagem
@@ -35,16 +34,7 @@ class ProdutoService {
       );
       return produto;
     }
-    if (nivel === 'ADMINISTRADOR') {
-      produto = await produtoRepositorio.produtosUpdate(
-        id_produto,
-        nome,
-        ingredientes,
-        imagem
-      );
-      return produto;
-    }
-    return new Error('deu ruim, oh');
+    return new Error('Unauthorized Service');
   }
 
   async deleteProduto(id_produto, id_usuario, nivel) {
