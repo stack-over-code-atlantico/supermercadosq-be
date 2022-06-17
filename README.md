@@ -1,3 +1,93 @@
+## Configurando e inicializando o projeto
+
+Primeiramente deverá fazer o clone da aplicação em sua máquina:
+
+Através do https
+```
+    git clone https://github.com/stack-over-code-atlantico/supermercadosq-be.git
+```
+
+Através do ssh
+```
+    git clone git@github.com:stack-over-code-atlantico/supermercadosq-be.git
+```
+
+Utilizamos o `npm install` para instalar todas as depedências utilizadas no projeto.
+
+```
+    npm install 
+```
+Para essa próxima etapa é necessário ter o arquivo `.env` configurado
+
+Logo após a instalação, utilizamos o `npx prisma generate` para inicilizar e gerar um cliente prisma. 
+```
+    npx prisma generate
+```
+
+O próximo passo é utilizar o comando `npx prisma migrate dev --name init` para manter o seu arquivo `prisma.schema` sincronizado com o banco de dados.
+```
+    npx prisma migrate dev --name init
+```
+
+E, por fim, usamos o `npm run dev` para iniciar o servidor em modo de desenvolvimento utilizando a biblioteca `nodemon` no endereço: [http://localhost:3000](http://localhost:3000)
+```
+    npm run dev
+```
+
+## Dependências
+
+<ul>
+    <li>
+        <a href="https://www.prisma.io/docs/concepts/components/prisma-client">
+            @prisma/client
+        </a>
+    </li>
+    <li>
+        <a href="https://www.npmjs.com/package/bcrypt">
+            bcrypt
+        </a>
+    </li>
+    <li>
+        <a href="https://expressjs.com/pt-br/">
+            express
+        </a>
+    </li>
+    <li>
+        <a href="https://www.npmjs.com/package/express-async-errors">
+            express-async-errors
+        </a>
+    </li>
+    <li>
+        <a href="https://jwt.io/introduction">
+            jsonwebtoken
+        </a>
+    </li>
+    <li>
+        <a href="https://www.npmjs.com/package/module-alias">
+            module-alias
+        </a>
+    </li>
+    <li>
+        <a href="https://www.npmjs.com/package/uuid">
+            uuid
+        </a>
+    </li>
+</ul>
+
+## Depedências de desenvolvimento
+<ul>
+    <li>
+        <a href="https://www.npmjs.com/package/nodemon">
+            nodemon
+        </a>
+    </li>
+    <li>
+        <a href="https://www.prisma.io/">
+            prisma
+        </a>
+    </li>
+</ul>
+
 ## Arquitetura de Pastas do Backend
 
 <img src="https://i.ibb.co/DwddM97/Screenshot-1.png" fullwidth/>
@@ -41,6 +131,129 @@
         Controller_delete_user->>Rota "/": Status 200
     end
 ```
+
+## Endpoints / Rotas
+
+<h3>
+    Usuários
+</h3>
+
+** Todas as informações nos endpoints entre parenteses "()" são os valores ou parâmetros
+
+** Todas as informações nas requisições adicionadas do ícone "💹" são rotas que exigem autenticação.
+
+<table>
+  <tr>
+    <td align="center">
+      <p>Entidades</p>
+    </td>
+    <td align="center">
+      <p>Ação</p>
+    </td>
+    <td align="center">
+      <p>Requisição</p>
+    </td>
+    <td align="center">
+      <p>Endpoint</p>
+    </td>
+  </tr>
+   <tr>
+    <td align="center">
+      <p>Usuário</p>
+    </td>
+    <td align="center">
+      <p>
+          Listar todos os usuários
+      </p>
+      <p>
+          Criar um novo usuário
+      </p>
+      <p>
+          Atualizar as informações de um usuário
+      </p>
+      <p>
+          Deletar o usuário (setar o valor do atributo "ativo": false)
+      </p>
+      <p>
+          Alterar o nível de usuário (setar o valor do atributo "nivel": "ADMINISTRADOR" ou "CLIENTE" ou "FORNECEDOR")
+      </p>
+    </td>
+    <td>
+      <p>
+          GET
+      </p>
+      <p>
+          POST
+      </p>
+      <p>
+          PUT
+      </p>
+      <p>
+          PUT 💹
+      </p>
+      <p>
+          PUT 💹
+      </p>
+    </td>
+    <td>
+      <p>
+          /users
+      </p>
+      <p>
+          /users
+      </p>
+      <p>
+          /users/(cpf_cnpj)
+      </p>
+      <p>
+          /users/(cpf_cnpj)/delete
+      </p>
+      <p>
+          /users/(cpf_cnpj)/nivel_edit
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+    <p>Login</p>
+    </td>
+    <td>
+
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <p>Fornecedor</p>
+    </td>
+    <td>
+
+    </td>
+  </tr>
+    <tr>
+    <td align="center">
+      <p>Cliente</p>
+    </td>
+    <td>
+
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <p>Produtos</p>
+    </td>
+    <td>
+
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <p>Comentário</p>
+    </td>
+    <td>
+    </td>
+  </tr>
+</table>
+
 
 ##
 
