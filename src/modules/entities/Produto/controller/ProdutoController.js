@@ -46,7 +46,6 @@ class ProdutoController {
       id_usuario,
       nivel
     );
-
     if (produto instanceof Error) {
       return res.status(401).json(produto.message);
     }

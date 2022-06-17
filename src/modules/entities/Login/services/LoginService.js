@@ -3,19 +3,22 @@ const { compare } = require('bcrypt');
 const { sign } = require('jsonwebtoken');
 
 class LoginService {
-  async signin(id_usuario, ativo, email, senha) {
+  async signin(email, senha) {
     const user = await usuarioRepository.findUserPerEmail(email);
-    var token = null;
     if (!user) {
       return new Error('Invalid login!');
+    }
+    const comparePassword = await compare(senha, user.senha);
+    if (!comparePassword) {
+      return new Error('Invalid password!');
     }
     if (user.ativo === false) {
       return new Error('Account Disabled!');
     }
+    var token = null;
     console.log(user);
 
     try {
-      const comparePassword = await compare(senha, user.senha);
       console.log(comparePassword);
       if (comparePassword) {
         token = sign(
