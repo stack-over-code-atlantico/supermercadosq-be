@@ -330,7 +330,7 @@ E, por fim, usamos o `npm run dev` para iniciar o servidor em modo de desenvolvi
         O Fornecedor poderá editar suas postagens e comentários.
       </p>
       <p>
-        O Fornecedor que tiver sua conta desativada, terá o atributo "ativo" como false, assim como seus comentários e produtos postados.
+        O Fornecedor que tiver sua conta desativada, terá o atributo "ativo" como false, assim como seus comentários postados.
       </p>
     </td>
   </tr>
@@ -349,7 +349,7 @@ E, por fim, usamos o `npm run dev` para iniciar o servidor em modo de desenvolvi
         O Cliente poderá editar suas postagens e comentários.
       </p>
       <p>
-        O Cliente que tiver sua conta desativada, terá o atributo "ativo" como false, assim como seus comentários e produtos postados.
+        O Cliente que tiver sua conta desativada, terá o atributo "ativo" como false, assim como seus comentários postados.
       </p>
     </td>
   </tr>
