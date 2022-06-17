@@ -53,6 +53,16 @@ const deleteComment = async (id_comentario) => {
 	return result;
 };
 
+const commentDeleteByUser = async id_usuario => {
+  const result = await prisma.comentario.updateMany({
+    where: { id_usuario },
+    data: {
+      status: 'REPROVADO'
+    }
+  });
+  return result;
+}
+
 const deleteAdminComment = async (id_comentario, id_usuario) => {
 	const result = await prisma.comentario.update({
 		where: { id_comentario },
@@ -93,6 +103,7 @@ module.exports = {
 	deleteComment,
 	deleteAdminComment,
 	reportComment,
-	reviewReportComment
+	reviewReportComment,
+	commentDeleteByUser
 };
 
