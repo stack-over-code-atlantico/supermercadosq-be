@@ -134,126 +134,57 @@ E, por fim, usamos o `npm run dev` para iniciar o servidor em modo de desenvolvi
 
 ## Endpoints / Rotas
 
+** Todas as informações nos endpoints entre parenteses "()" são os valores ou parâmetros
+
+** Todas as informações nas requisições adicionadas do ícone "👨‍⚖️" são rotas que exigem autenticação(token) de administrador.
+
+** Todas as informações nas requisições adicionadas do ícone "👤" são rotas que exigem autenticação(token) de usuário.
+
+<h3>
+    Login
+</h3>
+
+| Ação                                                                                                         | Requisição | Rota                         |
+|--------------------------------------------------------------------------------------------------------------|------------|------------------------------|
+| Fazer o login                                                                                                | `POST`     | /login                       |
+
 <h3>
     Usuários
 </h3>
 
-** Todas as informações nos endpoints entre parenteses "()" são os valores ou parâmetros
+| Ação                                                                                                         | Requisição | Rota                         |
+|--------------------------------------------------------------------------------------------------------------|------------|------------------------------|
+| Listar todos os usuários                                                                                     | `GET`      | /users                       |
+| Criar um novo usuário                                                                                        | `POST`     | /users                       |
+| Atualizar as informações de um usuário                                                                       | `PUT` 👤   | /users/(cpf_cnpj)            |
+| Deletar o usuário (setar o valor do atributo "ativo": false)                                                 | `PUT` 👨‍⚖️   | /users/(cpf_cnpj)/delete     |
+| Alterar o nível de usuário (setar o valor do atributo "nivel": "ADMINISTRADOR" ou "CLIENTE" ou "FORNECEDOR") | `PUT` 👨‍⚖️   | /users/(cpf_cnpj)/nivel_edit |
 
-** Todas as informações nas requisições adicionadas do ícone "💹" são rotas que exigem autenticação.
+<h3>
+    Produtos
+</h3>
 
-<table>
-  <tr>
-    <td align="center">
-      <p>Entidades</p>
-    </td>
-    <td align="center">
-      <p>Ação</p>
-    </td>
-    <td align="center">
-      <p>Requisição</p>
-    </td>
-    <td align="center">
-      <p>Endpoint</p>
-    </td>
-  </tr>
-   <tr>
-    <td align="center">
-      <p>Usuário</p>
-    </td>
-    <td align="center">
-      <p>
-          Listar todos os usuários
-      </p>
-      <p>
-          Criar um novo usuário
-      </p>
-      <p>
-          Atualizar as informações de um usuário
-      </p>
-      <p>
-          Deletar o usuário (setar o valor do atributo "ativo": false)
-      </p>
-      <p>
-          Alterar o nível de usuário (setar o valor do atributo "nivel": "ADMINISTRADOR" ou "CLIENTE" ou "FORNECEDOR")
-      </p>
-    </td>
-    <td>
-      <p>
-          GET
-      </p>
-      <p>
-          POST
-      </p>
-      <p>
-          PUT
-      </p>
-      <p>
-          PUT 💹
-      </p>
-      <p>
-          PUT 💹
-      </p>
-    </td>
-    <td>
-      <p>
-          /users
-      </p>
-      <p>
-          /users
-      </p>
-      <p>
-          /users/(cpf_cnpj)
-      </p>
-      <p>
-          /users/(cpf_cnpj)/delete
-      </p>
-      <p>
-          /users/(cpf_cnpj)/nivel_edit
-      </p>
-    </td>
-  </tr>
-  <tr>
-    <td align="center">
-    <p>Login</p>
-    </td>
-    <td>
+| Ação                                                                                 | Requisição | Rota                                   |
+|--------------------------------------------------------------------------------------|------------|----------------------------------------|
+| Listar todos os produtos                                                             | `GET`      | /products                              |
+| Criar uma postagem de um produto                                                     | `POST` 👤  | /products                              |
+| Alterar a postagem do produto cadastrado                                             | `PUT` 👤   | /products/(id_produto)                 |
+| Deletar uma postagem de um produto (setar o valor do atributo "status": "REPROVADO") | `PUT` 👤   | /products/(id_produto)/delete          |
+| Denunciar um produto                                                                 | `PUT` 👤   | /products/(id_produto)/denuncia        |
+| Analisa denuncias relacionadas a uma postagem de um produto                          | `PUT` 👨‍⚖️   | /products/(id_produto)/analisaDenuncia |
 
-    </td>
-  </tr>
-  <tr>
-    <td align="center">
-      <p>Fornecedor</p>
-    </td>
-    <td>
+<h3>
+    Comentário
+</h3>
 
-    </td>
-  </tr>
-    <tr>
-    <td align="center">
-      <p>Cliente</p>
-    </td>
-    <td>
-
-    </td>
-  </tr>
-  <tr>
-    <td align="center">
-      <p>Produtos</p>
-    </td>
-    <td>
-
-    </td>
-  </tr>
-  <tr>
-    <td align="center">
-      <p>Comentário</p>
-    </td>
-    <td>
-    </td>
-  </tr>
-</table>
-
+| Ação                                                                                     | Requisição | Rota                                      |
+|------------------------------------------------------------------------------------------|------------|-------------------------------------------|
+| Listar todos os comentários                                                              | `GET`      | /comments                                 |
+| Criar um comentário                                                                      | `POST` 👤  | /comments                                 |
+| Editar um comentário                                                                     | `PUT` 👤   | /comments/(id_comentario)                 |
+| Deletar um comentário de uma postagem (setar o valor do atributo "status": "REPROVADO")  | `PUT` 👤   | /comments/(id_comentario)/delete          |
+| Denunciar um comentário                                                                  | `PUT` 👤   | /comments/(id_comentario)/report          |
+| Analisa denúncias relacionadas a um comentário em uma postagem                           | `PUT` 👨‍⚖️   | /comments/(id_comentario)/reviewReport    |
 
 ##
 
@@ -330,7 +261,7 @@ E, por fim, usamos o `npm run dev` para iniciar o servidor em modo de desenvolvi
         O Fornecedor poderá editar suas postagens e comentários.
       </p>
       <p>
-        O Fornecedor que tiver sua conta desativada, terá o atributo "ativo" como false, assim como seus comentários postados.
+        O Fornecedor que tiver sua conta desativada, terá o atributo "ativo" como false, assim como seus comentários e produtos postados.
       </p>
     </td>
   </tr>
@@ -349,7 +280,7 @@ E, por fim, usamos o `npm run dev` para iniciar o servidor em modo de desenvolvi
         O Cliente poderá editar suas postagens e comentários.
       </p>
       <p>
-        O Cliente que tiver sua conta desativada, terá o atributo "ativo" como false, assim como seus comentários postados.
+        O Cliente que tiver sua conta desativada, terá o atributo "ativo" como false, assim como seus comentários e produtos postados.
       </p>
     </td>
   </tr>
@@ -423,31 +354,29 @@ E, por fim, usamos o `npm run dev` para iniciar o servidor em modo de desenvolvi
 - [ok] : O Usuário não poderá cadastrar o cpf ou cnpj caso já estejam cadastrados.
 - [ok] : O Usuário não poderá cadastrar um email caso já esteja cadastrado.
 - [ok] : O Usuário poderá alterar email, senha, endereço, telefone, porém não o seu nível de acesso e cpf ou cnpj não.
-- [ok] : O Usuário poderá adicionar suas próprias postagens, comentários
-- [ok] : O Usuário poderá denunciar comentários e produtos.
-- [ok] : O Usuário poderá editar seus comentários e produtos.
-- [ok] : O Usuário "deletado" (ativo false) terá todos os seus comentários dos produtos como "reprovado"
+- [--] : O Usuário poderá adicionar suas próprias postagens, comentários
+- [--] : O Usuário poderá denunciar comentários e postagens.
+- [--] : O Usuário poderá editar suas postagens e comentários.
 
 ### Administrador
 - **Todos tem um middleware isAdmin**
 - [ok] : O Administrador do sistema pode transformar um usuário em ADMIN. **Criar rota, terá uma validação de administrador, ou seja Middleware isAdmin**
-- [ok] : O Administrador poderá adicionar apagar e editar.        
-- [ok] : O Administrador poderá deletar comentários  
-- [ok] : O Administrador poderá deletar postagens denunciados.
+- [--] : O Administrador poderá adicionar apagar e editar.        
+- [--] : O Administrador poderá arquivar comentários  
+- [--] : O Administrador poderá bloquear postagens denunciados.
 - [ok] : Deixar usuário inativo (Delete)
 - [ok] : O Administrador poderá alterar o nível de qualquer usuário.
-- [ok] : Avaliar denuncia do produto **Quando o produto estiver aprovado, terá o id_admin_relator, que será o id do administrador que aprovou**
-
+- [--] : Aprovar produto **Quando o produto estiver aprovado, terá o id_aprovado, que será o id do administrador que aprovou**
 ### Fornecedor
-- [ok] : Poderá denunciar comentários e produtos.
-- [ok] : Poderá editar seus produtos e comentários.
+- [--] : Poderá denunciar comentários e postagens.
+- [--] : Poderá editar suas postagens e comentários.
 
 ### Cliente
-- [ok] : O Cliente que tiver sua conta desativada, terá o atributo "ativo" como false, assim como seus comentários postados como "REPROVADO".
+- [--] : O Cliente que tiver sua conta desativada, terá o atributo "ativo" como false, assim como seus comentários e produtos postados.
 
 ### Produtos
 - [ok] : Criar produto
-- [ok] : Listar produto apenas aqueles com status **diferentes de reprovado**
+- [ok] : Listar produto apenas aqueles com status **diferentes de false**
 - [ok] : Atualizar produto
 - [ok] : Deletar/Denunciar produto **Setar Status para false**    **Terá validação, ou seja, Middleware isAdmin**
 - [--] : Função rota para incrementar "feedbacks_produto" inicia com 0.
