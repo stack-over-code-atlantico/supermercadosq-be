@@ -1,65 +1,72 @@
-const produtoRepositorio = require('../repository/produtoRepository')
-const { sign } = require('jsonwebtoken')
+const produtoRepositorio = require('@produto/repository/produtoRepository');
 
 class ProdutoService {
-  async listAllProduct() {
-    const product = await produtoRepositorio.productRead()
-    return product
+  async listAllProdutos() {
+    const produtos = await produtoRepositorio.produtosRead();
+    return produtos;
   }
 
-  async createProduct(
-    nome,
-    ingredientes,
-    imagem,
-    feedbacks_produtos,
-    id_usuario
-  ) {
-    const alreadyHaveProduct = await produtoRepositorio.findUniqueProduct(
-      id_produto
-    )
-
-    if (alreadyHaveProduct) throw new Error(`Already have product.`)
-
-    const product = await produtoRepositorio.productCreate(
+  async createProduto(nome, ingredientes, imagem, id_usuario) {
+    const produtos = await produtoRepositorio.produtosCreate(
       nome,
       ingredientes,
       imagem,
-      data_postagem,
-      status,
-      feedbacks_produtos,
-      id_usuario,
-      editado,
-      id_admin_relator
-    )
-    return product
+      id_usuario
+    );
+    return produtos;
   }
 
-  async updateProduct(
+  async updateProduto(
     id_produto,
+    id_usuario,
     nome,
     ingredientes,
-    imagem,
-    feedbacks_produtos,
-    id_usuario
+    imagem
   ) {
-    const product = await produtoRepositorio.productUpdate(
-      id_produto,
-      nome,
-      ingredientes,
-      imagem,
-      data_postagem,
-      status,
-      feedbacks_produtos,
-      editado,
-      id_admin_relator
-    )
-    return product
+    const ValidProduto = await produtoRepositorio.findUniqueProduto(id_produto);
+    let produto;
+    if (ValidProduto.id_usuario === id_usuario) {
+      produto = await produtoRepositorio.produtosUpdate(
+        id_produto,
+        nome,
+        ingredientes,
+        imagem
+      );
+      return produto;
+    }
+    return new Error('Unauthorized Service');
   }
 
-  async deleteProduct(id_produto) {
-    const product = await produtoRepositorio.productDelete(id_produto)
-    return product
+  async deleteProduto(id_produto, id_usuario, nivel) {
+    const ValidProduto = await produtoRepositorio.findUniqueProduto(id_produto);
+    let produto;
+    if (ValidProduto.id_usuario === id_usuario) {
+      produto = await produtoRepositorio.produtoDelete(id_produto);
+      return produto;
+    }
+    if (nivel === 'ADMINISTRADOR') {
+      produto = await produtoRepositorio.produtoDeleteAdmin(
+        id_produto,
+        id_usuario
+      );
+      return produto;
+    }
+    return new Error('Unauthorized Service');
+  }
+
+  async denunciaProduto(id_produto) {
+    const produto = await produtoRepositorio.denunciaProduto(id_produto);
+    return produto;
+  }
+
+  async analisaDenuncia(id_produto, id_usuario, status) {
+    const produto = await produtoRepositorio.analisaDenuncia(
+      id_produto,
+      id_usuario,
+      status
+    );
+    return produto;
   }
 }
 
-module.exports = ProdutoService
+module.exports = ProdutoService;

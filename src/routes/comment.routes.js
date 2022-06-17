@@ -1,50 +1,25 @@
 const express = require('express');
 const route = express();
 const comentarioRepositorio = require('@comentario/repository/comentarioRepository');
+const ComentarioController = require('@comentario/controller/ComentarioController')
+const authenticate = require('@Middleware/authenticate');
+const isAdmin = require('../middlewares/isAdmin');
 
-route.get('/', async (req, res) => {
-    const comentario = await comentarioRepositorio.comentarioRead();
-    return res.json(comentario);
-});
 
-route.post('/', async (req, res) => {
-  const {
-    mensagem,
-    id_produto,
-    id_usuario,
-    id_aprovado
-  } = req.body;
-  const comentario = await comentarioRepositorio.comentarioCreate(
-    mensagem,
-    id_produto,
-    id_usuario,
-    id_aprovado
-  );
-  res.status(201).json(comentario);
-});
+const comentarioController = new ComentarioController();
 
-route.put('/:id_comentario', async (req, res) => {
-  const { id_comentario } = req.params;
-  const {
-    mensagem,
-    id_produto,
-    id_usuario,
-    id_aprovado
-  } = req.body;
-  const comentario = await comentarioRepositorio.comentarioUpdate(
-    Number(id_comentario),
-    mensagem,
-    id_produto,
-    id_usuario,
-    id_aprovado
-  );
-  return res.status(204).json(comentario);
-});
+route.get('/', comentarioController.list);
 
-route.delete('/:id_comentario', async (req, res) => {
-  const { id_comentario } = req.params;
-  const comentario = await comentarioRepositorio.comentarioDelete(Number(id_comentario));
-  return res.status(204).send(comentario);
-});
+route.post('/', authenticate,comentarioController.create);
+
+route.put('/:id_comentario', authenticate, comentarioController.update);
+
+route.put('/:id_comentario/delete', authenticate, comentarioController.delete);
+
+// denuncia um comentario
+route.put('/:id_comentario/report', authenticate, comentarioController.report);
+
+// analisa denuncia de um comentario
+route.put('/:id_comentario/reviewReport', isAdmin, comentarioController.reviewReport);
 
 module.exports = route;

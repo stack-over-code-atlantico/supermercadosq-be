@@ -424,28 +424,29 @@ E, por fim, usamos o `npm run dev` para iniciar o servidor em modo de desenvolvi
 - [ok] : O Usuário não poderá cadastrar um email caso já esteja cadastrado.
 - [ok] : O Usuário poderá alterar email, senha, endereço, telefone, porém não o seu nível de acesso e cpf ou cnpj não.
 - [--] : O Usuário poderá adicionar suas próprias postagens, comentários
-- [--] : O Usuário poderá denunciar comentários e postagens.
-- [--] : O Usuário poderá editar suas postagens e comentários.
+- [--] : O Usuário poderá denunciar comentários e produtos.
+- [--] : O Usuário poderá editar seus comentários e produtos.
+- [--] : O Usuário "deletado"(ativo false) tera todos os seus comentários, produtos e comentários dos produtos como "reprovado"
 
 ### Administrador
 - **Todos tem um middleware isAdmin**
 - [ok] : O Administrador do sistema pode transformar um usuário em ADMIN. **Criar rota, terá uma validação de administrador, ou seja Middleware isAdmin**
 - [--] : O Administrador poderá adicionar apagar e editar.        
-- [--] : O Administrador poderá arquivar comentários  
-- [--] : O Administrador poderá bloquear postagens denunciados.
+- [ok] : O Administrador poderá deletar comentários  
+- [--] : O Administrador poderá deletar postagens denunciados.
 - [ok] : Deixar usuário inativo (Delete)
 - [ok] : O Administrador poderá alterar o nível de qualquer usuário.
-- [--] : Aprovar produto **Quando o produto estiver aprovado, terá o id_aprovado, que será o id do administrador que aprovou**
+- [--] : Avaliar denuncia do produto **Quando o produto estiver aprovado, terá o id_admin_relator, que será o id do administrador que aprovou**
 ### Fornecedor
-- [--] : Poderá denunciar comentários e postagens.
-- [--] : Poderá editar suas postagens e comentários.
+- [--] : Poderá denunciar comentários e produtos.
+- [--] : Poderá editar seus produtos e comentários.
 
 ### Cliente
-- [--] : O Cliente que tiver sua conta desativada, terá o atributo "ativo" como false, assim como seus comentários e produtos postados.
+- [ok] : O Cliente que tiver sua conta desativada, terá o atributo "ativo" como false, assim como seus comentários e produtos postados como "REPROVADO".
 
 ### Produtos
 - [ok] : Criar produto
-- [ok] : Listar produto apenas aqueles com status **diferentes de false**
+- [ok] : Listar produto apenas aqueles com status **diferentes de reprovado**
 - [ok] : Atualizar produto
 - [ok] : Deletar/Denunciar produto **Setar Status para false**    **Terá validação, ou seja, Middleware isAdmin**
 - [--] : Função rota para incrementar "feedbacks_produto" inicia com 0.

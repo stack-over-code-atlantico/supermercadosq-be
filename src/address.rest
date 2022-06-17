@@ -1,29 +1,11 @@
-###
-GET http://localhost:3000/endereco
-###
-POST http://localhost:3000/endereco
-content-type: application/json
+### GET http://localhost:3000/endereco ### POST http://localhost:3000/endereco content-type: application/json
 
 {
-  "logradouro": "Teste",
-  "numero": "123",
-  "bairro": "Testando bairro",
-  "cidade": "testando cidade",
-  "estado": "TE",
-  "id_usuario": 6
+"logradouro": "Teste", "numero": "123", "bairro": "Testando bairro", "cidade": "testando cidade", "estado": "TE", "id_usuario": 6
 }
-###
-PUT http://localhost:3000/endereco/1
-content-type: application/json
+PUT http://localhost:3000/endereco/1 content-type: application/json
 
 {
-  "logradouro": "editado",
-  "numero": "123",
-  "bairro": "Testando bairro",
-  "cidade": "testando cidade",
-  "estado": "TE",
-  "id_usuario": 6
+"logradouro": "editado", "numero": "123", "bairro": "Testando bairro", "cidade": "testando cidade", "estado": "TE", "id_usuario": 6
 }
-###
-DELETE http://localhost:3000/endereco/1
-###
+DELETE http://localhost:3000/endereco/1 ###

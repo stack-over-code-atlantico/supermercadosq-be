@@ -1,81 +1,110 @@
 const prisma = require("../../../../database/prismaClient");
+const { hash } = require('bcrypt');
 
 const findUniqueComment = async (id_comentario) => {
 	const result = await prisma.comentario.findUnique({
-		where: {
-			id_comentario,
-		},
+		where: { id_comentario },
 	});
 	return result;
 };
 
-const commentCreate = async (data) => {
-	const comentario = await prisma.comentario.create({
+const createComment = async (mensagem, id_produto, id_usuario) => {
+	const result = await prisma.comentario.create({
 		data: {
-			mensagem: data.mensagem,
+			mensagem,
 			status: null,
 			data_comentario: new Date(),
 			editado: false,
 			feedbacks_comentarios: 0,
-			id_produto: data.id_produto,
-			id_usuario: data.id_usuario,
-			id_aprovado: data.id_aprovado,
+			id_produto,
+			id_usuario,
+			id_admin_relator: null
 		},
 	});
-	return comentario;
-};
-
-const commentRead = async () => {
-	const result = await prisma.comentario.findMany();
-	console.log(result);
 	return result;
 };
 
-const commentUpdate = async (
-	id_comentario,
-	data,
-	mensagem,
-	status,
-) => {
+const readComment = async () => {
+	const result = await prisma.comentario.findMany();
+	return result;
+};
+
+const updateComment = async (id_comentario, mensagem) => {
 	const comentario = await prisma.comentario.findFirst({
 		where: {id_comentario},
 	});
 	const result = await prisma.comentario.update({
 		where: {id_comentario},
 		data: {
-			mensagem: mensagem,
-			status: status,
-			data_comentario: new Date(),
+			mensagem: mensagem ? mensagem : comentario.mensagem,
 			editado: true,
-			feedbacks_comentarios: data.feedbacks_comentarios,
-			id_produto: comentario.id_produto,
-			id_usuario: comentario.id_usuario,
-			id_aprovado: comentario.id_aprovado
 		},
 	});
 	return result;
 };
 
-const commentDelete = async (id_comentario) => {
-	try{
-		const comentario = await prisma.comentario.delete({
-			where: {
-				id_comentario,
-			},
-		});
-		console.log('Comment removed successfully. Below is the comment information.');
-		console.log(comentario);
-		return comentario;
-	} catch (e){
-		console.log('Comment does not exist.');
-	}
+const deleteComment = async (id_comentario) => {
+	const result = await prisma.comentario.update({
+		where: { id_comentario },
+		data: { 
+			status: 'REPROVADO'
+		}
+	});
+	return result;
 };
+
+const commentDeleteByUser = async (id_usuario,id_admin_relator) => {
+  const result = await prisma.comentario.updateMany({
+    where: { id_usuario },
+    data: {
+      status: 'REPROVADO',
+			id_admin_relator
+    }
+  });
+  return result;
+}
+
+const deleteAdminComment = async (id_comentario, id_usuario) => {
+	const result = await prisma.comentario.update({
+		where: { id_comentario },
+		data: {
+			status: 'REPROVADO',
+			id_admin_relator: id_usuario
+		}
+	});
+	return result;
+};
+
+const reportComment = async id_comentario => {
+	const result = await prisma.comentario.update({
+		where: { id_comentario },
+		data: {
+			status: 'ANALISE'
+		}
+	});
+	return result;
+};
+
+const reviewReportComment = async (id_comentario, id_usuario, status) => {
+	const result = await prisma.comentario.update({
+		where: { id_comentario },
+		data: {
+			status: status,
+			id_admin_relator: id_usuario
+		}
+	})
+	return result;
+}
 
 module.exports = {
 	findUniqueComment,
-	commentCreate,
-	commentRead,
-	commentUpdate,
-	commentDelete
+	createComment,
+	readComment,
+	updateComment,
+	deleteComment,
+	deleteAdminComment,
+	reportComment,
+	reviewReportComment,
+	commentDeleteByUser
 };
 

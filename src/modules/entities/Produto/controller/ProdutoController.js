@@ -1,62 +1,73 @@
-const ProdutoService = require('../services/ProdutoService');
+const ProdutoService = require('@produto/services/ProdutoService');
 
-const productService = new ProdutoService();
+
+const produtoService = new ProdutoService();
 
 class ProdutoController {
-  
-  async list (req, res) {
-    const product = await productService.listAllProduct();
-    return res.json(product);
+  async list(req, res) {
+    const produtos = await produtoService.listAllProdutos();
+    return res.json(produtos);
   }
 
-  async create (req, res) {
-    const {
-        nome,
-        ingredientes,
-        imagem,
-        feedbacks_produtos,
-        id_usuario
-    } = req.body;
-    const product = await productService.createProduct(
-        nome,              
-        ingredientes,  
-        imagem,            
-        data_postagem,
-        status,          
-        feedbacks_produtos,
-        id_usuario,  
-        editado,       
-        id_admin_relator,
+  async create(req, res) {
+    const {id_usuario} = req;
+    const { nome, ingredientes, imagem } = req.body;
+    const produto = await produtoService.createProduto(
+      nome,
+      ingredientes,
+      imagem,
+      id_usuario
     );
-    return res.status(201).json(product);
+    return res.status(201).json(produto);
   }
 
-  async update (req, res) {
+  async update(req, res) {
+    const {id_usuario} = req
     const { id_produto } = req.params;
-    const {    
-        nome,              
-        ingredientes,      
-        imagem,       
-        feedbacks_produtos,
-        id_usuario 
-    } = req.body;
-    const product = await productService.updateProduct(
-        nome,              
-        ingredientes,  
-        imagem,            
-        data_postagem,
-        status,          
-        feedbacks_produtos,
-        editado,       
-        id_admin_relator, 
+    const { nome, ingredientes, imagem } = req.body;
+    const produto = await produtoService.updateProduto(
+      Number(id_produto),
+      id_usuario,
+      nome,
+      ingredientes,
+      imagem,
     );
-    return res.status(204).json(product);
+    if (produto instanceof Error) {
+      return res.status(401).json(produto.message);
+    }
+    return res.status(204).json(produto);
   }
-  
-  async delete (req, res) {
+
+  async delete(req, res) {
+    const {id_usuario, nivel} = req
     const { id_produto } = req.params;
-    const product = await productService.deleteProduct(id_produto);
-    return res.status(204).send(product);
+    const produto = await produtoService.deleteProduto(
+      Number(id_produto),
+      id_usuario,
+      nivel
+    );
+    if (produto instanceof Error) {
+      return res.status(401).json(produto.message);
+    }
+    return res.status(204).json(produto);
+  }
+
+  async denuncia(req, res) {
+    const { id_produto } = req.params;
+    const produto = await produtoService.denunciaProduto(Number(id_produto));
+    return res.status(204).json(produto);
+  }
+
+  async analisaDenuncia(req, res) {
+    const {id_usuario} = req;
+    const { id_produto } = req.params;
+    const {status} = req.body;
+    const produto = await produtoService.analisaDenuncia(
+      Number(id_produto),
+      id_usuario,
+      status
+    );
+    return res.status(204).json(produto);
   }
 }
 
