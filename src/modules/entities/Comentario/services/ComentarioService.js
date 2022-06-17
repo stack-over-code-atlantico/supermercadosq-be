@@ -45,7 +45,7 @@ class ComentarioService {
       );
       return comment;
     }
-    return new Error('Error');
+    return new Error('You cannot delete this comment!');
   }
 
   async reportComment(id_comentario) {

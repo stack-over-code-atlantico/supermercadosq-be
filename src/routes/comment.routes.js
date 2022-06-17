@@ -19,7 +19,7 @@ route.put('/:id_comentario/delete', authenticate, comentarioController.delete);
 // denuncia um comentario
 route.put('/:id_comentario/report', authenticate, comentarioController.report);
 
-// analisa denuncia de um produto
+// analisa denuncia de um comentario
 route.put('/:id_comentario/reviewReport', isAdmin, comentarioController.reviewReport);
 
 module.exports = route;
