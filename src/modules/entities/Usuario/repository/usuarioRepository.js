@@ -75,7 +75,7 @@ const usersCreate = async (
 
 const usersDelete = async (cpf_cnpj) => {
   const id_usuario = await findUniqueUser(cpf_cnpj)
-  const deletaComentario = await comentarioRepositorio.comentarioDeleteByUser(id_usuario.id_usuario)
+  const deletaComentario = await comentarioRepositorio.commentDeleteByUser(id_usuario.id_usuario)
   
   const result = await prisma.usuario.update({
     where: { cpf_cnpj },

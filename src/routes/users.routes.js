@@ -21,7 +21,7 @@ route.put('/:cpf_cnpj', usuarioController.update);
  */
 route.put('/:cpf_cnpj/delete', isAdmin, usuarioController.delete);
 /**
- * Altera núvel acesso do usuário
+ * Altera nível acesso do usuário
  */
 route.put('/:cpf_cnpj/nivel_edit', isAdmin, usuarioController.niveledit);
 

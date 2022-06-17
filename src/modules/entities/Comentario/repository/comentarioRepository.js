@@ -1,15 +1,14 @@
 const prisma = require("../../../../database/prismaClient");
+const { hash } = require('bcrypt');
 
 const findUniqueComment = async (id_comentario) => {
 	const result = await prisma.comentario.findUnique({
-		where: {
-			id_comentario,
-		},
+		where: { id_comentario },
 	});
 	return result;
 };
 
-const commentCreate = async (mensagem, id_produto, id_usuario) => {
+const createComment = async (mensagem, id_produto, id_usuario) => {
 	const result = await prisma.comentario.create({
 		data: {
 			mensagem,
@@ -25,12 +24,12 @@ const commentCreate = async (mensagem, id_produto, id_usuario) => {
 	return result;
 };
 
-const commentRead = async () => {
+const readComment = async () => {
 	const result = await prisma.comentario.findMany();
 	return result;
 };
 
-const commentUpdate = async (id_comentario, mensagem) => {
+const updateComment = async (id_comentario, mensagem) => {
 	const comentario = await prisma.comentario.findFirst({
 		where: {id_comentario},
 	});
@@ -44,18 +43,7 @@ const commentUpdate = async (id_comentario, mensagem) => {
 	return result;
 };
 
-const commentUpdateAdmin = async (id_comentario, id_usuario) => {
-	const result = await prisma.comentario.update({
-	  where: { id_comentario },
-	  data: {
-		status: "REPROVADO",
-		id_admin_relator: id_usuario
-	}
-});
-};
-
-
-const commentDelete = async (id_comentario) => {
+const deleteComment = async (id_comentario) => {
 	const result = await prisma.comentario.update({
 		where: { id_comentario },
 		data: { 
@@ -66,25 +54,56 @@ const commentDelete = async (id_comentario) => {
 };
 
 const commentDeleteByUser = async id_usuario => {
-  const result = await prisma.produto.updateMany({
+  const result = await prisma.comentario.updateMany({
     where: { id_usuario },
     data: {
       status: 'REPROVADO'
     }
   });
   return result;
+}
+
+const deleteAdminComment = async (id_comentario, id_usuario) => {
+	const result = await prisma.comentario.update({
+		where: { id_comentario },
+		data: {
+			status: 'REPROVADO',
+			id_admin_relator: id_usuario
+		}
+	});
+	return result;
 };
 
-  
+const reportComment = async id_comentario => {
+	const result = await prisma.comentario.update({
+		where: { id_comentario },
+		data: {
+			status: 'ANALISE'
+		}
+	});
+	return result;
+};
+
+const reviewReportComment = async (id_comentario, id_usuario, status) => {
+	const result = await prisma.comentario.update({
+		where: { id_comentario },
+		data: {
+			status: status,
+			id_admin_relator: id_usuario
+		}
+	})
+	return result;
+}
 
 module.exports = {
 	findUniqueComment,
-	commentCreate,
-	commentRead,
-	commentUpdate,
-	commentUpdateAdmin,
-	commentDelete,
+	createComment,
+	readComment,
+	updateComment,
+	deleteComment,
+	deleteAdminComment,
+	reportComment,
+	reviewReportComment,
 	commentDeleteByUser
-
 };
 

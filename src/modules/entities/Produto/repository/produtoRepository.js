@@ -55,16 +55,6 @@ const produtoDelete = async id_produto => {
   return result;
 };
 
-// const produtoDeleteByUser = async id_usuario => {
-//   const result = await prisma.produto.updateMany({
-//     where: { id_usuario },
-//     data: {
-//       status: 'REPROVADO'
-//     }
-//   });
-//   return result;
-// };
-
 const produtoDeleteAdmin = async (id_produto, id_usuario) => {
   const result = await prisma.produto.update({
     where: { id_produto },
@@ -86,12 +76,12 @@ const denunciaProduto = async id_produto => {
   return result;
 };
 
-const analisaDenuncia = async(id_produto, id_usuario, status)=>{
+const analisaDenuncia = async(id_produto, id_usuario, status) => {
   const result = await prisma.produto.update({
     where: {id_produto},
     data:{
       status: status,
-      id_admin_relator: id_usuario
+      id_admin_relator: id_usuario,
     }
   })
   return result
