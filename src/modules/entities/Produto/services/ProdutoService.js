@@ -51,7 +51,7 @@ class ProdutoService {
       );
       return produto;
     }
-    return new Error('Erroooo');
+    return new Error('Unauthorized Service');
   }
 
   async denunciaProduto(id_produto) {
