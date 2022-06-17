@@ -19,7 +19,7 @@ route.put('/:cpf_cnpj', usuarioController.update);
  * Torna usuário inativo
  * altera ativo pra false
  */
-route.put('/:cpf_cnpj/delete', isAdmin, usuarioController.delete);
+route.put('/:cpf_cnpj/delete', authenticate, usuarioController.delete);
 /**
  * Altera nível acesso do usuário
  */

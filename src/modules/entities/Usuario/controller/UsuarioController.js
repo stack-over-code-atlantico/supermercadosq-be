@@ -3,13 +3,12 @@ const UsuarioService = require('@usuario/services/UsuarioService');
 const userService = new UsuarioService();
 
 class UsuarioController {
-  
-  async list (req, res) {
+  async list(req, res) {
     const users = await userService.listAllUsers();
     return res.json(users);
   }
 
-  async create (req, res) {
+  async create(req, res) {
     const {
       nome,
       nome_social,
@@ -23,7 +22,7 @@ class UsuarioController {
       numero,
       bairro,
       cidade,
-      estado,
+      estado
     } = req.body;
     const users = await userService.createUser(
       nome,
@@ -38,12 +37,12 @@ class UsuarioController {
       numero,
       bairro,
       cidade,
-      estado,
+      estado
     );
     return res.status(201).json(users);
   }
 
-  async update (req, res) {
+  async update(req, res) {
     const { cpf_cnpj } = req.params;
     const {
       nome,
@@ -56,7 +55,7 @@ class UsuarioController {
       numero,
       bairro,
       cidade,
-      estado,
+      estado
     } = req.body;
     const users = await userService.updateUser(
       cpf_cnpj,
@@ -70,18 +69,22 @@ class UsuarioController {
       numero,
       bairro,
       cidade,
-      estado,
+      estado
     );
     return res.status(204).json(users);
   }
-  
-  async delete (req, res) {
+
+  async delete(req, res) {
     const { cpf_cnpj } = req.params;
-    const users = await userService.deleteUser(cpf_cnpj);
+    const { id_usuario, nivel } = req;
+    const users = await userService.deleteUser(cpf_cnpj, id_usuario, nivel);
+    if (users instanceof Error) {
+      return res.status(401).json(users.message);
+    }
     return res.status(204).json(users);
   }
 
-  async niveledit (req, res) {
+  async niveledit(req, res) {
     const { cpf_cnpj } = req.params;
     const { nivel } = req.body;
     const users = await userService.nivelEdit(cpf_cnpj, nivel);
