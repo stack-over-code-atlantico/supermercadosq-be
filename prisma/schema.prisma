@@ -24,6 +24,7 @@ model comentario {
 
 model endereco {
   id_endereco Int     @id @default(autoincrement())
+  cep         String?  @db.VarChar(8)
   logradouro  String  @db.VarChar(100)
   numero      String  @db.VarChar(5)
   bairro      String  @db.VarChar(25)
