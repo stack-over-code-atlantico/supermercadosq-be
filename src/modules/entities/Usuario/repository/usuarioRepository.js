@@ -1,7 +1,7 @@
 const prisma = require('../../../../database/prismaClient');
 const { hash } = require('bcrypt');
 const { usuario, endereco } = require('../../../../database/prismaClient');
-const produtoRepositorio = require('@produto/repository/produtoRepository')
+const comentarioRepositorio = require('@comentario/repository/comentarioRepository')
 
 const findUniqueUser = async (cpf_cnpj) => {
   const result = await prisma.usuario.findFirst({
@@ -75,7 +75,7 @@ const usersCreate = async (
 
 const usersDelete = async (cpf_cnpj) => {
   const id_usuario = await findUniqueUser(cpf_cnpj)
-  const deletaProduto = await produtoRepositorio.produtoDeleteByUser(id_usuario.id_usuario)
+  const deletaComentario = await comentarioRepositorio.comentarioDeleteByUser(id_usuario.id_usuario)
   
   const result = await prisma.usuario.update({
     where: { cpf_cnpj },

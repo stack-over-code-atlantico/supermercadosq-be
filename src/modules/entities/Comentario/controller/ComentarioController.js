@@ -30,12 +30,18 @@ class ComentarioController {
   }
   
  async delete (req, res) {
+  const { id_usuario, nivel } = req
   const { id_comentario } = req.params;
   const comment = await comentarioService.deleteComment(
-    Number(id_comentario)
+    Number(id_comentario),
+    id_usuario,
+    nivel
   );
+  if (comment instanceof Error) {
+    return res.status(401).json(comment.message);
+  }
   return res.status(204).json(comment);
- }
+}
 
 
 }

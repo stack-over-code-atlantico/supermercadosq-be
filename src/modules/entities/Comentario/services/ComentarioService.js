@@ -25,6 +25,12 @@ class ComentarioService {
   }
 
   async deleteComment(id_comentario) {
+    const validComment = await comentarioRepositorio.findUniqueComentario(id_comentario);
+    let comentario;
+    if (validComment.id_usuario === id_usuario) {
+      comentario = await comentarioRepositorio.commentDelete(id_comentario);
+      return comentario;
+    }
     const comment = await comentarioRepositorio.commentDelete(
       id_comentario
     );

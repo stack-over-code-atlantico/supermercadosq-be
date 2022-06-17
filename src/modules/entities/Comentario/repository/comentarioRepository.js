@@ -65,6 +65,15 @@ const commentDelete = async (id_comentario) => {
 	return result;
 };
 
+const commentDeleteByUser = async id_usuario => {
+  const result = await prisma.produto.updateMany({
+    where: { id_usuario },
+    data: {
+      status: 'REPROVADO'
+    }
+  });
+  return result;
+};
 
   
 
@@ -74,6 +83,8 @@ module.exports = {
 	commentRead,
 	commentUpdate,
 	commentUpdateAdmin,
-	commentDelete
+	commentDelete,
+	commentDeleteByUser
+
 };
 

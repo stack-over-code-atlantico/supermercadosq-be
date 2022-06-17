@@ -38,12 +38,12 @@ class ProdutoService {
   }
 
   async deleteProduto(id_produto, id_usuario, nivel) {
-    const ValidProduto = await produtoRepositorio.findUniqueProduto(id_produto);
-    let produto;
-    if (ValidProduto.id_usuario === id_usuario) {
-      produto = await produtoRepositorio.produtoDelete(id_produto);
-      return produto;
-    }
+    // const ValidProduto = await produtoRepositorio.findUniqueProduto(id_produto);
+    // let produto;
+    // if (ValidProduto.id_usuario === id_usuario) {
+    //   produto = await produtoRepositorio.produtoDelete(id_produto);
+    //   return produto;
+    // }
     if (nivel === 'ADMINISTRADOR') {
       produto = await produtoRepositorio.produtoDeleteAdmin(
         id_produto,
