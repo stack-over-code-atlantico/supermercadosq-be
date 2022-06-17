@@ -79,8 +79,8 @@ class UsuarioService {
     return users;
   }
 
-  async deleteUser(cpf_cnpj) {
-    const users = await usuarioRepositorio.usersDelete(cpf_cnpj);
+  async deleteUser(cpf_cnpj,id_usuario, nivel) {
+    const users = await usuarioRepositorio.usersDelete(cpf_cnpj,id_usuario, nivel);
     return users;
   }
 
