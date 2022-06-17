@@ -423,26 +423,27 @@ E, por fim, usamos o `npm run dev` para iniciar o servidor em modo de desenvolvi
 - [ok] : O Usuário não poderá cadastrar o cpf ou cnpj caso já estejam cadastrados.
 - [ok] : O Usuário não poderá cadastrar um email caso já esteja cadastrado.
 - [ok] : O Usuário poderá alterar email, senha, endereço, telefone, porém não o seu nível de acesso e cpf ou cnpj não.
-- [--] : O Usuário poderá adicionar suas próprias postagens, comentários
-- [--] : O Usuário poderá denunciar comentários e produtos.
-- [--] : O Usuário poderá editar seus comentários e produtos.
-- [--] : O Usuário "deletado"(ativo false) tera todos os seus comentários, produtos e comentários dos produtos como "reprovado"
+- [ok] : O Usuário poderá adicionar suas próprias postagens, comentários
+- [ok] : O Usuário poderá denunciar comentários e produtos.
+- [ok] : O Usuário poderá editar seus comentários e produtos.
+- [ok] : O Usuário "deletado" (ativo false) terá todos os seus comentários dos produtos como "reprovado"
 
 ### Administrador
 - **Todos tem um middleware isAdmin**
 - [ok] : O Administrador do sistema pode transformar um usuário em ADMIN. **Criar rota, terá uma validação de administrador, ou seja Middleware isAdmin**
-- [--] : O Administrador poderá adicionar apagar e editar.        
+- [ok] : O Administrador poderá adicionar apagar e editar.        
 - [ok] : O Administrador poderá deletar comentários  
-- [--] : O Administrador poderá deletar postagens denunciados.
+- [ok] : O Administrador poderá deletar postagens denunciados.
 - [ok] : Deixar usuário inativo (Delete)
 - [ok] : O Administrador poderá alterar o nível de qualquer usuário.
-- [--] : Avaliar denuncia do produto **Quando o produto estiver aprovado, terá o id_admin_relator, que será o id do administrador que aprovou**
+- [ok] : Avaliar denuncia do produto **Quando o produto estiver aprovado, terá o id_admin_relator, que será o id do administrador que aprovou**
+
 ### Fornecedor
-- [--] : Poderá denunciar comentários e produtos.
-- [--] : Poderá editar seus produtos e comentários.
+- [ok] : Poderá denunciar comentários e produtos.
+- [ok] : Poderá editar seus produtos e comentários.
 
 ### Cliente
-- [ok] : O Cliente que tiver sua conta desativada, terá o atributo "ativo" como false, assim como seus comentários e produtos postados como "REPROVADO".
+- [ok] : O Cliente que tiver sua conta desativada, terá o atributo "ativo" como false, assim como seus comentários postados como "REPROVADO".
 
 ### Produtos
 - [ok] : Criar produto
