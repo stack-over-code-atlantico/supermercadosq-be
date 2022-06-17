@@ -10,22 +10,28 @@ class ComentarioController {
   }
 
   async create (req, res) {
-    const { mensagem, id_produto, id_usuario } = req.body;
+    const { mensagem, id_produto} = req.body;
+    const {id_usuario} = req
     const comment = await comentarioService.createComment(
       mensagem,
-      id_produto,
+      Number(id_produto),
       id_usuario,
     );
     return res.status(201).json(comment);
   }
 
   async update (req, res) {
+    const {id_usuario} = req
     const { id_comentario } = req.params;
     const { mensagem } = req.body;
     const comment = await comentarioService.updateComment(
       Number(id_comentario),
+      id_usuario,
       mensagem,
     );
+    if (comment instanceof Error) {
+      return res.status(401).json(comment.message);
+    }
     return res.status(204).json(comment);
   }
   

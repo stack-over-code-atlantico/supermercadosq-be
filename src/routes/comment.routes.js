@@ -10,9 +10,9 @@ const comentarioController = new ComentarioController();
 
 route.get('/', comentarioController.list);
 
-route.post('/', comentarioController.create);
+route.post('/', authenticate,comentarioController.create);
 
-route.put('/:id_comentario', comentarioController.update);
+route.put('/:id_comentario', authenticate, comentarioController.update);
 
 route.put('/:id_comentario/delete', authenticate, comentarioController.delete);
 
