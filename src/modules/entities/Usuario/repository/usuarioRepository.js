@@ -41,6 +41,7 @@ const usersCreate = async (
   nivel,
   telefone = null,
   restricao_alimenticia = null,
+  cep,
   logradouro,
   numero,
   bairro,
@@ -61,6 +62,7 @@ const usersCreate = async (
       restricao_alimenticia,
       endereco: {
         create: {
+          cep,
           logradouro,
           numero,
           bairro,
@@ -121,6 +123,7 @@ const usersUpdate = async (
   senha,
   telefone,
   restricao_alimenticia,
+  cep,
   logradouro,
   numero,
   bairro,
@@ -149,6 +152,7 @@ const usersUpdate = async (
         update: {
           where: { id_endereco: user.endereco[0].id_endereco },
           data: {
+            cep: cep ? cep : user.cep[0].cep,
             logradouro: logradouro ? logradouro : user.endereco[0].logradouro,
             numero: numero ? numero : user.endereco[0].numero,
             bairro: bairro ? bairro : user.endereco[0].bairro,
