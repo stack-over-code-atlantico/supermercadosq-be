@@ -144,17 +144,17 @@ E, por fim, usamos o `npm run dev` para iniciar o servidor em modo de desenvolvi
     Login
 </h3>
 
-| Ação                                                                                                         | Requisição | Rota                         |
-|--------------------------------------------------------------------------------------------------------------|------------|------------------------------|
-| Fazer o login                                                                                                | `POST`     | /login                       |
+| Ação           | Requisição | Rota      |
+|----------------|------------|-----------|
+| Fazer o login  | `POST`     | /login    |
 
 <h3>
     Usuários
 </h3>
 
-| Ação                                                                                                         | Requisição | Rota                         |
+| Ação                                                                                                         | Requisição | Rota                         | 
 |--------------------------------------------------------------------------------------------------------------|------------|------------------------------|
-| Listar todos os usuários                                                                                     | `GET`      | /users                       |
+| Listar todos os usuários                                                                                     | `GET`      | /users                       | 
 | Criar um novo usuário                                                                                        | `POST`     | /users                       |
 | Atualizar as informações de um usuário                                                                       | `PUT` 👤   | /users/(cpf_cnpj)            |
 | Deletar o usuário (setar o valor do atributo "ativo": false)                                                 | `PUT` 👨‍⚖️   | /users/(cpf_cnpj)/delete     |
@@ -348,45 +348,43 @@ E, por fim, usamos o `npm run dev` para iniciar o servidor em modo de desenvolvi
 - **Haverá uma validação para que o Administrador (Adão) não possa ser deletado do sistema através do seu ID.**
 
 ### Usuário
-- [ok] : Cadastrar usuário
-- [ok] : Listagem de usuário
-- [ok] : Atualização de usuário
-- [ok] : O Usuário não poderá cadastrar o cpf ou cnpj caso já estejam cadastrados.
-- [ok] : O Usuário não poderá cadastrar um email caso já esteja cadastrado.
-- [ok] : O Usuário poderá alterar email, senha, endereço, telefone, porém não o seu nível de acesso e cpf ou cnpj não.
-- [--] : O Usuário poderá adicionar suas próprias postagens, comentários
-- [--] : O Usuário poderá denunciar comentários e postagens.
-- [--] : O Usuário poderá editar suas postagens e comentários.
+- [x] : Cadastrar usuário
+- [x] : Listagem de usuário
+- [x] : Atualização de usuário
+- [x] : O Usuário não poderá cadastrar o cpf ou cnpj caso já estejam cadastrados.
+- [x] : O Usuário não poderá cadastrar um email caso já esteja cadastrado.
+- [x] : O Usuário poderá alterar email, senha, endereço, telefone, porém não o seu nível de acesso e cpf ou cnpj não.
+- [x] : O Usuário poderá adicionar suas próprias postagens, comentários
+- [-] : O Usuário poderá denunciar comentários e postagens.
+- [-] : O Usuário poderá editar suas postagens e comentários.
 
 ### Administrador
 - **Todos tem um middleware isAdmin**
-- [ok] : O Administrador do sistema pode transformar um usuário em ADMIN. **Criar rota, terá uma validação de administrador, ou seja Middleware isAdmin**
-- [--] : O Administrador poderá adicionar apagar e editar.        
-- [--] : O Administrador poderá arquivar comentários  
-- [--] : O Administrador poderá bloquear postagens denunciados.
-- [ok] : Deixar usuário inativo (Delete)
-- [ok] : O Administrador poderá alterar o nível de qualquer usuário.
-- [--] : Aprovar produto **Quando o produto estiver aprovado, terá o id_aprovado, que será o id do administrador que aprovou**
+- [x] : O Administrador do sistema pode transformar um usuário em ADMIN. **Criar rota, terá uma validação de administrador, ou seja Middleware isAdmin**
+- [-] : O Administrador poderá adicionar apagar e editar.        
+- [-] : O Administrador poderá arquivar comentários  
+- [-] : O Administrador poderá bloquear postagens denunciados.
+- [x] : Deixar usuário inativo (Delete)
+- [x] : O Administrador poderá alterar o nível de qualquer usuário.
+- [-] : Aprovar produto **Quando o produto estiver aprovado, terá o id_aprovado, que será o id do administrador que aprovou**
 ### Fornecedor
-- [--] : Poderá denunciar comentários e postagens.
-- [--] : Poderá editar suas postagens e comentários.
+- [-] : Poderá denunciar comentários e postagens.
+- [-] : Poderá editar suas postagens e comentários.
 
 ### Cliente
-- [--] : O Cliente que tiver sua conta desativada, terá o atributo "ativo" como false, assim como seus comentários e produtos postados.
+- [x] : O Cliente que tiver sua conta desativada, terá o atributo "ativo" como false, assim como seus comentários e produtos postados.
 
 ### Produtos
-- [ok] : Criar produto
-- [ok] : Listar produto apenas aqueles com status **diferentes de false**
-- [ok] : Atualizar produto
-- [ok] : Deletar/Denunciar produto **Setar Status para false**    **Terá validação, ou seja, Middleware isAdmin**
-- [--] : Função rota para incrementar "feedbacks_produto" inicia com 0.
+- [x] : Criar produto
+- [x] : Listar produto apenas aqueles com status **diferentes de false**
+- [x] : Atualizar produto
+- [x] : Deletar/Denunciar produto **Setar Status para false**    **Terá validação, ou seja, Middleware isAdmin**
 
 ### Comentário
-- [ok] : Criar comentário
-- [ok] : Deletar comentário **Setar status para false**
-- [ok] : Atualizar comentário
-- [ok] : Listar comentário
-- [ok] : Denunciar comentário **Setar para false**
-- [ok] : Função rota para atualizar id_admin_relator com o id do **ADMIN** quando aprovado **Apenas Admins podem aprovar** 
-- [--] : Função rota para incrementar "feedbacks_produto" inicia com 0.
+- [x] : Criar comentário
+- [x] : Deletar comentário **Setar status para false**
+- [x] : Atualizar comentário
+- [x] : Listar comentário
+- [x] : Denunciar comentário **Setar para false**
+- [x] : Função rota para atualizar id_admin_relator com o id do **ADMIN** quando aprovado **Apenas Admins podem aprovar** 
 
