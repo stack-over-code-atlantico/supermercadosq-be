@@ -261,7 +261,7 @@ E, por fim, usamos o `npm run dev` para iniciar o servidor em modo de desenvolvi
         O Fornecedor poderá editar suas postagens e comentários.
       </p>
       <p>
-        O Fornecedor que tiver sua conta desativada, terá o atributo "ativo" como false, assim como seus comentários e produtos postados.
+        O Fornecedor que tiver sua conta desativada, terá o atributo "ativo" como false, assim como seus comentários postados.
       </p>
     </td>
   </tr>
@@ -280,7 +280,7 @@ E, por fim, usamos o `npm run dev` para iniciar o servidor em modo de desenvolvi
         O Cliente poderá editar suas postagens e comentários.
       </p>
       <p>
-        O Cliente que tiver sua conta desativada, terá o atributo "ativo" como false, assim como seus comentários e produtos postados.
+        O Cliente que tiver sua conta desativada, terá o atributo "ativo" como false, assim como seus comentários postados.
       </p>
     </td>
   </tr>
@@ -355,24 +355,24 @@ E, por fim, usamos o `npm run dev` para iniciar o servidor em modo de desenvolvi
 - [x] : O Usuário não poderá cadastrar um email caso já esteja cadastrado.
 - [x] : O Usuário poderá alterar email, senha, endereço, telefone, porém não o seu nível de acesso e cpf ou cnpj não.
 - [x] : O Usuário poderá adicionar suas próprias postagens, comentários
-- [-] : O Usuário poderá denunciar comentários e postagens.
-- [-] : O Usuário poderá editar suas postagens e comentários.
+- [x] : O Usuário poderá denunciar comentários e postagens.
+- [x] : O Usuário poderá editar suas postagens e comentários.
 
 ### Administrador
 - **Todos tem um middleware isAdmin**
 - [x] : O Administrador do sistema pode transformar um usuário em ADMIN. **Criar rota, terá uma validação de administrador, ou seja Middleware isAdmin**
-- [-] : O Administrador poderá adicionar apagar e editar.        
-- [-] : O Administrador poderá arquivar comentários  
-- [-] : O Administrador poderá bloquear postagens denunciados.
+- [x] : O Administrador poderá adicionar apagar e editar.        
+- [x] : O Administrador poderá arquivar comentários  
+- [x] : O Administrador poderá bloquear postagens denunciados.
 - [x] : Deixar usuário inativo (Delete)
 - [x] : O Administrador poderá alterar o nível de qualquer usuário.
-- [-] : Aprovar produto **Quando o produto estiver aprovado, terá o id_aprovado, que será o id do administrador que aprovou**
+- [x] : Aprovar produto **Quando o produto estiver aprovado, terá o id_aprovado, que será o id do administrador que aprovou**
 ### Fornecedor
-- [-] : Poderá denunciar comentários e postagens.
-- [-] : Poderá editar suas postagens e comentários.
+- [x] : Poderá denunciar comentários e postagens.
+- [x] : Poderá editar suas postagens e comentários.
 
 ### Cliente
-- [x] : O Cliente que tiver sua conta desativada, terá o atributo "ativo" como false, assim como seus comentários e produtos postados.
+- [x] : O Cliente que tiver sua conta desativada, terá o atributo "ativo" como false, assim como seus comentários postados.
 
 ### Produtos
 - [x] : Criar produto
