@@ -24,11 +24,6 @@ Logo após a instalação, utilizamos o `npx prisma generate` para inicilizar e 
     npx prisma generate
 ```
 
-O próximo passo é utilizar o comando `npx prisma migrate dev --name init` para manter o seu arquivo `prisma.schema` sincronizado com o banco de dados.
-```
-    npx prisma migrate dev --name init
-```
-
 E, por fim, usamos o `npm run dev` para iniciar o servidor em modo de desenvolvimento utilizando a biblioteca `nodemon` no endereço: [http://localhost:3000](http://localhost:3000)
 ```
     npm run dev
