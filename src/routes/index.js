@@ -5,14 +5,12 @@ const loginRoute = require('./login.routes');
 const errors = require('@Middleware/errors');
 const comentarioRoute = require('./comment.routes');
 const produtoRoute = require('./product.routes');
+var corsOptions = {
+  origin: '*'
+}
 
 const app = express();
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-  app.use(cors());
-  next();
-});
+app.use(cors(corsOptions))
 app.use(express.json());
 app.use('/users', userRoute);
 app.use('/login', loginRoute);
