@@ -6,11 +6,13 @@ class ProdutoService {
     return produtos;
   }
 
-  async createProduto(nome, ingredientes, imagem, id_usuario) {
+  async createProduto(nome, alergia, ingredientes, imagem,descricao, id_usuario) {
     const produtos = await produtoRepositorio.produtosCreate(
       nome,
+      alergia,
       ingredientes,
       imagem,
+      descricao,
       id_usuario
     );
     return produtos;
@@ -20,8 +22,10 @@ class ProdutoService {
     id_produto,
     id_usuario,
     nome,
+    alergia,
     ingredientes,
-    imagem
+    imagem,
+    descricao
   ) {
     const ValidProduto = await produtoRepositorio.findUniqueProduto(id_produto);
     let produto;
@@ -29,8 +33,10 @@ class ProdutoService {
       produto = await produtoRepositorio.produtosUpdate(
         id_produto,
         nome,
+        alergia,
         ingredientes,
-        imagem
+        imagem,
+        descricao
       );
       return produto;
     }

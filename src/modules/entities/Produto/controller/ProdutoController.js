@@ -11,11 +11,13 @@ class ProdutoController {
 
   async create(req, res) {
     const {id_usuario} = req;
-    const { nome, ingredientes, imagem } = req.body;
+    const { nome, alergia, ingredientes, imagem, descricao } = req.body;
     const produto = await produtoService.createProduto(
       nome,
+      alergia,
       ingredientes,
       imagem,
+      descricao,
       id_usuario
     );
     return res.status(201).json(produto);
@@ -24,13 +26,15 @@ class ProdutoController {
   async update(req, res) {
     const {id_usuario} = req
     const { id_produto } = req.params;
-    const { nome, ingredientes, imagem } = req.body;
+    const { nome, alergia, ingredientes, imagem, descricao } = req.body;
     const produto = await produtoService.updateProduto(
       Number(id_produto),
       id_usuario,
       nome,
+      alergia,
       ingredientes,
       imagem,
+      descricao,
     );
     if (produto instanceof Error) {
       return res.status(401).json(produto.message);

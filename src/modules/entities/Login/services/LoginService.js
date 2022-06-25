@@ -25,7 +25,9 @@ class LoginService {
           {
             cpf_cnpj: user.cpf_cnpj,
             nivel: user.nivel,
-            id_usuario: user.id_usuario
+            id_usuario: user.id_usuario,
+            email: user.email,
+            nome: user.nome
           },
           process.env.JWT_SECRET,
           { expiresIn: '1h' }
