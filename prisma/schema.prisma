@@ -13,7 +13,6 @@ model comentario {
   status                                       String?  @db.VarChar(9)
   data_comentario                              DateTime @db.Date
   editado                                      Boolean?
-  feedbacks_comentarios                        Int?
   id_produto                                   Int
   id_usuario                                   Int
   id_admin_relator                             Int?
@@ -37,12 +36,13 @@ model endereco {
 model produto {
   id_produto                                Int          @id @default(autoincrement())
   nome                                      String       @db.VarChar(50)
+  alergia                                   String?
+  descricao                                 String?
   ingredientes                              String
   imagem                                    Bytes?
   data_postagem                             DateTime     @db.Date
   editado                                   Boolean?
   status                                    String?      @db.VarChar(9)
-  feedbacks_produtos                        Int?
   id_usuario                                Int
   id_admin_relator                          Int?
   usuario_produto_id_admin_relatorTousuario usuario?     @relation("produto_id_admin_relatorTousuario", fields: [id_admin_relator], references: [id_usuario], onDelete: NoAction, onUpdate: NoAction)
@@ -60,7 +60,7 @@ model usuario {
   nome_social                                     String?      @db.VarChar(50)
   ativo                                           Boolean
   telefone                                        String?      @db.VarChar(11)
-  restricao_alimenticia                           String?      @db.VarChar(40)
+  restricao_alimenticia                           String?      @db.VarChar(255)
   comentario_comentario_id_admin_relatorTousuario comentario[] @relation("comentario_id_admin_relatorTousuario")
   comentario_comentario_id_usuarioTousuario       comentario[] @relation("comentario_id_usuarioTousuario")
   endereco                                        endereco[]
