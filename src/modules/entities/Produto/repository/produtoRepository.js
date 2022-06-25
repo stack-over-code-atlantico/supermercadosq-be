@@ -13,15 +13,16 @@ const produtosRead = async () => {
   return result;
 };
 
-const produtosCreate = async (nome, ingredientes, imagem, id_usuario) => {
+const produtosCreate = async (nome, alergia, ingredientes, imagem,descricao, id_usuario) => {
   const result = await prisma.produto.create({
     data: {
       nome,
+      alergia,
       ingredientes,
       imagem,
+      descricao,
       status: null,
       data_postagem: new Date(),
-      feedbacks_produtos: 0,
       id_usuario,
       editado: false,
       id_admin_relator: null
@@ -30,7 +31,7 @@ const produtosCreate = async (nome, ingredientes, imagem, id_usuario) => {
   return result;
 };
 
-const produtosUpdate = async (id_produto, nome, ingredientes, imagem) => {
+const produtosUpdate = async (id_produto, nome, alergia, ingredientes, imagem,descricao) => {
   const produto = await prisma.produto.findFirst({
     where: { id_produto }
   });
@@ -38,8 +39,11 @@ const produtosUpdate = async (id_produto, nome, ingredientes, imagem) => {
     where: { id_produto },
     data: {
       nome: nome ? nome : produto.nome,
+      alergia: alergia ? alergia : produto.alergia,
       ingredientes: ingredientes ? ingredientes : produto.ingredientes,
-      imagem: imagem ? nome : produto.imagem
+      imagem: imagem ? nome : produto.imagem,
+      descricao: descricao ? descricao : produto.descricao,
+      editado: true
     }
   });
   return result;

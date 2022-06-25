@@ -10,8 +10,8 @@ class ComentarioController {
   }
 
   async create (req, res) {
-    const { mensagem, id_produto} = req.body;
     const {id_usuario} = req
+    const { mensagem, id_produto} = req.body;
     const comment = await comentarioService.createComment(
       mensagem,
       Number(id_produto),

@@ -15,7 +15,6 @@ const createComment = async (mensagem, id_produto, id_usuario) => {
 			status: null,
 			data_comentario: new Date(),
 			editado: false,
-			feedbacks_comentarios: 0,
 			id_produto,
 			id_usuario,
 			id_admin_relator: null
