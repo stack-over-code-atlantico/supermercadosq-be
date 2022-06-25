@@ -221,35 +221,108 @@ E, por fim, usamos o `npm run dev` para iniciar o servidor em modo de desenvolvi
 
     </td>
   </tr>
+
+<tr>
+    <td align="center">
+      <p>Produto</p>
+    </td>
+    <td align="center">
+      <p>
+          Listar todos os produtos
+      </p>
+      <p>
+          Criar um novo produto
+      </p>
+      <p>
+          Atualizar as informações de um produto
+      </p>
+      <p>
+          Deletar o produto (setar o valor do atributo "status": "REPROVADO")
+      </p>
+    </td>
+    <td>
+      <p>
+          GET
+      </p>
+      <p>
+          POST
+      </p>
+      <p>
+          PUT
+      </p>
+      <p>
+          PUT 💹
+      </p>
+    </td>
+    <td>
+      <p>
+          /products
+      </p>
+      <p>
+          /products
+      </p>
+      <p>
+          /products/:id_produto
+      </p>
+      <p>
+          /products/:id_produto
+      </p>
+    </td>
+  </tr>
+        
   <tr>
     <td align="center">
-      <p>Fornecedor</p>
+    <p>Login</p>
     </td>
     <td>
 
     </td>
   </tr>
-    <tr>
-    <td align="center">
-      <p>Cliente</p>
-    </td>
-    <td>
-
-    </td>
-  </tr>
-  <tr>
-    <td align="center">
-      <p>Produtos</p>
-    </td>
-    <td>
-
-    </td>
-  </tr>
-  <tr>
+ <tr>
     <td align="center">
       <p>Comentário</p>
     </td>
+    <td align="center">
+      <p>
+          Listar todos os comentários
+      </p>
+      <p>
+          Criar um novo comentário
+      </p>
+      <p>
+          Atualizar as informações de um comentário
+      </p>
+      <p>
+          Deletar o comentário (setar o valor do atributo "status": "REPROVADO")
+      </p>
+    </td>
     <td>
+      <p>
+          GET
+      </p>
+      <p>
+          POST
+      </p>
+      <p>
+          PUT
+      </p>
+      <p>
+          PUT 💹
+      </p>
+    </td>
+    <td>
+      <p>
+          /comments
+      </p>
+      <p>
+          /comments
+      </p>
+      <p>
+          /comments/:id_comentario
+      </p>
+      <p>
+          /comments/:id_comentario
+      </p>
     </td>
   </tr>
 </table>
