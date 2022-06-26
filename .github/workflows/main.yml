@@ -50,4 +50,5 @@ jobs:
           script: |
             cd ~/app
             npm i
+            npx prisma generate
             pm2 restart stackovercode
