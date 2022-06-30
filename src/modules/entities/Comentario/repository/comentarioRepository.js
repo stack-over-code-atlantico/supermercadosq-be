@@ -4,6 +4,7 @@ const { hash } = require('bcrypt');
 const findUniqueComment = async (id_comentario) => {
 	const result = await prisma.comentario.findUnique({
 		where: { id_comentario },
+		include: { usuario_comentario_id_usuarioTousuario:true }
 	});
 	return result;
 };
