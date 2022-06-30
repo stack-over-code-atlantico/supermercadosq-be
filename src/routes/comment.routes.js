@@ -10,6 +10,8 @@ const comentarioController = new ComentarioController();
 
 route.get('/', comentarioController.list);
 
+route.get('/disapproved', comentarioController.listDisapproved);
+
 route.post('/', authenticate,comentarioController.create);
 
 route.put('/:id_comentario', authenticate, comentarioController.update);

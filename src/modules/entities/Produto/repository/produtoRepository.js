@@ -8,12 +8,28 @@ const findUniqueProduto = async id_produto => {
   return result;
 };
 
-const produtosRead = async () => {
-  const result = await prisma.produto.findMany({});
+const disapprovedProdutosRead = async () => {
+  const result = await prisma.produto.findMany({
+    where: {
+      status: {
+        equals: "REPROVADO",
+      },
+    },
+    orderBy: {
+      data_postagem: 'desc',
+    },
+  });
+
   return result;
 };
 
-const produtosCreate = async (nome, alergia, ingredientes, imagem,descricao, id_usuario) => {
+const produtosRead = async () => {
+  const result = await prisma.$queryRaw`SELECT * FROM produto where status != 'REPROVADO' or status is null order by data_postagem desc`;
+
+  return result;
+};
+
+const produtosCreate = async (nome, alergia, ingredientes, imagem, descricao, id_usuario) => {
   const result = await prisma.produto.create({
     data: {
       nome,
@@ -31,7 +47,7 @@ const produtosCreate = async (nome, alergia, ingredientes, imagem,descricao, id_
   return result;
 };
 
-const produtosUpdate = async (id_produto, nome, alergia, ingredientes, imagem,descricao) => {
+const produtosUpdate = async (id_produto, nome, alergia, ingredientes, imagem, descricao) => {
   const produto = await prisma.produto.findFirst({
     where: { id_produto }
   });
@@ -80,10 +96,10 @@ const denunciaProduto = async id_produto => {
   return result;
 };
 
-const analisaDenuncia = async(id_produto, id_usuario, status) => {
+const analisaDenuncia = async (id_produto, id_usuario, status) => {
   const result = await prisma.produto.update({
-    where: {id_produto},
-    data:{
+    where: { id_produto },
+    data: {
       status: status,
       id_admin_relator: id_usuario,
     }
@@ -99,5 +115,6 @@ module.exports = {
   produtoDelete,
   produtoDeleteAdmin,
   denunciaProduto,
-  analisaDenuncia
+  analisaDenuncia,
+  disapprovedProdutosRead
 };

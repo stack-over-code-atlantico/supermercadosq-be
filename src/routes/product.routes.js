@@ -10,6 +10,8 @@ const productController = new ProdutoController()
  */
  route.get('/', productController.list);
 
+ route.get('/disapproved', productController.listDisapproved);
+
  /**
   * Cria um produto
   */

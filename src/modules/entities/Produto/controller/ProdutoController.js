@@ -9,6 +9,11 @@ class ProdutoController {
     return res.json(produtos);
   }
 
+  async listDisapproved(req, res) {
+    const produtos = await produtoService.listDisapprovedProdutos();
+    return res.json(produtos);
+  }
+
   async create(req, res) {
     const {id_usuario} = req;
     const { nome, alergia, ingredientes, imagem, descricao } = req.body;

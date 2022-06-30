@@ -8,6 +8,27 @@ const findUniqueComment = async (id_comentario) => {
 	return result;
 };
 
+const disapprovedReadComment = async () => {
+	const result = await prisma.comentario.findMany({
+	  where: {
+		status: {
+		  equals: "REPROVADO",
+		},
+	  },
+	  orderBy: {
+		data_comentario: 'desc',
+	  },
+	});
+  
+	return result;
+  };
+  
+  const readComment = async () => {
+	const result = await prisma.$queryRaw`SELECT * FROM comentario where status != 'REPROVADO' or status is null order by data_comentario desc`;
+  
+	return result;
+  };
+
 const createComment = async (mensagem, id_produto, id_usuario) => {
 	const result = await prisma.comentario.create({
 		data: {
@@ -23,10 +44,10 @@ const createComment = async (mensagem, id_produto, id_usuario) => {
 	return result;
 };
 
-const readComment = async () => {
-	const result = await prisma.comentario.findMany();
-	return result;
-};
+// const readComment = async () => {
+// 	const result = await prisma.comentario.findMany();
+// 	return result;
+// };
 
 const updateComment = async (id_comentario, mensagem) => {
 	const comentario = await prisma.comentario.findFirst({
@@ -104,6 +125,7 @@ module.exports = {
 	deleteAdminComment,
 	reportComment,
 	reviewReportComment,
-	commentDeleteByUser
+	commentDeleteByUser,
+	disapprovedReadComment
 };
 

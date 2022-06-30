@@ -5,6 +5,11 @@ class ProdutoService {
     const produtos = await produtoRepositorio.produtosRead();
     return produtos;
   }
+  
+  async listDisapprovedProdutos() {
+    const produtos = await produtoRepositorio.disapprovedProdutosRead();
+    return produtos;
+  }
 
   async createProduto(nome, alergia, ingredientes, imagem,descricao, id_usuario) {
     const produtos = await produtoRepositorio.produtosCreate(

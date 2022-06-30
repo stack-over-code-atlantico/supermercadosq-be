@@ -9,6 +9,11 @@ class ComentarioController {
     return res.json(comments);
   }
 
+  async listDisapproved (req,res) {
+    const comments = await comentarioService.listDisapprovedComments();
+    return res.json(comments);
+  }
+
   async create (req, res) {
     const {id_usuario} = req
     const { mensagem, id_produto} = req.body;
