@@ -9,6 +9,10 @@ const productController = new ProdutoController()
  * Lista todos os produtos
  */
  route.get('/', productController.list);
+ /**
+ * Lista produto pelo id
+ */
+ route.get('/:id_produto', productController.listOne);
 
  /**
   * Cria um produto

@@ -1,6 +1,5 @@
 const ProdutoService = require('@produto/services/ProdutoService');
 
-
 const produtoService = new ProdutoService();
 
 class ProdutoController {
@@ -9,8 +8,14 @@ class ProdutoController {
     return res.json(produtos);
   }
 
+  async listOne(req, res) {
+    const { id_produto } = req.params;
+    const produtos = await produtoService.listOne(Number(id_produto));
+    return res.json(produtos);
+  }
+
   async create(req, res) {
-    const {id_usuario} = req;
+    const { id_usuario } = req;
     const { nome, alergia, ingredientes, imagem, descricao } = req.body;
     const produto = await produtoService.createProduto(
       nome,
@@ -24,7 +29,7 @@ class ProdutoController {
   }
 
   async update(req, res) {
-    const {id_usuario} = req
+    const { id_usuario } = req;
     const { id_produto } = req.params;
     const { nome, alergia, ingredientes, imagem, descricao } = req.body;
     const produto = await produtoService.updateProduto(
@@ -34,7 +39,7 @@ class ProdutoController {
       alergia,
       ingredientes,
       imagem,
-      descricao,
+      descricao
     );
     if (produto instanceof Error) {
       return res.status(401).json(produto.message);
@@ -43,7 +48,7 @@ class ProdutoController {
   }
 
   async delete(req, res) {
-    const {id_usuario, nivel} = req
+    const { id_usuario, nivel } = req;
     const { id_produto } = req.params;
     const produto = await produtoService.deleteProduto(
       Number(id_produto),
@@ -63,9 +68,9 @@ class ProdutoController {
   }
 
   async analisaDenuncia(req, res) {
-    const {id_usuario} = req;
+    const { id_usuario } = req;
     const { id_produto } = req.params;
-    const {status} = req.body;
+    const { status } = req.body;
     const produto = await produtoService.analisaDenuncia(
       Number(id_produto),
       id_usuario,
