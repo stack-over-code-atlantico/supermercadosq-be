@@ -6,6 +6,11 @@ class ComentarioService {
     return comments;
   }
 
+  async listOne(id_comentario) {
+    const comments = await comentarioRepositorio.findUniqueComment(id_comentario);
+    return comments;
+  }
+
   async createComment(mensagem, id_produto, id_usuario) {
     const comments = await comentarioRepositorio.createComment(
       mensagem,

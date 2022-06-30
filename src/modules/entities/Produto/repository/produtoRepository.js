@@ -3,7 +3,8 @@ const { produto } = require('../../../../database/prismaClient');
 
 const findUniqueProduto = async id_produto => {
   const result = await prisma.produto.findFirst({
-    where: { id_produto }
+    where: { id_produto },
+    include: { usuario_produto_id_usuarioTousuario:true }
   });
   return result;
 };
@@ -13,7 +14,14 @@ const produtosRead = async () => {
   return result;
 };
 
-const produtosCreate = async (nome, alergia, ingredientes, imagem,descricao, id_usuario) => {
+const produtosCreate = async (
+  nome,
+  alergia,
+  ingredientes,
+  imagem,
+  descricao,
+  id_usuario
+) => {
   const result = await prisma.produto.create({
     data: {
       nome,
@@ -31,7 +39,14 @@ const produtosCreate = async (nome, alergia, ingredientes, imagem,descricao, id_
   return result;
 };
 
-const produtosUpdate = async (id_produto, nome, alergia, ingredientes, imagem,descricao) => {
+const produtosUpdate = async (
+  id_produto,
+  nome,
+  alergia,
+  ingredientes,
+  imagem,
+  descricao
+) => {
   const produto = await prisma.produto.findFirst({
     where: { id_produto }
   });
@@ -63,7 +78,7 @@ const produtoDeleteAdmin = async (id_produto, id_usuario) => {
   const result = await prisma.produto.update({
     where: { id_produto },
     data: {
-      status: "REPROVADO",
+      status: 'REPROVADO',
       id_admin_relator: id_usuario
     }
   });
@@ -80,16 +95,16 @@ const denunciaProduto = async id_produto => {
   return result;
 };
 
-const analisaDenuncia = async(id_produto, id_usuario, status) => {
+const analisaDenuncia = async (id_produto, id_usuario, status) => {
   const result = await prisma.produto.update({
-    where: {id_produto},
-    data:{
+    where: { id_produto },
+    data: {
       status: status,
-      id_admin_relator: id_usuario,
+      id_admin_relator: id_usuario
     }
-  })
-  return result
-}
+  });
+  return result;
+};
 
 module.exports = {
   findUniqueProduto,

@@ -6,6 +6,11 @@ class ProdutoService {
     return produtos;
   }
 
+  async listOne(id_produto) {
+    const produtos = await produtoRepositorio.findUniqueProduto(id_produto);
+    return produtos;
+  }
+
   async createProduto(nome, alergia, ingredientes, imagem,descricao, id_usuario) {
     const produtos = await produtoRepositorio.produtosCreate(
       nome,

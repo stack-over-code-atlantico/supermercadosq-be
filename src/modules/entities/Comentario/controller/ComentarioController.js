@@ -8,6 +8,11 @@ class ComentarioController {
     const comments = await comentarioService.listAllComments();
     return res.json(comments);
   }
+  async listOne (req,res) {
+    const { id_comentario } = req.params;
+    const comments = await comentarioService.listOne(Number(id_comentario));
+    return res.json(comments);
+  }
 
   async create (req, res) {
     const {id_usuario} = req
