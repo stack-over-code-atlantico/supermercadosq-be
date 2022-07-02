@@ -10,6 +10,8 @@ const comentarioController = new ComentarioController();
 
 route.get('/', comentarioController.list);
 
+route.get('/product/:id_produto', comentarioController.listByProduct);
+
 route.get('/:id_comentario', comentarioController.listOne);
 
 route.post('/', authenticate,comentarioController.create);

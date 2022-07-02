@@ -9,6 +9,14 @@ const findUniqueComment = async (id_comentario) => {
 	return result;
 };
 
+const findByProduct = async (id_produto) => {
+	const result = await prisma.comentario.findMany({
+		where: { id_produto },
+		include: { usuario_comentario_id_usuarioTousuario:true }
+	});
+	return result;
+};
+
 const createComment = async (mensagem, id_produto, id_usuario) => {
 	const result = await prisma.comentario.create({
 		data: {
@@ -98,6 +106,7 @@ const reviewReportComment = async (id_comentario, id_usuario, status) => {
 
 module.exports = {
 	findUniqueComment,
+	findByProduct,
 	createComment,
 	readComment,
 	updateComment,
