@@ -1,8 +1,8 @@
 const produtoRepositorio = require('@produto/repository/produtoRepository');
 
 class ProdutoService {
-  async listAllProdutos() {
-    const produtos = await produtoRepositorio.produtosRead();
+  async listAllProdutos(page) {
+    const produtos = await produtoRepositorio.produtosRead(page);
     return produtos;
   }
   

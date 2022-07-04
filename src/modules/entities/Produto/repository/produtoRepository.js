@@ -23,8 +23,21 @@ const disapprovedProdutosRead = async () => {
   return result;
 };
 
-const produtosRead = async () => {
-  const result = await prisma.$queryRaw`SELECT * FROM produto where status != 'REPROVADO' or status is null order by data_postagem desc`;
+const produtosRead = async (page) => {
+  const result = await prisma.produto.findMany({
+    skip: 9 * page,
+    take: page === 0 ? 8 : 9,
+    where: {
+      OR: [
+        { status: null },
+        { status: 'APROVADO'},
+        { status: 'ANALISE' }
+      ]
+    },
+    orderBy: {
+      id_produto: 'asc',
+    }
+  });
 
   return result;
 };
@@ -116,5 +129,5 @@ module.exports = {
   produtoDeleteAdmin,
   denunciaProduto,
   analisaDenuncia,
-  disapprovedProdutosRead
+  disapprovedProdutosRead,
 };

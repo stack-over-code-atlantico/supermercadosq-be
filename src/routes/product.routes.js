@@ -8,7 +8,7 @@ const productController = new ProdutoController()
 /**
  * Lista todos os produtos
  */
- route.get('/', productController.list);
+ route.get('/:page/:limit?', productController.list);
 
  route.get('/disapproved', productController.listDisapproved);
 

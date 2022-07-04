@@ -1,11 +1,11 @@
 const ProdutoService = require('@produto/services/ProdutoService');
 
-
 const produtoService = new ProdutoService();
 
 class ProdutoController {
   async list(req, res) {
-    const produtos = await produtoService.listAllProdutos();
+    const { page } = req.params;
+    const produtos = await produtoService.listAllProdutos(Number(page));
     return res.json(produtos);
   }
 
