@@ -11,7 +11,7 @@ const findUniqueComment = async (id_comentario) => {
 
 const findByProduct = async (id_produto) => {
 	const result = await prisma.comentario.findMany({
-		where: { id_produto },
+		where: { id_produto, OR:[{status:null},{status:'APROVADO'}] },
 		include: { usuario_comentario_id_usuarioTousuario:true }
 	});
 	return result;
