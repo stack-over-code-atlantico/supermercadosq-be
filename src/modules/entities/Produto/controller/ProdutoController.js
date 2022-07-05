@@ -8,9 +8,23 @@ class ProdutoController {
     const produtos = await produtoService.listAllProdutos(Number(page));
     return res.json(produtos);
   }
-
+  
   async listDisapproved(req, res) {
     const produtos = await produtoService.listDisapprovedProdutos();
+    return res.json(produtos);
+  }
+  
+  async listPerAllergy(req, res) {
+    const { page } = req.params;
+    const { alergia } = req.body;
+    const produtos = await produtoService.listAllPerAllergy(Number(page), alergia);
+    return res.json(produtos);
+  }
+
+  async listNotPerAllergy(req, res) {
+    const { page } = req.params;
+    const { alergia } = req.body;
+    const produtos = await produtoService.listAllNotPerAllergy(Number(page), alergia);
     return res.json(produtos);
   }
 

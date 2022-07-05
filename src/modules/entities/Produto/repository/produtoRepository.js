@@ -23,6 +23,34 @@ const disapprovedProdutosRead = async () => {
   return result;
 };
 
+const produtosPerAllergy = async (page, allergy) => {
+  const result = await prisma.produto.findMany({
+    skip: 9 * page,
+    take: page === 0 ? 8 : 9,
+    where: {
+      alergia: {
+        search: allergy.join(' & ')
+      }
+    },
+  });
+  return result;
+};
+
+const produtosNotPerAllergy = async (page, allergy) => {
+  const result = await prisma.produto.findMany({
+    skip: 9 * page,
+    take: page === 0 ? 8 : 9,
+    where: {
+      NOT: {
+        alergia: {
+          search: allergy.join(' | ')
+        }
+      }
+    },
+  });
+  return result;
+};
+
 const produtosRead = async (page) => {
   const result = await prisma.produto.findMany({
     skip: 9 * page,
@@ -130,4 +158,6 @@ module.exports = {
   denunciaProduto,
   analisaDenuncia,
   disapprovedProdutosRead,
+  produtosPerAllergy,
+  produtosNotPerAllergy
 };

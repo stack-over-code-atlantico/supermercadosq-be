@@ -11,6 +11,18 @@ class ProdutoService {
     return produtos;
   }
 
+  async listAllPerAllergy(page, allergy) {
+    const alergia = allergy.split(',');
+    const produtos = await produtoRepositorio.produtosPerAllergy(page, alergia);
+    return produtos;
+  }
+
+  async listAllNotPerAllergy(page, allergy) {
+    const alergia = allergy.split(',');
+    const produtos = await produtoRepositorio.produtosNotPerAllergy(page, alergia);
+    return produtos;
+  }
+
   async createProduto(nome, alergia, ingredientes, imagem,descricao, id_usuario) {
     const produtos = await produtoRepositorio.produtosCreate(
       nome,
