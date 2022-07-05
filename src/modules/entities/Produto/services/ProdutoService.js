@@ -28,7 +28,7 @@ class ProdutoService {
     return produtos;
   }
 
-  async createProduto(nome, alergia, ingredientes, imagem,descricao, id_usuario) {
+  async createProduto(nome, alergia, ingredientes, imagem, descricao, id_usuario) {
     const produtos = await produtoRepositorio.produtosCreate(
       nome,
       alergia,
@@ -49,9 +49,9 @@ class ProdutoService {
     imagem,
     descricao
   ) {
-    const ValidProduto = await produtoRepositorio.findUniqueProduto(id_produto);
+    const validProduto = await produtoRepositorio.findUniqueProduto(id_produto);
     let produto;
-    if (ValidProduto.id_usuario === id_usuario) {
+    if (validProduto.id_usuario === id_usuario) {
       produto = await produtoRepositorio.produtosUpdate(
         id_produto,
         nome,
@@ -66,9 +66,9 @@ class ProdutoService {
   }
 
   async deleteProduto(id_produto, id_usuario, nivel) {
-    const ValidProduto = await produtoRepositorio.findUniqueProduto(id_produto);
+    const validProduto = await produtoRepositorio.findUniqueProduto(id_produto);
     let produto;
-    if (ValidProduto.id_usuario === id_usuario) {
+    if (validProduto.id_usuario === id_usuario) {
       produto = await produtoRepositorio.produtoDelete(id_produto);
       return produto;
     }

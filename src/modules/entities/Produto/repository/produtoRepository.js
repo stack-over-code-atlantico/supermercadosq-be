@@ -85,7 +85,7 @@ const produtosCreate = async (
       nome,
       alergia,
       ingredientes,
-      imagem,
+      imagem: imagem,
       descricao,
       status: null,
       data_postagem: new Date(),
@@ -115,7 +115,7 @@ const produtosUpdate = async (
       nome: nome ? nome : produto.nome,
       alergia: alergia ? alergia : produto.alergia,
       ingredientes: ingredientes ? ingredientes : produto.ingredientes,
-      imagem: imagem ? nome : produto.imagem,
+      imagem: imagem ? imagem : produto.imagem,
       descricao: descricao ? descricao : produto.descricao,
       editado: true
     }
