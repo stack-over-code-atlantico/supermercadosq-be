@@ -9,6 +9,8 @@ class ComentarioController {
     return res.json(comments);
   }
 
+  async listDisapproved (req,res) {
+    const comments = await comentarioService.listDisapprovedComments();
   async listByProduct (req,res) {
     const {id_produto} = req.params
     const comments = await comentarioService.listByProduct(Number(id_produto));
