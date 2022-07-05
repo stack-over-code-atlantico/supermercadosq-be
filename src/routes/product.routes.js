@@ -8,13 +8,20 @@ const productController = new ProdutoController()
 /**
  * Lista todos os produtos
  */
- route.get('/:page/:limit?', productController.list);
+
+ route.get('/:page', productController.list);
 
  route.get('/disapproved', productController.listDisapproved);
 
  route.post('/allergy/:page', productController.listPerAllergy);
 
  route.post('/notAllergy/:page', productController.listNotPerAllergy);
+
+ route.get('/', productController.list);
+ /**
+ * Lista produto pelo id
+ */
+ route.get('/:id_produto', productController.listOne);
 
  /**
   * Cria um produto

@@ -8,6 +8,14 @@ class ComentarioService {
 
   async listDisapprovedComments() {
     const comments = await comentarioRepositorio.disapprovedReadComment();
+
+  async listByProduct(id_produto) {
+    const comments = await comentarioRepositorio.findByProduct(id_produto);
+    return comments;
+  }
+
+  async listOne(id_comentario) {
+    const comments = await comentarioRepositorio.findUniqueComment(id_comentario);
     return comments;
   }
 

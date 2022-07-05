@@ -4,6 +4,15 @@ const { hash } = require('bcrypt');
 const findUniqueComment = async (id_comentario) => {
 	const result = await prisma.comentario.findUnique({
 		where: { id_comentario },
+		include: { usuario_comentario_id_usuarioTousuario:true }
+	});
+	return result;
+};
+
+const findByProduct = async (id_produto) => {
+	const result = await prisma.comentario.findMany({
+		where: { id_produto, OR:[{status:null},{status:'APROVADO'}] },
+		include: { usuario_comentario_id_usuarioTousuario:true }
 	});
 	return result;
 };
@@ -118,6 +127,7 @@ const reviewReportComment = async (id_comentario, id_usuario, status) => {
 
 module.exports = {
 	findUniqueComment,
+	findByProduct,
 	createComment,
 	readComment,
 	updateComment,
