@@ -72,8 +72,6 @@ const produtosRead = async (page) => {
   return result;
 };
 
-const produtosCreate = async (nome, alergia, ingredientes, imagem, descricao, id_usuario) => {
-
 const produtosCreate = async (
   nome,
   alergia,
