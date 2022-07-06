@@ -4,20 +4,21 @@ const fs = require('fs');
 const path = require('path');
 const { promisify } = require('util');
 
-function removerImg(imagem) {
-    if(!imagem){
+function removerImg(image) {
+    if (!image) {
+        console.log('Caiu aqui')
         return;
     }
-    if(process.env.STORAGE_TYPE === 's3'){
+    if (process.env.STORAGE_TYPE === 's3') {
         return s3.deleteObject({
             Bucket: process.env.AWS_BUCKET,
-            Key: imagem,
+            Key: image,
         }).promise();
     } else {
         return promisify(fs.unlink)(
-            path.resolve(__dirname, '..','..','tmp', imagem)
+            path.resolve(image)
         )
     }
   };
 
-  module.exports = removerImg;
+module.exports = removerImg;

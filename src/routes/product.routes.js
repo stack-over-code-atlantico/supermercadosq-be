@@ -3,6 +3,9 @@ const route = express();
 const ProdutoController = require('@produto/controller/ProdutoController')
 const authenticate = require('@Middleware/authenticate');
 const isAdmin = require('../middlewares/isAdmin');
+const multer = require('multer');
+const {uploadToS3} = require('../utils/uploadImage');
+const remove = require('../utils/removeImage');
 
 const productController = new ProdutoController()
 /**
@@ -17,7 +20,6 @@ const productController = new ProdutoController()
 
  route.post('/notAllergy/:page', productController.listNotPerAllergy);
 
- route.get('/', productController.list);
  /**
  * Lista produto pelo id
  */
@@ -26,12 +28,12 @@ const productController = new ProdutoController()
  /**
   * Cria um produto
   */
- route.post('/',authenticate,productController.create);
+ route.post('/', multer(uploadToS3('products')).single('file'), authenticate, productController.create);
 
   /**
   * Altera um produto
   */
- route.put('/:id_produto', authenticate, productController.update);
+ route.put('/:id_produto', multer(uploadToS3('products')).single('file'), authenticate, productController.update);
 
   /**
   * Deleta um produto
