@@ -1,4 +1,5 @@
 const produtoRepositorio = require('@produto/repository/produtoRepository');
+const removeImage = require('../../../../utils/removeImage');
 
 class ProdutoService {
   async listAllProdutos(page) {
@@ -60,6 +61,11 @@ class ProdutoService {
         imagem,
         descricao
       );
+
+      if (validProduto.imagem !== imagem) {
+        removeImage(validProduto.imagem.split('.com/')[1]);
+      }
+
       return produto;
     }
     return new Error('Unauthorized Service');

@@ -20,7 +20,6 @@ const productController = new ProdutoController()
 
  route.post('/notAllergy/:page', productController.listNotPerAllergy);
 
- route.get('/', productController.list);
  /**
  * Lista produto pelo id
  */
