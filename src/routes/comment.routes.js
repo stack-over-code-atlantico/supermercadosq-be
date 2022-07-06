@@ -10,7 +10,6 @@ const comentarioController = new ComentarioController();
 
 route.get('/', comentarioController.list);
 
-
 route.get('/disapproved', comentarioController.listDisapproved);
 
 route.get('/product/:id_produto', comentarioController.listByProduct);

@@ -5,6 +5,7 @@ const loginRoute = require('./login.routes');
 const errors = require('@Middleware/errors');
 const comentarioRoute = require('./comment.routes');
 const produtoRoute = require('./product.routes');
+const docRoute = require('./documentation.routes');
 var corsOptions = {
   origin: '*'
 }
@@ -16,6 +17,7 @@ app.use('/users', userRoute);
 app.use('/login', loginRoute);
 app.use('/comments', comentarioRoute);
 app.use('/products', produtoRoute);
+app.use('/documentation', docRoute);
 
 app.use(errors);
 
