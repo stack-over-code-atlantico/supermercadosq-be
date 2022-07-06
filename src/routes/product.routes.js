@@ -12,7 +12,7 @@ const productController = new ProdutoController()
  * Lista todos os produtos
  */
 
- route.get('/:page', productController.list);
+ route.get('/page/:page', productController.list);
 
  route.get('/disapproved', productController.listDisapproved);
 
