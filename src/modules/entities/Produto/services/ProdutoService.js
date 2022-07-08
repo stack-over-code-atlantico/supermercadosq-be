@@ -2,8 +2,13 @@ const produtoRepositorio = require('@produto/repository/produtoRepository');
 const removeImage = require('../../../../utils/removeImage');
 
 class ProdutoService {
-  async listAllProdutos(page) {
-    const produtos = await produtoRepositorio.produtosRead(page);
+  async listAllProdutos() {
+    const produtos = await produtoRepositorio.readAllProdutos();
+    return produtos;
+  }
+
+  async listProdutos(page) {
+    const produtos = await produtoRepositorio.produtosRead(parseInt(page));
     return produtos;
   }
   
