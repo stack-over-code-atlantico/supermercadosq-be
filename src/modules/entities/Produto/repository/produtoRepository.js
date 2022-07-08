@@ -1,5 +1,4 @@
 const prisma = require('../../../../database/prismaClient');
-const { produto } = require('../../../../database/prismaClient');
 
 const findUniqueProduto = async id_produto => {
   const result = await prisma.produto.findFirst({
@@ -52,6 +51,22 @@ const produtosNotPerAllergy = async (page, allergy) => {
   return result;
 };
 
+
+const readAllProdutos = async () => {
+  const result = await prisma.produto.findMany({
+    where: {
+      OR: [
+        { status: null },
+        { status: 'APROVADO'},
+        { status: 'ANALISE' }
+      ]
+    },
+    orderBy: {
+      id_produto: 'asc',
+    }
+  });
+  return result;
+}
 
 const produtosRead = async (page) => {
   const result = await prisma.produto.findMany({
@@ -176,5 +191,6 @@ module.exports = {
   analisaDenuncia,
   disapprovedProdutosRead,
   produtosPerAllergy,
-  produtosNotPerAllergy
+  produtosNotPerAllergy,
+  readAllProdutos
 };

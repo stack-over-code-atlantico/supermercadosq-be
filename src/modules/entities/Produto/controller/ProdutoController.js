@@ -5,7 +5,11 @@ const produtoService = new ProdutoService();
 class ProdutoController {
   async list(req, res) {
     const { page } = req.params;
-    const produtos = await produtoService.listAllProdutos(Number(page));
+    const produtos = await produtoService.listProdutos(Number(page));
+    return res.json(produtos);
+  }
+  async listAll(req, res) {
+    const produtos = await produtoService.listAllProdutos();
     return res.json(produtos);
   }
   
