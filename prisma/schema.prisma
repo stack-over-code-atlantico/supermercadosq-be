@@ -59,6 +59,7 @@ model usuario {
   senha                                           String       @db.VarChar(255)
   nivel                                           String?      @db.VarChar(15)
   nome_social                                     String?      @db.VarChar(50)
+  avatar                                          String?
   ativo                                           Boolean
   telefone                                        String?      @db.VarChar(11)
   restricao_alimenticia                           String?      @db.VarChar(255)

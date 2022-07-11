@@ -79,6 +79,22 @@ const produtosRead = async (page) => {
         { status: 'ANALISE' }
       ]
     },
+    include: {
+      usuario_produto_id_usuarioTousuario:
+      {
+        select: {
+          nome: true,
+          cpf_cnpj: true,
+          email: true,
+          nivel: true,
+          nome_social: true,
+          ativo: true,
+          telefone: true,
+          restricao_alimenticia: true,
+          avatar: true,
+        },
+      }
+    },
     orderBy: {
       id_produto: 'asc',
     }
