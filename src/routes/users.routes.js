@@ -10,7 +10,7 @@ const usuarioController = new UsuarioController();
  */
 route.get('/', usuarioController.list);
 /**
- * Cria um usuário
+ * Lista um usuário pelo Id
  */ 
 route.get('/:id_usuario', usuarioController.listOne);
 /**
