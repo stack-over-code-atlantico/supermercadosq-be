@@ -52,7 +52,7 @@ const usersCreate = async (
   const result = await prisma.usuario.create({
     data: {
       nome,
-      nome_social,
+      nome_social, 
       cpf_cnpj,
       email,
       senha: password,
