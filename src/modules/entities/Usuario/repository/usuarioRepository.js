@@ -67,6 +67,7 @@ const usersCreate = async (
   nivel,
   telefone = null,
   restricao_alimenticia = null,
+  cep,
   logradouro,
   numero,
   bairro,
@@ -87,6 +88,7 @@ const usersCreate = async (
       restricao_alimenticia,
       endereco: {
         create: {
+          cep,
           logradouro,
           numero,
           bairro,
