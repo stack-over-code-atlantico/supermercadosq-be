@@ -10,6 +10,10 @@ const usuarioController = new UsuarioController();
  */
 route.get('/', usuarioController.list);
 /**
+ * Lista um usuário pelo Id
+ */ 
+route.get('/:id_usuario', usuarioController.listOne);
+/**
  * Cria um usuário
  */
 route.post('/', usuarioController.create);

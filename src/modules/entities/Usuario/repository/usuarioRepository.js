@@ -15,6 +15,13 @@ const findUserPerEmail = async (email) => {
   return result;
 };
 
+const findUserPerId = async (id_usuario) => {
+  const result = await prisma.usuario.findFirst({
+    where: { id_usuario },
+  });
+  return result;
+};
+
 const findUniqueRestriction = async (restricao_alimenticia) => {
   const result = await prisma.usuario.findUnique({
     where: { restricao_alimenticia },
@@ -159,6 +166,7 @@ const usersUpdate = async (
 module.exports = {
   findUniqueRestriction,
   findUniqueUser,
+  findUserPerId,
   findUserPerEmail,
   usersRead,
   usersCreate,
