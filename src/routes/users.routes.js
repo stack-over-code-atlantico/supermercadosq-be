@@ -11,6 +11,10 @@ const usuarioController = new UsuarioController();
 route.get('/', usuarioController.list);
 /**
  * Cria um usuário
+ */ 
+route.get('/:id_usuario', usuarioController.listOne);
+/**
+ * Cria um usuário
  */
 route.post('/', usuarioController.create);
 

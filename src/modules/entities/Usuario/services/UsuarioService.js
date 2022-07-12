@@ -8,6 +8,11 @@ class UsuarioService {
     return users;
   }
 
+  async listOne(id_usuario) {
+    const user = await usuarioRepositorio.findUserPerId(id_usuario);
+    return user;
+  }
+
   async createUser(
     nome,
     nome_social,

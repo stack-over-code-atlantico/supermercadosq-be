@@ -8,6 +8,12 @@ class UsuarioController {
     return res.json(users);
   }
 
+  async listOne(req, res) {
+    const { id_usuario } = req.params;
+    const user = await userService.listOne(Number(id_usuario));
+    return res.json(user);
+  }
+
   async create(req, res) {
     const {
       nome,
