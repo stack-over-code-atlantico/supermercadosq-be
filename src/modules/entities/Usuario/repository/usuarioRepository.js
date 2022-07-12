@@ -11,6 +11,7 @@ const findUniqueUser = async (cpf_cnpj) => {
 const findUserPerEmail = async (email) => {
   const result = await prisma.usuario.findFirst({
     where: { email },
+    include:{endereco: true}
   });
   return result;
 };
@@ -18,6 +19,7 @@ const findUserPerEmail = async (email) => {
 const findUserPerId = async (id_usuario) => {
   const result = await prisma.usuario.findFirst({
     where: { id_usuario },
+    include:{endereco: true}
   });
   return result;
 };
