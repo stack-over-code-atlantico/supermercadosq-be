@@ -6,6 +6,11 @@ class ComentarioService {
     return comments;
   }
 
+  async listHistoric(id_usuario) {
+    const comentarios = await comentarioRepositorio.comentariosReadHistoric(id_usuario);
+    return comentarios;
+  }
+
   async listDisapprovedComments() {
     const comments = await comentarioRepositorio.disapprovedReadComment(); 
     return comments;

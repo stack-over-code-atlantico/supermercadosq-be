@@ -13,6 +13,10 @@ const productController = new ProdutoController()
  */
 
  route.get('/page/:page', productController.list);
+/**
+ * Lista 4 ultimos posts do usuario
+ */
+ route.get('/Historic/:id_usuario', productController.listHistoric);
 
  route.get('/', productController.listAll);
 

@@ -38,6 +38,25 @@ const disapprovedReadComment = async () => {
 	return result;
   };
 
+	const comentariosReadHistoric = async (id_usuario) => {
+		const result = await prisma.comentario.findMany({
+			take: 4,
+			where: {
+				id_usuario,
+				OR: [
+					{ status: null },
+					{ status: 'APROVADO'},
+					{ status: 'ANALISE' }
+				]
+			},
+			orderBy: {
+				id_comentario: 'desc',
+			}
+		});
+	
+		return result;
+	};
+
 const createComment = async (mensagem, id_produto, id_usuario) => {
 	const result = await prisma.comentario.create({
 		data: {
@@ -130,6 +149,7 @@ module.exports = {
 	findByProduct,
 	createComment,
 	readComment,
+	comentariosReadHistoric,
 	updateComment,
 	deleteComment,
 	deleteAdminComment,

@@ -118,6 +118,40 @@ const produtosRead = async (page) => {
 
   return result;
 };
+const produtosReadHistoric = async (id_usuario) => {
+  const result = await prisma.produto.findMany({
+    take: 4,
+    where: {
+      id_usuario,
+      OR: [
+        { status: null },
+        { status: 'APROVADO'},
+        { status: 'ANALISE' }
+      ]
+    },
+    include: {
+      usuario_produto_id_usuarioTousuario:
+      {
+        select: {
+          nome: true,
+          cpf_cnpj: true,
+          email: true,
+          nivel: true,
+          nome_social: true,
+          ativo: true,
+          telefone: true,
+          restricao_alimenticia: true,
+          avatar: true,
+        },
+      }
+    },
+    orderBy: {
+      id_produto: 'desc',
+    }
+  });
+
+  return result;
+};
 
 const produtosCreate = async (
   nome,
@@ -215,6 +249,7 @@ const analisaDenuncia = async (id_produto, id_usuario, status) => {
 module.exports = {
   findUniqueProduto,
   produtosRead,
+  produtosReadHistoric,
   produtosCreate,
   produtosUpdate,
   produtoDelete,
