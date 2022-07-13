@@ -112,7 +112,7 @@ const produtosRead = async (page) => {
       }
     },
     orderBy: {
-      id_produto: 'asc',
+      id_produto: 'desc',
     }
   });
 
