@@ -103,6 +103,16 @@ const usersCreate = async (
   return result; 
 };
 
+const passwordEdit = async (id_usuario, novaSenha) => {
+  const result = await prisma.usuario.update({
+    where: { id_usuario },
+    data: {
+      senha:  await hash(novaSenha, 8),
+    }});
+
+  return result;
+};
+
 const usersDelete = async (cpf_cnpj) => {
   const result = await prisma.usuario.update({
     where: { cpf_cnpj },
@@ -174,6 +184,7 @@ module.exports = {
   findUniqueUser,
   findUserPerId,
   findUserPerEmail,
+  passwordEdit,
   usersRead,
   usersCreate,
   usersDelete,

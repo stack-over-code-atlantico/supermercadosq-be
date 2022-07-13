@@ -1,5 +1,6 @@
 const usuarioRepositorio = require('@usuario/repository/usuarioRepository');
 const { sign } = require('jsonwebtoken');
+const { compare } = require('bcrypt');
 
 class UsuarioService {
 
@@ -103,6 +104,21 @@ class UsuarioService {
       return users;
     }
     throw new Error(`Nivel doesn't exist.`);
+  }
+
+  async passwordEdit(id_usuario, senhaAntiga, novaSenha) {
+    const user = await usuarioRepositorio.findUserPerId(id_usuario)
+    const comparePassword = await compare(senhaAntiga, user.senha)
+    if (!comparePassword) {
+      return new Error('Invalid password!');
+    }
+    
+    try {
+      const users = await usuarioRepositorio.passwordEdit(id_usuario, novaSenha);
+      return users;
+    } catch (error) {
+      throw new Error(error);
+    }
   }
 
   async verifyAdmin(cpf_cnpj){
