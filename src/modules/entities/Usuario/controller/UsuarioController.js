@@ -100,6 +100,15 @@ class UsuarioController {
     const users = await userService.nivelEdit(cpf_cnpj, nivel);
     return res.status(204).json(users);
   }
+  async passwordEdit(req, res) {
+    const { id_usuario } = req.params;
+    const { senhaAntiga, novaSenha } = req.body;
+    const users = await userService.passwordEdit(Number(id_usuario), senhaAntiga,novaSenha);
+    if (users instanceof Error) {
+      return res.status(401).json(users.message);
+    }
+    return res.status(204).json(users);
+  }
 }
 
 module.exports = UsuarioController;

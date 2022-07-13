@@ -28,5 +28,9 @@ route.put('/:cpf_cnpj/delete', authenticate, usuarioController.delete);
  * Altera nível acesso do usuário
  */
 route.put('/:cpf_cnpj/nivel_edit', isAdmin, usuarioController.niveledit);
+/**
+ * Altera nível acesso do usuário
+ */
+route.put('/:id_usuario/changePassword', authenticate, usuarioController.passwordEdit);
 
 module.exports = route;
