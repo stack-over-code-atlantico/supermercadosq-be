@@ -8,6 +8,11 @@ class ProdutoController {
     const produtos = await produtoService.listProdutos(Number(page));
     return res.json(produtos);
   }
+  async listHistoric(req, res) {
+    const { id_usuario } = req.params;
+    const produtos = await produtoService.listHistoric(Number(id_usuario));
+    return res.json(produtos);
+  }
   async listAll(req, res) {
     const produtos = await produtoService.listAllProdutos();
     return res.json(produtos);
