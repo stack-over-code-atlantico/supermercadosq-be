@@ -10,6 +10,11 @@ const comentarioController = new ComentarioController();
 
 route.get('/', comentarioController.list);
 
+/**
+ * Lista 4 ultimos posts do usuario
+ */
+ route.get('/Historic/:id_usuario', comentarioController.listHistoric);
+
 route.get('/disapproved', comentarioController.listDisapproved);
 
 route.get('/product/:id_produto', comentarioController.listByProduct);

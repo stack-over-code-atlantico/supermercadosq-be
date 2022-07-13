@@ -9,6 +9,12 @@ class ComentarioController {
     return res.json(comments);
   }
 
+  async listHistoric(req, res) {
+    const { id_usuario } = req.params;
+    const comentarios = await comentarioService.listHistoric(Number(id_usuario));
+    return res.json(comentarios);
+  }
+
   async listDisapproved (req,res) {
     const comments = await comentarioService.listDisapprovedComments(); 
     return res.json(comments);
