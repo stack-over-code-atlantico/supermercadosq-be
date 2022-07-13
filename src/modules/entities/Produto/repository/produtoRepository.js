@@ -122,6 +122,7 @@ const produtosReadHistoric = async (id_usuario) => {
   const result = await prisma.produto.findMany({
     take: 4,
     where: {
+      id_usuario,
       OR: [
         { status: null },
         { status: 'APROVADO'},
