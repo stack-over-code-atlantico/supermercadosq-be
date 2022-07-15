@@ -17,7 +17,6 @@ module.exports = async function (req, res, next) {
   req.id_usuario = id_usuario;
   req.nivel = nivel;
   const user = await usuarioService.verifyAdmin(cpf_cnpj);
-  console.log(user);
 
   if (!user) {
     throw new Error("User isn't admin!");

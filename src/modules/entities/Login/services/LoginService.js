@@ -16,10 +16,9 @@ class LoginService {
       return new Error('Account Disabled!');
     }
     var token = null;
-    console.log(user);
+    
 
     try {
-      console.log(comparePassword);
       if (comparePassword) {
         token = sign(
           {

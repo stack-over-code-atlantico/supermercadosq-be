@@ -6,7 +6,6 @@ const { promisify } = require('util');
 
 function removerImg(image) {
     if (!image) {
-        console.log('Caiu aqui')
         return;
     }
     if (process.env.STORAGE_TYPE === 's3') {

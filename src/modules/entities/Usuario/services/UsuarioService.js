@@ -30,7 +30,6 @@ class UsuarioService {
     estado,
   ) {
     const alreadyHaveUser = await usuarioRepositorio.findUniqueUser(cpf_cnpj);
-    console.log(alreadyHaveUser);
 
     if (alreadyHaveUser && alreadyHaveUser.email === email) throw new Error(`Email already in use.`);
 
@@ -106,7 +105,6 @@ class UsuarioService {
   }
 
   async verifyAdmin(cpf_cnpj){
-    console.log('verifyAdmin')
     var user = await usuarioRepositorio.findUniqueUser(cpf_cnpj);
     if (!user) throw new Error("User not found!");
     if (user.nivel === "ADMINISTRADOR") return true;
