@@ -5,6 +5,7 @@ const multerS3 = require('multer-s3');
 const aws = require('aws-sdk');
 
 const uploadToS3 = (folder) => {
+
     const storageTypes = {
         s3: multerS3({
             s3: new aws.S3(),
@@ -14,7 +15,6 @@ const uploadToS3 = (folder) => {
             key: (req, file, cb) => {
                 crypto.randomBytes(16, (err, hash) => {
                     if (err) cb(err);
-    
                     const filename = `${folder}/${hash.toString('hex')}-${file.originalname}`;
                     cb(null, filename)
                 });
@@ -43,6 +43,7 @@ const uploadToS3 = (folder) => {
             }
         }
     }
+
     return upload;
 };
 

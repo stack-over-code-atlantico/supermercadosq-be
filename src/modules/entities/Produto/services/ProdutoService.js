@@ -71,7 +71,7 @@ class ProdutoService {
         descricao
       );
 
-      if (validProduto.imagem !== imagem) {
+      if (validProduto.imagem !== null && validProduto.imagem !== imagem) {
         removeImage(validProduto.imagem.split('.com/')[1]);
       }
 

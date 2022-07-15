@@ -46,11 +46,13 @@ class ProdutoController {
   async create(req, res) {
     const { id_usuario } = req;
     const { nome, alergia, ingredientes, descricao } = req.body;
+
+    const img = req.file ? req.file.location : null;
     const produto = await produtoService.createProduto(
       nome,
       alergia,
       ingredientes,
-      req.file.location,
+      img,
       descricao,
       id_usuario
     );
@@ -61,13 +63,15 @@ class ProdutoController {
     const { id_usuario } = req;
     const { id_produto } = req.params;
     const { nome, alergia, ingredientes, descricao } = req.body;
+    const img = req.file ? req.file.location : null;
+
     const produto = await produtoService.updateProduto(
       Number(id_produto),
       id_usuario,
       nome,
       alergia,
       ingredientes,
-      req.file.location,
+      img,
       descricao
     );
     if (produto instanceof Error) {
