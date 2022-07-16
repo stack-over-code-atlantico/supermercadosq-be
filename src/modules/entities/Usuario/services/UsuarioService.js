@@ -57,9 +57,7 @@ class UsuarioService {
       );
       return users;
     } catch (error) {
-      console.log(avatar.split('.com/')[1]);
       removeImage(avatar.split('.com/')[1]);
-      console.log('oooooooo');
       throw new Error('Ocorreu um erro ao cadastrar')
     }
   }
@@ -81,7 +79,7 @@ class UsuarioService {
     estado
   ) {
     const validUser = await usuarioRepositorio.findUniqueUser(cpf_cnpj);
-    if (validUser.avatar !== null && validUser.avatar !== avatar) {
+    if (validUser.avatar !== null && avatar !== null && validUser.avatar !== avatar) {
       console.log(validUser.avatar.split('.com/')[1]);
       removeImage(validUser.avatar.split('.com/')[1]);
     }

@@ -63,6 +63,7 @@ class ProdutoController {
     const { id_usuario } = req;
     const { id_produto } = req.params;
     const { nome, alergia, ingredientes, descricao } = req.body;
+    
     const img = req.file ? req.file.location : null;
 
     const produto = await produtoService.updateProduto(
