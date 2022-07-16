@@ -5,6 +5,7 @@ const path = require('path');
 const { promisify } = require('util');
 
 function removerImg(image) {
+    image = image.split('%20').join(' ')
     if (!image) {
         return;
     }

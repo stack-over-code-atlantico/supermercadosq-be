@@ -31,6 +31,8 @@ class UsuarioController {
       cidade,
       estado
     } = req.body;
+    const img = req.file ? req.file.location : null;
+    
     const users = await userService.createUser(
       nome,
       nome_social,
@@ -40,6 +42,7 @@ class UsuarioController {
       nivel,
       telefone,
       restricao_alimenticia,
+      img,
       cep,
       logradouro,
       numero,
@@ -66,6 +69,7 @@ class UsuarioController {
       cidade,
       estado
     } = req.body;
+    const img = req.file ? req.file.location : null;
     const users = await userService.updateUser(
       cpf_cnpj,
       nome,
@@ -74,6 +78,7 @@ class UsuarioController {
       senha,
       telefone,
       restricao_alimenticia,
+      img,
       cep,
       logradouro,
       numero,
@@ -103,7 +108,11 @@ class UsuarioController {
   async passwordEdit(req, res) {
     const { id_usuario } = req.params;
     const { senhaAntiga, novaSenha } = req.body;
-    const users = await userService.passwordEdit(Number(id_usuario), senhaAntiga,novaSenha);
+    const users = await userService.passwordEdit(
+      Number(id_usuario),
+      senhaAntiga,
+      novaSenha
+    );
     if (users instanceof Error) {
       return res.status(401).json(users.message);
     }

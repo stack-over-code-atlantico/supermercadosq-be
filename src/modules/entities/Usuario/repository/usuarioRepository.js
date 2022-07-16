@@ -1,32 +1,32 @@
 const prisma = require('../../../../database/prismaClient');
 const { hash } = require('bcrypt');
 
-const findUniqueUser = async (cpf_cnpj) => {
+const findUniqueUser = async cpf_cnpj => {
   const result = await prisma.usuario.findFirst({
-    where: { cpf_cnpj },
+    where: { cpf_cnpj }
   });
   return result;
 };
 
-const findUserPerEmail = async (email) => {
+const findUserPerEmail = async email => {
   const result = await prisma.usuario.findFirst({
     where: { email },
-    include:{endereco: true}
+    include: { endereco: true }
   });
   return result;
 };
 
-const findUserPerId = async (id_usuario) => {
+const findUserPerId = async id_usuario => {
   const result = await prisma.usuario.findFirst({
     where: { id_usuario },
-    include:{endereco: true}
+    include: { endereco: true }
   });
   return result;
 };
 
-const findUniqueRestriction = async (restricao_alimenticia) => {
+const findUniqueRestriction = async restricao_alimenticia => {
   const result = await prisma.usuario.findUnique({
-    where: { restricao_alimenticia },
+    where: { restricao_alimenticia }
   });
   return result;
 };
@@ -51,13 +51,13 @@ const usersRead = async () => {
           numero: true,
           bairro: true,
           cidade: true,
-          estado: true,
+          estado: true
         }
       }
-    },
+    }
   });
 
-  return result; 
+  return result;
 };
 
 const usersCreate = async (
@@ -69,18 +69,19 @@ const usersCreate = async (
   nivel,
   telefone = null,
   restricao_alimenticia = null,
+  avatar,
   cep,
   logradouro,
   numero,
   bairro,
   cidade,
-  estado,
+  estado
 ) => {
   const password = await hash(senha, 8);
   const result = await prisma.usuario.create({
     data: {
       nome,
-      nome_social, 
+      nome_social,
       cpf_cnpj,
       email,
       senha: password,
@@ -88,6 +89,7 @@ const usersCreate = async (
       nivel,
       telefone,
       restricao_alimenticia,
+      avatar: avatar,
       endereco: {
         create: {
           cep,
@@ -95,30 +97,31 @@ const usersCreate = async (
           numero,
           bairro,
           cidade,
-          estado,
-        },
-      },
-    },
+          estado
+        }
+      }
+    }
   });
-  return result; 
+  return result;
 };
 
 const passwordEdit = async (id_usuario, novaSenha) => {
   const result = await prisma.usuario.update({
     where: { id_usuario },
     data: {
-      senha:  await hash(novaSenha, 8),
-    }});
+      senha: await hash(novaSenha, 8)
+    }
+  });
 
   return result;
 };
 
-const usersDelete = async (cpf_cnpj) => {
+const usersDelete = async cpf_cnpj => {
   const result = await prisma.usuario.update({
     where: { cpf_cnpj },
     data: {
       ativo: false
-    },
+    }
   });
   return result;
 };
@@ -126,7 +129,7 @@ const usersDelete = async (cpf_cnpj) => {
 const nivelEdit = async (cpf_cnpj, nivel) => {
   const result = await prisma.usuario.update({
     where: { cpf_cnpj },
-    data: { nivel },
+    data: { nivel }
   });
   return result;
 };
@@ -139,33 +142,37 @@ const usersUpdate = async (
   senha,
   telefone,
   restricao_alimenticia,
+  avatar,
   cep,
   logradouro,
   numero,
   bairro,
   cidade,
-  estado,
+  estado
 ) => {
-  // const password = await hash(senha, 8);
-  const user = await prisma.usuario.findFirst({ 
+  const user = await prisma.usuario.findFirst({
     where: { cpf_cnpj },
     include: {
-    endereco: true,
-  } });
+      endereco: true
+    }
+  });
   const result = await prisma.usuario.update({
     where: { cpf_cnpj },
     data: {
       nome: nome ? nome : user.nome,
-      nome_social:  nome_social ? nome_social : user.nome_social ,
-      email:  email ? email : user.email ,
-      senha:  senha ? await hash(senha, 8) : user.senha ,
-      telefone:  telefone ? telefone : user.telefone ,
-      restricao_alimenticia:  restricao_alimenticia ? restricao_alimenticia  : user.restricao_alimenticia,
+      nome_social: nome_social ? nome_social : user.nome_social,
+      email: email ? email : user.email,
+      senha: senha ? await hash(senha, 8) : user.senha,
+      telefone: telefone ? telefone : user.telefone,
+      restricao_alimenticia: restricao_alimenticia
+        ? restricao_alimenticia
+        : user.restricao_alimenticia,
+      avatar: avatar ? avatar : user.avatar,
       endereco: {
         update: {
           where: { id_endereco: user.endereco[0].id_endereco },
           data: {
-            cep: cep? cep: user.endereco[0].cep,
+            cep: cep ? cep : user.endereco[0].cep,
             logradouro: logradouro ? logradouro : user.endereco[0].logradouro,
             numero: numero ? numero : user.endereco[0].numero,
             bairro: bairro ? bairro : user.endereco[0].bairro,
@@ -174,7 +181,7 @@ const usersUpdate = async (
           }
         }
       }
-    },
+    }
   });
   return result;
 };
@@ -189,5 +196,5 @@ module.exports = {
   usersCreate,
   usersDelete,
   usersUpdate,
-  nivelEdit,
+  nivelEdit
 };
