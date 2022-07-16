@@ -3,7 +3,6 @@ const { sign } = require('jsonwebtoken');
 const { compare } = require('bcrypt');
 
 class UsuarioService {
-
   async listAllUsers() {
     const users = await usuarioRepositorio.usersRead();
     return users;
@@ -29,11 +28,12 @@ class UsuarioService {
     numero,
     bairro,
     cidade,
-    estado,
+    estado
   ) {
     const alreadyHaveUser = await usuarioRepositorio.findUniqueUser(cpf_cnpj);
 
-    if (alreadyHaveUser && alreadyHaveUser.email === email) throw new Error(`Email already in use.`);
+    if (alreadyHaveUser && alreadyHaveUser.email === email)
+      throw new Error(`Email already in use.`);
 
     if (alreadyHaveUser) throw new Error(`Already have user.`);
 
@@ -52,7 +52,7 @@ class UsuarioService {
       numero,
       bairro,
       cidade,
-      estado,
+      estado
     );
     return users;
   }
@@ -70,7 +70,7 @@ class UsuarioService {
     numero,
     bairro,
     cidade,
-    estado,
+    estado
   ) {
     const users = await usuarioRepositorio.usersUpdate(
       cpf_cnpj,
@@ -85,21 +85,25 @@ class UsuarioService {
       numero,
       bairro,
       cidade,
-      estado,
+      estado
     );
     return users;
   }
 
-  async deleteUser(cpf_cnpj,id_usuario, nivel) {
-    const users = await usuarioRepositorio.usersDelete(cpf_cnpj,id_usuario, nivel);
+  async deleteUser(cpf_cnpj, id_usuario, nivel) {
+    const users = await usuarioRepositorio.usersDelete(
+      cpf_cnpj,
+      id_usuario,
+      nivel
+    );
     return users;
   }
 
   async nivelEdit(cpf_cnpj, nivel) {
     if (
-      nivel === "CLIENTE" ||
-      nivel === "ADMINISTRADOR" ||
-      nivel === "FORNECEDOR"
+      nivel === 'CLIENTE' ||
+      nivel === 'ADMINISTRADOR' ||
+      nivel === 'FORNECEDOR'
     ) {
       const users = await usuarioRepositorio.nivelEdit(cpf_cnpj, nivel);
       return users;
@@ -108,24 +112,27 @@ class UsuarioService {
   }
 
   async passwordEdit(id_usuario, senhaAntiga, novaSenha) {
-    const user = await usuarioRepositorio.findUserPerId(id_usuario)
-    const comparePassword = await compare(senhaAntiga, user.senha)
+    const user = await usuarioRepositorio.findUserPerId(id_usuario);
+    const comparePassword = await compare(senhaAntiga, user.senha);
     if (!comparePassword) {
       return new Error('Invalid password!');
     }
-    
+
     try {
-      const users = await usuarioRepositorio.passwordEdit(id_usuario, novaSenha);
+      const users = await usuarioRepositorio.passwordEdit(
+        id_usuario,
+        novaSenha
+      );
       return users;
     } catch (error) {
       throw new Error(error);
     }
   }
 
-  async verifyAdmin(cpf_cnpj){
+  async verifyAdmin(cpf_cnpj) {
     var user = await usuarioRepositorio.findUniqueUser(cpf_cnpj);
-    if (!user) throw new Error("User not found!");
-    if (user.nivel === "ADMINISTRADOR") return true;
+    if (!user) throw new Error('User not found!');
+    if (user.nivel === 'ADMINISTRADOR') return true;
     return false;
   }
 }
