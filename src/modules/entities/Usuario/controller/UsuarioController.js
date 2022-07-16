@@ -31,6 +31,7 @@ class UsuarioController {
       cidade,
       estado
     } = req.body;
+    const img = req.file ? req.file.location : null
     const users = await userService.createUser(
       nome,
       nome_social,
@@ -40,6 +41,7 @@ class UsuarioController {
       nivel,
       telefone,
       restricao_alimenticia,
+      img,
       cep,
       logradouro,
       numero,

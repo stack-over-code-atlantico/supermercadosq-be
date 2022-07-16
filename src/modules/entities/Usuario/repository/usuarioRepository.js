@@ -69,6 +69,7 @@ const usersCreate = async (
   nivel,
   telefone = null,
   restricao_alimenticia = null,
+  avatar,
   cep,
   logradouro,
   numero,
@@ -88,6 +89,7 @@ const usersCreate = async (
       nivel,
       telefone,
       restricao_alimenticia,
+      avatar: avatar,
       endereco: {
         create: {
           cep,
