@@ -20,7 +20,7 @@ route.get('/:id_usuario', usuarioController.listOne);
  */
 route.post('/', multer(uploadToS3('profiles')).single('file'), usuarioController.create);
 
-route.put('/:cpf_cnpj', usuarioController.update);
+route.put('/:cpf_cnpj', multer(uploadToS3('profiles')).single('file'), usuarioController.update);
 /**
  * Torna usuário inativo
  * altera ativo pra false

@@ -32,6 +32,7 @@ class UsuarioController {
       estado
     } = req.body;
     const img = req.file ? req.file.location : null;
+    
     const users = await userService.createUser(
       nome,
       nome_social,
@@ -68,6 +69,7 @@ class UsuarioController {
       cidade,
       estado
     } = req.body;
+    const img = req.file ? req.file.location : null;
     const users = await userService.updateUser(
       cpf_cnpj,
       nome,
@@ -76,6 +78,7 @@ class UsuarioController {
       senha,
       telefone,
       restricao_alimenticia,
+      img,
       cep,
       logradouro,
       numero,

@@ -1,6 +1,7 @@
 const usuarioRepositorio = require('@usuario/repository/usuarioRepository');
 const { sign } = require('jsonwebtoken');
 const { compare } = require('bcrypt');
+const removeImage = require('../../../../utils/removeImage');
 
 class UsuarioService {
   async listAllUsers() {
@@ -31,30 +32,36 @@ class UsuarioService {
     estado
   ) {
     const alreadyHaveUser = await usuarioRepositorio.findUniqueUser(cpf_cnpj);
-
+    
     if (alreadyHaveUser && alreadyHaveUser.email === email)
-      throw new Error(`Email already in use.`);
-
+    throw new Error(`Email already in use.`);
+    
     if (alreadyHaveUser) throw new Error(`Already have user.`);
-
-    const users = await usuarioRepositorio.usersCreate(
-      nome,
-      nome_social,
-      cpf_cnpj,
-      email,
-      senha,
-      nivel,
-      telefone,
-      restricao_alimenticia,
-      avatar,
-      cep,
-      logradouro,
-      numero,
-      bairro,
-      cidade,
-      estado
-    );
-    return users;
+    try {
+      const users = await usuarioRepositorio.usersCreate(
+        nome,
+        nome_social,
+        cpf_cnpj,
+        email,
+        senha,
+        nivel,
+        telefone,
+        restricao_alimenticia,
+        avatar,
+        cep,
+        logradouro,
+        numero,
+        bairro,
+        cidade,
+        estado
+      );
+      return users;
+    } catch (error) {
+      console.log(avatar.split('.com/')[1]);
+      removeImage(avatar.split('.com/')[1]);
+      console.log('oooooooo');
+      throw new Error('Ocorreu um erro ao cadastrar')
+    }
   }
 
   async updateUser(
@@ -65,6 +72,7 @@ class UsuarioService {
     senha,
     telefone,
     restricao_alimenticia,
+    avatar,
     cep,
     logradouro,
     numero,
@@ -72,22 +80,32 @@ class UsuarioService {
     cidade,
     estado
   ) {
-    const users = await usuarioRepositorio.usersUpdate(
-      cpf_cnpj,
-      nome,
-      nome_social,
-      email,
-      senha,
-      telefone,
-      restricao_alimenticia,
-      cep,
-      logradouro,
-      numero,
-      bairro,
-      cidade,
-      estado
-    );
-    return users;
+    const validUser = await usuarioRepositorio.findUniqueUser(cpf_cnpj);
+    if (validUser.avatar !== null && validUser.avatar !== avatar) {
+      console.log(validUser.avatar.split('.com/')[1]);
+      removeImage(validUser.avatar.split('.com/')[1]);
+    }
+    try {
+      const users = await usuarioRepositorio.usersUpdate(
+        cpf_cnpj,
+        nome,
+        nome_social,
+        email,
+        senha,
+        telefone,
+        restricao_alimenticia,
+        avatar,
+        cep,
+        logradouro,
+        numero,
+        bairro,
+        cidade,
+        estado
+      );
+      return users;
+    } catch (error) {
+      removeImage(avatar);
+    }
   }
 
   async deleteUser(cpf_cnpj, id_usuario, nivel) {
