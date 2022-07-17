@@ -29,7 +29,7 @@ class LoginService {
             nome: user.nome
           },
           process.env.JWT_SECRET,
-          { expiresIn: '1h' }
+          { expiresIn: '24h' }
         );
       }
     } catch (error) {
