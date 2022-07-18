@@ -23,6 +23,22 @@ const disapprovedProdutosRead = async () => {
   return result;
 };
 
+const searchProducts = async (nameSearched) => {
+  const result = await prisma.produto.findMany({
+    where: {
+      OR: [
+        { status: null },
+        { status: 'APROVADO'},
+        { status: 'ANALISE' }
+      ],
+      nome: {
+        search: nameSearched
+      }
+    }
+  });
+  return result;
+};
+
 const produtosPerAllergy = async (page, allergy) => {
   const result = await prisma.produto.findMany({
     skip: 9 * page,
@@ -66,7 +82,6 @@ const produtosNotPerAllergy = async (page, allergy) => {
   });
   return result;
 };
-
 
 const readAllProdutos = async () => {
   const result = await prisma.produto.findMany({
@@ -259,5 +274,6 @@ module.exports = {
   disapprovedProdutosRead,
   produtosPerAllergy,
   produtosNotPerAllergy,
-  readAllProdutos
+  readAllProdutos,
+  searchProducts
 };

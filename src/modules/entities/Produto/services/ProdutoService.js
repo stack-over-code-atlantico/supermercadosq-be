@@ -11,8 +11,14 @@ class ProdutoService {
     const produtos = await produtoRepositorio.produtosRead(parseInt(page));
     return produtos;
   }
+
   async listHistoric(id_usuario) {
     const produtos = await produtoRepositorio.produtosReadHistoric(id_usuario);
+    return produtos;
+  }
+
+  async searchProduct(name) {
+    const produtos = await produtoRepositorio.searchProducts(name);
     return produtos;
   }
   
