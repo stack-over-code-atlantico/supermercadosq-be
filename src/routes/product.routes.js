@@ -22,6 +22,8 @@ const productController = new ProdutoController()
 
  route.get('/disapproved', productController.listDisapproved);
 
+ route.post('/search', productController.searchList);
+
  route.post('/allergy/:page', productController.listPerAllergy);
 
  route.post('/notAllergy/:page', productController.listNotPerAllergy);
