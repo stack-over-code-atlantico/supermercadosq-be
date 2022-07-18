@@ -61,6 +61,9 @@ const searchProducts = async (nameSearched, page) => {
         },
       }
     },
+    orderBy: {
+      id_produto: 'desc',
+    }
   });
   return result;
 };
