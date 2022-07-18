@@ -17,8 +17,8 @@ class ProdutoService {
     return produtos;
   }
 
-  async searchProduct(name) {
-    const produtos = await produtoRepositorio.searchProducts(name);
+  async searchProduct(name, page) {
+    const produtos = await produtoRepositorio.searchProducts(name, page);
     return produtos;
   }
   

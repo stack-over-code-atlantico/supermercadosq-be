@@ -22,7 +22,8 @@ class ProdutoController {
 
   async searchList(req, res) {
     const { nome } = req.body;
-    const produtos = await produtoService.searchProduct(nome);
+    const { page } = req.params;
+    const produtos = await produtoService.searchProduct(nome, page);
     return res.json(produtos);
   }
   
