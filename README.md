@@ -1,3 +1,7 @@
+## Documentação 
+
+Link para a documentação da API: https://apisupersq.supermercadosq.com.br/documentation/redoc
+
 ## Configurando e inicializando o projeto
 
 Primeiramente deverá fazer o clone da aplicação em sua máquina:
